@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+@include('layouts.header')
+
 <head>
     <meta charset="UTF-8">
     <title>Login - LoafBooks</title>
@@ -15,7 +18,8 @@
 
         .left-side {
             flex: 1;
-            background-image: url('/images/books.jpeg'); /* Put your image in public/images */
+            background-image: url('images/books.jpeg');
+            /* Put your image in public/images */
             background-size: cover;
             background-position: center;
         }
@@ -61,14 +65,14 @@
             color: #a75f09;
             text-decoration: none;
         }
-
     </style>
 </head>
+
 <body>
     <div class="left-side"></div>
     <div class="right-side">
         <div class="login-box">
-            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <img src="images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
             <h2>Welcome back!</h2>
             <form method="POST" action="">
                 @csrf
@@ -91,4 +95,5 @@
         </div>
     </div>
 </body>
+
 </html>
