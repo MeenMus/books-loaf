@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-@include('layouts.header')
-
 <head>
     <meta charset="UTF-8">
-    <title>Login - LoafBooks</title>
+    <title>Register - LoafBooks</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- optional, for styling -->
     <style>
         body {
@@ -18,8 +15,7 @@
 
         .left-side {
             flex: 1;
-            background-image: url('images/books.jpeg');
-            /* Put your image in public/images */
+            background-image: url('/images/books.jpeg'); /* Put your image in public/images */
             background-size: cover;
             background-position: center;
         }
@@ -32,15 +28,16 @@
             padding: 30px;
         }
 
-        .login-box {
+        .register-box {
             width: 100%;
             max-width: 400px;
         }
 
-        .login-box h2 {
+        .register-box h2 {
             margin-bottom: 20px;
         }
 
+        input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
@@ -56,44 +53,44 @@
             border: none;
         }
 
-        .register-link {
+        .login-link {
             text-align: center;
             margin-top: 10px;
         }
 
-        .register-link a {
+        .login-link a {
             color: #a75f09;
             text-decoration: none;
         }
     </style>
 </head>
-
 <body>
     <div class="left-side"></div>
     <div class="right-side">
-        <div class="login-box">
-            <img src="images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
-            <h2>Welcome back!</h2>
-            <form method="POST" action="">
+        <div class="register-box">
+            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <h2>Create an Account</h2>
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
+                <label for="name">Full Name</label>
+                <input type="text" name="name" id="name" placeholder="Your Name" required>
+
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" placeholder="you@email.com" required>
 
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
 
-                <div>
-                    <input type="checkbox" name="remember"> Remember Me
-                </div>
+                <label for="password_confirmation">Confirm Password</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" required>
 
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Register</button>
             </form>
 
-            <div class="register-link">
-                <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
+            <div class="login-link">
+                <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
             </div>
         </div>
     </div>
 </body>
-
 </html>

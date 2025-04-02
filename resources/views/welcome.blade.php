@@ -271,11 +271,12 @@
                   </a>
                 </li>
                 <li class="pe-3">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a href="{{ route('login') }}">
                     <svg class="user">
-                      <use xlink:href="#user"></use>
+                        <use xlink:href="#user"></use>
                     </svg>
-                  </a>
+                </a>
+
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
