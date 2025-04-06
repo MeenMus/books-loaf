@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - LoafBooks</title>
+    <title>BooksLoaf</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- optional, for styling -->
     <style>
         body {
