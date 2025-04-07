@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'customer']);
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->string('payment_method'); // e.g., FPX
+            $table->string('transaction_id')->unique();
+            $table->decimal('amount', 10, 2);
+            $table->string('status'); // success, failed, pending
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('payments');
     }
 };
