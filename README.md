@@ -1,4 +1,6 @@
-![5d5cc028-60d8-42cd-9eb9-ecf09613bb49 (1)](https://github.com/user-attachments/assets/6708c7dc-6f16-4bd5-9962-1dbcfbf07492)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6708c7dc-6f16-4bd5-9962-1dbcfbf07492"/>
+</p>
 
 # 📚 BooksLoaf
 
