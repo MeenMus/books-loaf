@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/13b5538c-3f85-4e94-923d-703c342dd46d)
+
 
 # 📚 BooksLoaf
 
@@ -10,7 +12,6 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Installation](#-installation)
-- [Environment Configuration](#-environment-configuration)
 - [Usage](#-usage)
 - [Deployment](#-deployment)
 - [AI Integration](#-ai-integration)
@@ -38,7 +39,7 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 
 - **Framework:** Laravel (PHP)
 - **Database:** MySQL
-- **Frontend:** Blade, HTML5, Tailwind CSS (or Bootstrap)
+- **Frontend:** Blade, HTML5, Bootstrap
 - **AI:** DeepSeek API
 - **Environment:** XAMPP (for local dev)
 - **Hosting Ready:** Works with Exabytes or any domain provider
@@ -103,26 +104,6 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 
 ---
 
-## ⚙️ Environment Configuration
-
-In your `.env` file, configure the database and other services:
-
-```dotenv
-APP_NAME=BooksLoaf
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=booksloaf
-DB_USERNAME=root
-DB_PASSWORD=
-
-DEEPSEEK_API_KEY=your_deepseek_key
-```
-
----
-
 ## ▶️ Usage
 
 Run the migration and start the app:
@@ -162,8 +143,6 @@ Integration is handled via a Laravel service and can be easily extended or repla
 
 ## 📸 Screenshots
 
-> Add your actual screenshots below:
-
 - 🖼️ Homepage
 - 🛒 Cart & Checkout
 - 📚 Recommendation Results
@@ -194,4 +173,4 @@ This project is licensed under the **MIT License**. See [`LICENSE`](LICENSE) for
 Built with ❤️ by the BooksLoaf team.
 
 - 🌐 Website: [https://booksloaf.com](https://booksloaf.com)
-- ✉️ Email: hello@booksloaf.com
+- ✉️ Email: admin@booksloaf.com
