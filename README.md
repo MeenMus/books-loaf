@@ -1,4 +1,4 @@
-![5d5cc028-60d8-42cd-9eb9-ecf09613bb49](https://github.com/user-attachments/assets/3d8cf2a6-3406-47d9-a064-95a6a735bf30){:width="300px"}
+<img src="(https://github.com/user-attachments/assets/d2540c90-bc14-4d40-a1f3-39375c4c2019)" width="300"/>
 
 # 📚 BooksLoaf
 
