@@ -15,7 +15,17 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class, 'showHome']);
+Route::get('/', [Controller::class, 'showIndex']);
+Route::get('/index-2', [Controller::class, 'showIndexAlt']);
+Route::get('/single-product', [Controller::class, 'showBook']);
+Route::get('/single-post', [Controller::class, 'showPost']);
+Route::get('/shop', [Controller::class, 'showShop']);
+Route::get('/contact', [Controller::class, 'showContact']);
+Route::get('/checkout', [Controller::class, 'showCheckout']);
+Route::get('/cart', [Controller::class, 'showCart']);
+Route::get('/blog', [Controller::class, 'showBlog']);
+Route::get('/about', [Controller::class, 'showAbout']);
+
 
 //Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 
