@@ -1,6 +1,4 @@
-![5d5cc028-60d8-42cd-9eb9-ecf09613bb49](https://github.com/user-attachments/assets/ca142083-7e6f-4f18-91fd-7a5094ea07fc)
-
-
+![5d5cc028-60d8-42cd-9eb9-ecf09613bb49 (1)](https://github.com/user-attachments/assets/6708c7dc-6f16-4bd5-9962-1dbcfbf07492)
 
 # 📚 BooksLoaf
 
