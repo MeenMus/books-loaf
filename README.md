@@ -1,6 +1,4 @@
 ![image](https://github.com/user-attachments/assets/13b5538c-3f85-4e94-923d-703c342dd46d)
-
-
 # 📚 BooksLoaf
 
 BooksLoaf is a smart, user-friendly online bookstore system designed to make book discovery and shopping seamless. It leverages AI for personalized recommendations, keeps stock updated in real time, and sends alerts for new arrivals and discounts — all wrapped in a modern, clean interface.
