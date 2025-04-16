@@ -38,6 +38,15 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
+// Show Forgot Password Form
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('forgot.password');
+
+// Handle form submission
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+
+
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 
 
@@ -45,4 +54,6 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 
 Route::post('/email/verification-notification', [AuthController::class, 'resendVerificationEmail'])->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layouts.header')
-
 <head>
     <meta charset="UTF-8">
-    <title>BooksLoaf</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- optional, for styling -->
+    <title>Forgot Password - BooksLoaf</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         body {
             margin: 0;
@@ -18,8 +16,7 @@
 
         .left-side {
             flex: 1;
-            background-image: url('images/books.jpeg');
-            /* Put your image in public/images */
+            background-image: url('/images/books.jpeg');
             background-size: cover;
             background-position: center;
         }
@@ -32,17 +29,16 @@
             padding: 30px;
         }
 
-        .login-box {
+        .forgot-box {
             width: 100%;
             max-width: 400px;
         }
 
-        .login-box h2 {
+        .forgot-box h2 {
             margin-bottom: 20px;
         }
 
-        input[type="email"],
-        input[type="password"] {
+        input[type="email"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -56,12 +52,12 @@
             border: none;
         }
 
-        .register-link {
+        .login-link {
             text-align: center;
             margin-top: 10px;
         }
 
-        .register-link a {
+        .login-link a {
             color: #a75f09;
             text-decoration: none;
         }
@@ -69,39 +65,28 @@
 </head>
 
 <body>
-    
+
     @include('sweetalert::alert')
 
     <div class="left-side"></div>
     <div class="right-side">
-        <div class="login-box">
-            <img src="images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
-            <h2>Welcome back!</h2>
-            <form method="POST" action="">
+        <div class="forgot-box">
+            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <h2>Forgot Your Password?</h2>
+            <form method="POST" action="{{ url('/forgot-password') }}">
                 @csrf
-                <label for="email">E-mail</label>
+                <label for="email">Enter your email address</label>
                 <input type="email" name="email" id="email" placeholder="you@email.com" required>
 
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-
-                <div style="text-align: right; margin-bottom: 10px;">
-                    <a href="{{ route('forgot.password') }}" style="color: #a75f09; text-decoration: none;">Forgot your password?</a>
-                </div>
-
-
-                <div>
-                    <input type="checkbox" name="remember"> Remember Me
-                </div>
-
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Send Reset Link</button>
             </form>
 
-            <div class="register-link">
-                <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
+            <div class="login-link">
+                <p><a href="{{ route('login') }}">Back to login</a></p>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

@@ -163,7 +163,8 @@
     <nav id="header-nav" class="navbar navbar-expand-lg py-3">
         <div class="container">
             <a class="navbar-brand" href="index-2">
-                <img src="images/main-logo.png" class="logo">
+                <!-- <img src="images/main-logo.png" class="logo"> -->
+                <img src="images/logo.jpg" class="logo" style="height: 200px;">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <svg class="navbar-icon">
@@ -183,7 +184,7 @@
                             <a class="nav-link me-4" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4 active" href="about">About</a>
+                            <a class="nav-link me-4" href="about">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="shop">Shop</a>
@@ -236,16 +237,38 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="pe-3">
+                            <!--old UI FOR Profile-->
+                            <!-- <li class="pe-3">
                                 <a href="/login">
                                     <svg class="user">
                                         <use xlink:href="#user"></use>
                                     </svg>
                                 </a>
                                 @auth
-                                    {{ Auth::user()->name }}
+                                <div class="d-flex flex-column align-items-start">
+                                    <span>{{ Auth::user()->name }}</span>
+                                    <button id="logout-btn" class="btn btn-sm btn-outline-danger mt-1 p-1" style="font-size: 12px;">Logout</button>
+                                </div>
                                 @endauth
+                            </li> -->
+                            <li class="pe-3 dropdown">
+                                <a href="#" class="dropdown-toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg class="user me-1">
+                                        <use xlink:href="#user"></use>
+                                    </svg>
+                                    @auth
+                                        <span>{{ Auth::user()->name }}</span>
+                                    @endauth
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li> {{-- Optional --}}
+                                    <li>
+                                        <button id="logout-btn" class="dropdown-item text-danger">Logout</button>
+                                    </li>
+                                </ul>
                             </li>
+
                             <li class="wishlist-dropdown dropdown pe-3">
                                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <svg class="wishlist">
@@ -338,3 +361,29 @@
     </nav>
 
 </header>
+
+<script>
+$(document).ready(function() {
+    // Trigger logout on button click
+    $(document).on('click', '#logout-btn', function (e) {
+        e.preventDefault();
+
+        // Send the logout request using AJAX
+        $.ajax({
+            url: '{{ route('logout') }}', // Use the route name for better flexibility
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                console.log(response.message); // Handle the success message
+                window.location.href = '/'; // Redirect user to homepage or login page
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText); // Handle errors
+            }
+        });
+    });
+});
+</script>
+
