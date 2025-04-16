@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +31,18 @@ Route::get('/blog', [Controller::class, 'showBlog']);
 Route::get('/about', [Controller::class, 'showAbout']);
 
 
-//Route::get('/', [AuthController::class, 'showLogin'])->name('login');
-
+/* AUTH (GUEST)*/
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+
+
+/* AUTH (SANCTUM)*/
+
+Route::post('/email/verification-notification', [AuthController::class, 'resendVerificationEmail'])->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

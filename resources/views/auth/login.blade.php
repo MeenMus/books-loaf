@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 @include('layouts.header')
 
 <head>
@@ -69,6 +69,9 @@
 </head>
 
 <body>
+    
+    @include('sweetalert::alert')
+
     <div class="left-side"></div>
     <div class="right-side">
         <div class="login-box">

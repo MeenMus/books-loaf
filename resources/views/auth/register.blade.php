@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>BooksLoaf</title>
@@ -15,7 +16,8 @@
 
         .left-side {
             flex: 1;
-            background-image: url('/images/books.jpeg'); /* Put your image in public/images */
+            background-image: url('/images/books.jpeg');
+            /* Put your image in public/images */
             background-size: cover;
             background-position: center;
         }
@@ -64,7 +66,11 @@
         }
     </style>
 </head>
+
 <body>
+    
+    @include('sweetalert::alert')
+
     <div class="left-side"></div>
     <div class="right-side">
         <div class="register-box">
@@ -93,4 +99,5 @@
         </div>
     </div>
 </body>
+
 </html>
