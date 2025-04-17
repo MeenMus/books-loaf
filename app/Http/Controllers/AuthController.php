@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+
 
 class AuthController extends Controller
 {
@@ -69,11 +71,19 @@ class AuthController extends Controller
             Alert::warning('Email not verified', 'A new verification link has been sent to your email.');
             return redirect()->back();
         }
-        
+
         Auth::login($user);
 
         return redirect('/');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate(); // Invalidate the session
+        $request->session()->regenerateToken(); // Regenerate CSRF token
+    }
+    
 
     public function forgotPassword(Request $request)
     {
@@ -83,18 +93,42 @@ class AuthController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::RESET_LINK_SENT
-            ? response()->json(['message' => __($status)])
-            : response()->json(['message' => __($status)], 400);
+        if ($status === Password::RESET_LINK_SENT) {
+            Alert::success('Email Sent', 'A new password reset link has been sent to your email.');
+            return redirect('login');
+        } else {
+            Alert::error('Error!', __($status));
+            return redirect()->back()->withErrors(['email' => __($status)]);
+        }
+
     }
 
-    public function logout(Request $request)
+    public function resetPassword(Request $request)
     {
-        // Revoke the current access token
-        $request->user()->currentAccessToken()->delete();
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-        return response()->json(['message' => 'Logged out successfully']);
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password),
+                ])->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            Alert::success('Password Reset!', 'Your password has been changed!');
+            return redirect('login');
+        } else {
+            Alert::error('Error!', __($status));
+            return redirect()->back()->withErrors(['email' => __($status)]);
+        }
     }
+
 
     public function verifyEmail(Request $request, $id, $hash)
     {

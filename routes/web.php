@@ -43,12 +43,21 @@ Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('forgot.password');
 
+
+//Password reset
+Route::get('/reset-password/{token}', function ($token, Request $request) {
+    return view('auth.reset-password', [
+        'token' => $token,
+        'email' => $request->email, // pulled from the query string
+    ]);
+})->name('password.reset');
+
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+
+
 // Handle form submission
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-
-
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-
 
 /* AUTH (SANCTUM)*/
 
