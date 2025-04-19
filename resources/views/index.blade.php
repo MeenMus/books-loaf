@@ -185,7 +185,7 @@
                   </svg>
                 </div>
               </div>
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -229,7 +229,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -273,7 +273,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -320,7 +320,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -364,7 +364,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -408,7 +408,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -445,22 +445,22 @@
           <h2>30% Discount on all items. Hurry Up !!!</h2>
           <div id="countdown-clock" class="text-dark d-flex align-items-center my-3">
             <div class="time d-grid pe-3">
-              <span class="days fs-1 fw-normal"></span>
+              <span class="days fs-1 fw-noRM al"></span>
               <small>Days</small>
             </div>
             <span class="fs-1 text-primary">:</span>
             <div class="time d-grid pe-3 ps-3">
-              <span class="hours fs-1 fw-normal"></span>
+              <span class="hours fs-1 fw-noRM al"></span>
               <small>Hrs</small>
             </div>
             <span class="fs-1 text-primary">:</span>
             <div class="time d-grid pe-3 ps-3">
-              <span class="minutes fs-1 fw-normal"></span>
+              <span class="minutes fs-1 fw-noRM al"></span>
               <small>Min</small>
             </div>
             <span class="fs-1 text-primary">:</span>
             <div class="time d-grid ps-3">
-              <span class="seconds fs-1 fw-normal"></span>
+              <span class="seconds fs-1 fw-noRM al"></span>
               <small>Sec</small>
             </div>
           </div>
@@ -505,7 +505,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr class="gray-400">
@@ -533,7 +533,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr>
@@ -562,7 +562,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
             </div>
@@ -598,7 +598,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr class="gray-400">
@@ -626,7 +626,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr>
@@ -654,7 +654,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
             </div>
@@ -690,7 +690,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr class="gray-400">
@@ -718,7 +718,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
               <hr>
@@ -746,7 +746,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">$870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
                 </div>
               </div>
             </div>
@@ -782,8 +782,8 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">$1666</s>
-                    $999</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 1666</s>
+                    RM 999</span>
                 </div>
               </div>
               <hr class="gray-400">
@@ -811,8 +811,8 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">$500</s>
-                    $410</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 500</s>
+                    RM 410</span>
                 </div>
               </div>
               <hr>
@@ -840,8 +840,8 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">$600</s>
-                    $500</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 600</s>
+                    RM 500</span>
                 </div>
               </div>
             </div>
@@ -926,7 +926,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Emma Chamberlin</h5>
+              <h5 class="mt-1 fw-noRM al">Emma Chamberlin</h5>
             </div>
           </div>
           <div class="swiper-slide">
@@ -949,7 +949,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Thomas John</h5>
+              <h5 class="mt-1 fw-noRM al">Thomas John</h5>
             </div>
           </div>
           <div class="swiper-slide">
@@ -972,7 +972,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Kevin Bryan</h5>
+              <h5 class="mt-1 fw-noRM al">Kevin Bryan</h5>
             </div>
           </div>
           <div class="swiper-slide">
@@ -997,7 +997,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Stevin</h5>
+              <h5 class="mt-1 fw-noRM al">Stevin</h5>
             </div>
           </div>
           <div class="swiper-slide">
@@ -1022,7 +1022,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Roman</h5>
+              <h5 class="mt-1 fw-noRM al">Roman</h5>
             </div>
           </div>
         </div>

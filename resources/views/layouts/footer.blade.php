@@ -5,7 +5,7 @@
         <div class="row d-flex flex-wrap justify-content-between">
           <div class="col-lg-3 col-sm-6 pb-3">
             <div class="footer-menu">
-              <img src="images/main-logo.png" alt="logo" class="img-fluid mb-2">
+              <img src="images/logo.jpg" alt="logo" class="img-fluid mb-2">
               <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio
                 erat nullam fringilla.</p>
               <div class="social-links">
@@ -97,7 +97,7 @@
             <div class="footer-menu contact-item">
               <h5 class="widget-title text-capitalize pb-2">Contact Us</h5>
               <p>Do you have any queries or suggestions? <a href="mailto:"
-                  class="text-decoration-underline">yourinfo@gmail.com</a></p>
+                  class="text-decoration-underline">nfarisya888@gmail.com                  </a></p>
               <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222
                   333 44</a></p>
             </div>

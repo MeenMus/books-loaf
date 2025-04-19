@@ -49,11 +49,21 @@
         }
 
         .btn {
-            width: 100%;
+            width: 60%;
             padding: 10px;
             background-color: #a75f09;
             color: white;
             border: none;
+            display: block;
+            margin: 10px auto 0 auto; /* reduced top margin for less gap */
+            border-radius: 30px; /* makes it pill-style */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8a4b05;
         }
 
         .register-link {
@@ -93,7 +103,7 @@
                 <div>
                     <input type="checkbox" name="remember"> Remember Me
                 </div>
-
+                
                 <button type="submit" class="btn">Login</button>
             </form>
 
