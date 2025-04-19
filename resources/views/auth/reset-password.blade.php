@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Reset Password - BooksLoaf</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">\
+    <link rel="icon" href="{{ asset('favicon-booksloaf.ico') }}" type="image/x-icon">
     <style>
         body {
             margin: 0;

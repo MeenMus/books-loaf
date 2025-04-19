@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <title>BooksLoaf</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- optional, for styling -->
+    <link rel="icon" href="{{ asset('favicon-booksloaf.ico') }}" type="image/x-icon">
+
     <style>
         body {
             margin: 0;
