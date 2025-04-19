@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BookController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -66,3 +68,12 @@ Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])-
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+//Handle Payment
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
+//Books Controller
+Route::get('/books/malay', [BookController::class, 'malay'])->name('books.malay');
+Route::get('/books/english', [BookController::class, 'english'])->name('books.english');
+Route::get('/books/chinese', [BookController::class, 'chinese'])->name('books.chinese');
+Route::get('/books/revision', [BookController::class, 'revision'])->name('books.revision');
+Route::get('/books/stationery', [BookController::class, 'stationery'])->name('books.stationery');

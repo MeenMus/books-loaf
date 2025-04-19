@@ -186,6 +186,36 @@
                             <a class="nav-link me-4" href="/">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link me-4" href="/">Best Selling</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Category</a>
+                            <ul class="dropdown-menu animate slide border">
+                                <li>
+                                    <a href="{{ route('books.malay') }}" class="dropdown-item fw-light">Malay Books</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('books.english') }}" class="dropdown-item fw-light">English Books</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('books.chinese') }}" class="dropdown-item fw-light">Chinese Books</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('books.revision') }}" class="dropdown-item fw-light">Revision Books</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('books.stationery') }}" class="dropdown-item fw-light">Stationery</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="/">Promotion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="/">Contact Us</a>
+                        </li>
+                        <!-- <li class="nav-item">
                             <a class="nav-link me-4" href="about">About</a>
                         </li>
                         <li class="nav-item">
@@ -193,8 +223,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="blog">Blogs</a>
-                        </li>
-                        <li class="nav-item dropdown">
+                        </li> -->
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                             <ul class="dropdown-menu animate slide border">
                                 <li>
@@ -222,13 +252,14 @@
                                     <a href="contact" class="dropdown-item fw-light">Contact <span class="badge bg-primary">Pro</span></a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                       
+                        <!-- <li class="nav-item">
                             <a class="nav-link me-4" href="contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a class="nav-link text-decoration-underline me-4" href="https://templatesjungle.gumroad.com/l/bookly-bookstore-ecommerce-bootstrap-html-css-website-template" target="_blank">Get Pro</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="user-items d-flex">
                         <ul class="d-flex justify-content-end list-unstyled mb-0">
