@@ -36,7 +36,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::error('Invalid Credentials', 'Please re-enter your credentials');
+            Alert::error('Invalid Credentials', 'Email has already been registered!');
             return redirect()->back();
         }
 
