@@ -289,19 +289,30 @@
                                     <svg class="user me-1">
                                         <use xlink:href="#user"></use>
                                     </svg>
+
                                     @auth
                                         <span>{{ Auth::user()->name }}</span>
+                                    @else
+                                        <span>Guest</span>
                                     @endauth
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="#">Profile</a></li> {{-- Optional --}}
-                                    <li>
-                                        <button id="logout-btn" class="dropdown-item text-danger">Logout</button>
-                                    </li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+
+                                    @auth
+                                        <li>
+                                            <button id="logout-btn" class="dropdown-item text-danger">Logout</button>
+                                        </li>
+                                    @endauth
+
+                                    @guest
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                                        </li>
+                                    @endguest
                                 </ul>
                             </li>
-
                             <li class="wishlist-dropdown dropdown pe-3">
                                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <svg class="wishlist">
@@ -394,30 +405,30 @@
     </nav>
 
 </header>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
 <script>
     // Trigger logout on button click
     $(document).on('click', '#logout-btn', function (e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        // Send the logout request using AJAX
-        $.ajax({
-            url: '{{ route('logout') }}', // Use the route name for better flexibility
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-            },
-            success: function(response) {
-                console.log(response.message); // Handle the success message
-                window.location.href = '/'; // Redirect user to homepage or login page
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText); // Handle errors
-            }
-        });
+    $.ajax({
+        url: '{{ route('logout') }}',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}'
+        },
+        success: function (response) {
+            // Optional: show toast or alert here
+            window.location.href = '/'; // or redirect to login if you prefer
+        },
+        error: function (xhr) {
+            console.error('Logout failed:', xhr.responseText);
+        }
     });
+});
 
 </script>
 

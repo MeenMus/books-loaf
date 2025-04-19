@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Forgot Password - BooksLoaf</title>
+    <title>Reset Password - BooksLoaf</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         body {
@@ -11,7 +11,8 @@
             padding: 0;
             display: flex;
             height: 100vh;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fefbf6;
         }
 
         .left-side {
@@ -27,39 +28,66 @@
             justify-content: center;
             align-items: center;
             padding: 30px;
+            background-color: #fff7ed;
         }
 
         .forgot-box {
             width: 100%;
             max-width: 400px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .forgot-box img {
+            display: block;
+            margin: 0 auto 20px;
         }
 
         .forgot-box h2 {
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #a75f09;
         }
 
-        input[type="email"] {
+        input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
         }
 
         .btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #a75f09;
             color: white;
             border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8a4b05;
         }
 
         .login-link {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .login-link a {
             color: #a75f09;
             text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -69,19 +97,25 @@
     @include('sweetalert::alert')
 
     <div class="left-side"></div>
+
     <div class="right-side">
         <div class="forgot-box">
-            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
-            <h2>Forgot Your Password?</h2>
+            <img src="/images/logo.jpg" alt="BooksLoaf Logo" width="120">
+            <h2>Reset Your Password</h2>
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
                 <input type="hidden" name="email" value="{{ $email }}">
-                <input type="password" name="password" placeholder="New Password" required><br>
-                <input type="password" name="password_confirmation" placeholder="Confirm Password" required><br>
 
-                <button type="submit">Reset Password</button>
+                <input type="password" name="password" placeholder="New Password" required>
+                <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
+
+                <button type="submit" class="btn">Reset Password</button>
             </form>
+
+            <div class="login-link">
+                <a href="{{ route('login') }}">Back to Login</a>
+            </div>
         </div>
     </div>
 
