@@ -6,12 +6,14 @@
   @include('admin.layouts.sidebar')
 
   <div class="main-content">
-    <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+    <h1 class="text-2xl font-bold mb-6"> <!-- TITEL --> </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="admin-card">Total Books: 123</div>
-      <div class="admin-card">Users: 87</div>
-      <div class="admin-card">Orders: 45</div>
+      <div class="admin-card">
+
+        <!-- content -->
+
+      </div>
     </div>
   </div>
 

@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('genres', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->string('isbn')->unique();
-            $table->text('description');
-            $table->string('genre');
-            $table->decimal('price', 8, 2);
-            $table->integer('stock');
-            $table->string('cover_image')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('genres');
     }
 };

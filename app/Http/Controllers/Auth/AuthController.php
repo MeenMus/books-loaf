@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -13,10 +13,18 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
 
-class AuthController extends Controller
+
+class AuthController extends BaseController
 {
+
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function showLogin()
     {
         return view('auth.login');
@@ -82,6 +90,8 @@ class AuthController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate(); // Invalidate the session
         $request->session()->regenerateToken(); // Regenerate CSRF token
+
+        return redirect('/');
     }
     
 

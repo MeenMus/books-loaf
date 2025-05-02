@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Customer\HomeController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -22,19 +24,55 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('/', [Controller::class, 'showIndex']);
-Route::get('/index-2', [Controller::class, 'showIndexAlt']);
-Route::get('/single-product', [Controller::class, 'showBook']);
-Route::get('/single-post', [Controller::class, 'showPost']);
-Route::get('/shop', [Controller::class, 'showShop']);
-Route::get('/contact', [Controller::class, 'showContact']);
-Route::get('/checkout', [Controller::class, 'showCheckout']);
-Route::get('/cart', [Controller::class, 'showCart']);
-Route::get('/blog', [Controller::class, 'showBlog']);
-Route::get('/about', [Controller::class, 'showAbout']);
+/* CUSTOMER STUFF */
+
+Route::get('/', [HomeController::class, 'showIndex']);
+Route::get('/index-2', [HomeController::class, 'showIndexAlt']);
+Route::get('/single-product', [HomeController::class, 'showBook']);
+Route::get('/single-post', [HomeController::class, 'showPost']);
+Route::get('/shop', [HomeController::class, 'showShop']);
+Route::get('/contact', [HomeController::class, 'showContact']);
+Route::get('/checkout', [HomeController::class, 'showCheckout']);
+Route::get('/cart', [HomeController::class, 'showCart']);
+Route::get('/blog', [HomeController::class, 'showBlog']);
+Route::get('/about', [HomeController::class, 'showAbout']);
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
+/* ---- */
 
 
-/* AUTH (GUEST)*/
+
+
+/* ADMIN STUFF */
+Route::middleware(['admin'])->group(function () {
+
+    /* DASHBOARD */
+    Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+    /* MANAGE BOOKS */
+    Route::get('/manage-books', [BookController::class, 'index'])->name('manage-books');
+    Route::get('/create-books', [BookController::class, 'create'])->name('create-books');
+    Route::post('/store-books', [BookController::class, 'store'])->name('store-books');
+
+    /* MANAGE GENRE */
+    Route::get('/manage-genres', [GenreController::class, 'index'])->name('manage-genres');
+    Route::post('/store-genres', [GenreController::class, 'store'])->name('store-genres');
+    Route::post('/delete-genres', [GenreController::class, 'delete'])->name('delete-genres');
+
+
+
+});
+
+/* ---- */
+
+
+
+
+
+
+
+/* AUTH STUFF */
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -46,12 +84,11 @@ Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('forgot.password');
 
-
 //Password reset
 Route::get('/reset-password/{token}', function ($token, Request $request) {
     return view('auth.reset-password', [
         'token' => $token,
-        'email' => $request->email, // pulled from the query string
+        'email' => $request->email,
     ]);
 })->name('password.reset');
 
@@ -60,15 +97,21 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 // Handle form submission
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 
-/* AUTH (SANCTUM)*/
-
 Route::post('/email/verification-notification', [AuthController::class, 'resendVerificationEmail'])->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+/* ---- */
 
-//Handle Payment
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
+
+
+
+
+
+
+
+
 
 //Books Controller
 Route::get('/books/malay', [BookController::class, 'malay'])->name('books.malay');
@@ -76,8 +119,3 @@ Route::get('/books/english', [BookController::class, 'english'])->name('books.en
 Route::get('/books/chinese', [BookController::class, 'chinese'])->name('books.chinese');
 Route::get('/books/revision', [BookController::class, 'revision'])->name('books.revision');
 Route::get('/books/stationery', [BookController::class, 'stationery'])->name('books.stationery');
-
-
-
-//ADMIN STUFF//
-Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');

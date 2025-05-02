@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layouts.header')
+@include('admin.layouts.header')
 
 <head>
     <meta charset="UTF-8">

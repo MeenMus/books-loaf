@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class BookController extends Controller
+class BookController extends BaseController
 {
     //
     public function malay()
