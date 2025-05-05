@@ -146,21 +146,14 @@
 
 <header id="header" class="site-header">
 
-    <div class="top-info border-bottom d-none d-md-block">
-        <div class="container-fluid">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <p class="fs-6 my-2 text-center">Need any help? Call us <a href="#">112233344455</a></p>
-                </div>
-                <div class="col-md-4 border-start border-end">
-                    <p class="fs-6 my-2 text-center">Summer sale discount off 60% off! <a class="text-decoration-underline" href="shop">Shop Now</a></p>
-                </div>
-                <div class="col-md-4">
-                    <p class="fs-6 my-2 text-center">2-3 business days delivery & free returns</p>
-                </div>
-            </div>
-        </div>
+<div class="row g-0 justify-content-center" style="background-color: #f5cba7 ;">
+    <div class="col-md-8 text-center">
+        <p class="fs-6 my-2"><b>Become a Readings Member to make your shopping experience even easier.</b> 
+            <a href="https://booksloaf.com/login"><b>Sign in</a> or</b>
+            <a href="https://booksloaf.com/register"><b>sign up</a> for free!</b>
+        </p>
     </div>
+</div>
 
     <nav id="header-nav" class="navbar navbar-expand-lg py-3">
         <div class="container">
@@ -253,7 +246,7 @@
                                 </li>
                             </ul>
                         </li> -->
-
+                       
                         <!-- <li class="nav-item">
                             <a class="nav-link me-4" href="contact">Contact</a>
                         </li> -->
@@ -289,36 +282,27 @@
                                     <svg class="user me-1">
                                         <use xlink:href="#user"></use>
                                     </svg>
+
                                     @auth
-                                    <span>{{ Auth::user()->name }}</span>
+                                        <span>{{ Auth::user()->name }}</span>
                                     @else
-                                    <span>Guest</span>
+                                        <span>Guest</span>
                                     @endauth
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-
-                                    @auth
-                                    @if (Auth::user()->role === 'admin')
-                                    <li><a class="dropdown-item" href="{{ route('dashboard') }}">Admin</a></li>
-                                    @endif
-                                    @endauth
-
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
 
                                     @auth
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item text-danger">Logout</button>
-                                        </form>
-                                    </li>
+                                        <li>
+                                            <button id="logout-btn" class="dropdown-item text-danger">Logout</button>
+                                        </li>
                                     @endauth
 
                                     @guest
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('login') }}">Login</a>
-                                    </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                                        </li>
                                     @endguest
                                 </ul>
                             </li>
@@ -415,3 +399,29 @@
 
 </header>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script>
+    // Trigger logout on button click
+    $(document).on('click', '#logout-btn', function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: '{{ route('logout') }}',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}'
+        },
+        success: function (response) {
+            // Optional: show toast or alert here
+            window.location.href = '/'; // or redirect to login if you prefer
+        },
+        error: function (xhr) {
+            console.error('Logout failed:', xhr.responseText);
+        }
+    });
+});
+
+</script>
+
