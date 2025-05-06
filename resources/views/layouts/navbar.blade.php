@@ -282,27 +282,36 @@
                                     <svg class="user me-1">
                                         <use xlink:href="#user"></use>
                                     </svg>
-
                                     @auth
-                                        <span>{{ Auth::user()->name }}</span>
+                                    <span>{{ Auth::user()->name }}</span>
                                     @else
-                                        <span>Guest</span>
+                                    <span>Guest</span>
                                     @endauth
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+
+                                    @auth
+                                    @if (Auth::user()->role === 'admin')
+                                    <li><a class="dropdown-item" href="{{ route('dashboard') }}">Admin</a></li>
+                                    @endif
+                                    @endauth
+
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
 
                                     @auth
-                                        <li>
-                                            <button id="logout-btn" class="dropdown-item text-danger">Logout</button>
-                                        </li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                        </form>
+                                    </li>
                                     @endauth
 
                                     @guest
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
-                                        </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                                    </li>
                                     @endguest
                                 </ul>
                             </li>
@@ -398,30 +407,5 @@
     </nav>
 
 </header>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-
-<script>
-    // Trigger logout on button click
-    $(document).on('click', '#logout-btn', function (e) {
-    e.preventDefault();
-
-    $.ajax({
-        url: '{{ route('logout') }}',
-        type: 'POST',
-        data: {
-            _token: '{{ csrf_token() }}'
-        },
-        success: function (response) {
-            // Optional: show toast or alert here
-            window.location.href = '/'; // or redirect to login if you prefer
-        },
-        error: function (xhr) {
-            console.error('Logout failed:', xhr.responseText);
-        }
-    });
-});
-
-</script>
 
