@@ -146,14 +146,15 @@
 
 <header id="header" class="site-header">
 
-<div class="row g-0 justify-content-center" style="background-color: #f5cba7 ;">
-    <div class="col-md-8 text-center">
-        <p class="fs-6 my-2"><b>Become a Readings Member to make your shopping experience even easier.</b> 
-            <a href="https://booksloaf.com/login"><b>Sign in</a> or</b>
-            <a href="https://booksloaf.com/register"><b>sign up</a> for free!</b>
-        </p>
+    <div class="row g-0 justify-content-center" style="background-color: #f5cba7;">
+        <div class="col-md-8 text-center">
+            <p class="fs-6 my-2">
+                <strong style="font-weight: 800;">Become a Readings Member to make your shopping experience even easier.</strong>
+                <a href="https://booksloaf.com/login"><b>Sign in</a> or</b>
+                <a href="https://booksloaf.com/register"><b>sign up</a> for free!</b>
+            </p>
+        </div>
     </div>
-</div>
 
     <nav id="header-nav" class="navbar navbar-expand-lg py-3">
         <div class="container">
@@ -202,9 +203,9 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <!--                         <li class="nav-item">
                             <a class="nav-link me-4" href="/">Promotion</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link me-4" href="/">Contact Us</a>
                         </li>
@@ -246,7 +247,7 @@
                                 </li>
                             </ul>
                         </li> -->
-                       
+
                         <!-- <li class="nav-item">
                             <a class="nav-link me-4" href="contact">Contact</a>
                         </li> -->
@@ -407,5 +408,3 @@
     </nav>
 
 </header>
-
-

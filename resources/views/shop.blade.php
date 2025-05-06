@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 
+
 @include('layouts.header')
+
 
 <body>
 
   @include('layouts.navbar')
+
 
   <section class="hero-section position-relative padding-large" style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 400px;">
     <div class="hero-content">
