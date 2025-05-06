@@ -6,14 +6,14 @@
   @include('admin.layouts.sidebar')
 
   <div class="main-content">
-    <h3 class="text-2xl font-bold mb-6">Create Books</h3>
+    <h3 class="text-2xl font-bold mb-6">Book Creator</h3>
 
     <div class="row g-4">
       <!-- Form Card -->
       <div class="col-lg-7">
         <div class="admin-card">
           <div class="card-body">
-            <form action="{{ route('store-books') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('books-store') }}" method="POST" enctype="multipart/form-data">
               @csrf
 
               <div class="mb-3">
@@ -38,7 +38,11 @@
 
               <div class="mb-3">
                 <label for="genre" class="form-label">Genre</label>
-                <input type="text" class="form-control" id="genre" name="genre" required>
+                <select class="form-select" id="genre" name="genre[]" multiple required>
+                  @foreach($genres as $genre)
+                  <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="mb-3">
@@ -71,8 +75,6 @@
             <img id="imagePreview" src="#" alt="No image selected" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
           </div>
         </div>
-
-
       </div>
 
     </div>
@@ -95,7 +97,18 @@
           reader.readAsDataURL(input.files[0]);
         }
       }
+
+      $(document).ready(function() {
+        $('#genre').select2({
+          theme: 'bootstrap-5',
+          placeholder: 'Select genres',
+          width: '100%' // ensures it fits in the form nicely
+        });
+      });
     </script>
+    
+
+
 
 </body>
 

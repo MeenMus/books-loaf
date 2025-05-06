@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 
-
 @include('layouts.header')
-
 
 <body>
 
   @include('layouts.navbar')
-
 
   <section class="hero-section position-relative padding-large" style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 400px;">
     <div class="hero-content">
@@ -613,98 +610,48 @@
           </nav>
         </main>
         <aside class="col-md-3">
-          <div class="sidebar ps-lg-5">
-            <div class="widget-menu">
-              <div class="widget-search-bar">
-                <form class="d-flex border rounded-3 p-2" role="search">
-                  <input class="form-control border-0 me-2 py-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn rounded-3 p-3 d-flex align-items-center" type="submit">
-                    <svg class="search text-light" width="18" height="18">
-                      <use xlink:href="#search"></use>
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            </div>
             <div class="widget-product-categories pt-5">
               <div class="section-title overflow-hidden mb-2">
                 <h3 class="d-flex flex-column mb-0">Categories</h3>
               </div>
+              <br>
               <ul class="product-categories mb-0 sidebar-list list-unstyled">
                 <li class="cat-item">
-                  <a href="https://demo.templatesjungle.com/collections/categories">All</a>
+                  <a href=#>All</a>
                 </li>
+                <br>
                 <li class="cat-item">
-                  <a href="#">Romance</a>
+                  <a href="#">Young Adult</a>
                 </li>
+                <br>
                 <li class="cat-item">
-                  <a href="#">Recipie</a>
+                  <a href="#">Fantasy</a>
                 </li>
+                <br>
                 <li class="cat-item">
-                  <a href="#">Sci-Fi</a>
+                  <a href="#">Mystery</a>
                 </li>
+                <br>
                 <li class="cat-item">
                   <a href="#">Lifestyle</a>
                 </li>
-              </ul>
-            </div>
-            <div class="widget-product-tags pt-5">
-              <div class="section-title overflow-hidden mb-2">
-                <h3 class="d-flex flex-column mb-0">Tags</h3>
-              </div>
-              <ul class="product-tags mb-0 sidebar-list list-unstyled">
-                <li class="tags-item">
+                <br>
+                <li class="cat-item">
+                  <a href="#">Fiction</a>
+                </li>
+                <br>
+                <li class="cat-item">
+                  <a href="#">Thriller/Suspense</a>
+                </li>
+                <br>
+                <li class="cat-item">
+                  <a href="#">Horror</a>
+                </li>
+                <br>
+                <li class="cat-item">
                   <a href="#">Sci-Fi</a>
                 </li>
-                <li class="tags-item">
-                  <a href="#">Revenge</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">Zombie</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">Vampire</a>
-                </li>
               </ul>
-            </div>
-            <div class="widget-product-authur pt-5">
-              <div class="section-title overflow-hidden mb-2">
-                <h3 class="d-flex flex-column mb-0">authur</h3>
-              </div>
-              <ul class="product-tags mb-0 sidebar-list list-unstyled">
-                <li class="tags-item">
-                  <a href="#">Hanna Clark</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">Albert E. Beth</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">D.K John</a>
-                </li>
-              </ul>
-            </div>
-            <div class="widget-price-filter pt-5">
-              <div class="section-title overflow-hidden mb-2">
-                <h3 class="d-flex flex-column mb-0">Filter by price</h3>
-              </div>
-              <ul class="product-tags mb-0 sidebar-list list-unstyled">
-                <li class="tags-item">
-                  <a href="#">Less than $10</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">$10- $20</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">$20- $30</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">$30- $40</a>
-                </li>
-                <li class="tags-item">
-                  <a href="#">$40- $50</a>
-                </li>
-              </ul>
-            </div>
           </div>
         </aside>
       </div>
@@ -848,6 +795,130 @@
               <h5 class="mt-1 fw-normal">Roman</h5>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest-posts" class="padding-large">
+    <div class="container">
+      <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
+        <h3 class="d-flex align-items-center">Latest posts</h3>
+        <a href="shop" class="btn">View All</a>
+      </div>
+      <div class="row">
+        <div class="col-md-3 posts mb-4">
+          <img src="images/post-item1.jpg" alt="post image" class="img-fluid rounded-3">
+          <a href="blog" class="fs-6 text-primary">Books</a>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">10 Must-Read Books of the Year: Our Top Picks!</a></h4>
+          <p class="mb-2">Dive into the world of cutting-edge technology with our latest blog post, where we highlight
+            five essential gadg <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          </p>
+        </div>
+        <div class="col-md-3 posts mb-4">
+          <img src="images/post-item2.jpg" alt="post image" class="img-fluid rounded-3">
+          <a href="blog" class="fs-6 text-primary">Books</a>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">The Fascinating Realm of Science Fiction</a></h4>
+          <p class="mb-2">Explore the intersection of technology and sustainability in our latest blog post. Learn about
+            the innovative <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span> </p>
+        </div>
+        <div class="col-md-3 posts mb-4">
+          <img src="images/post-item3.jpg" alt="post image" class="img-fluid rounded-3">
+          <a href="blog" class="fs-6 text-primary">Books</a>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Finding Love in the Pages of a Book</a></h4>
+          <p class="mb-2">Stay ahead of the curve with our insightful look into the rapidly evolving landscape of
+            wearable technology. <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          </p>
+        </div>
+        <div class="col-md-3 posts mb-4">
+          <img src="images/post-item4.jpg" alt="post image" class="img-fluid rounded-3">
+          <a href="blog" class="fs-6 text-primary">Books</a>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Reading for Mental Health: How Books Can Heal and Inspire</a></h4>
+          <p class="mb-2">In today's remote work environment, productivity is key. Discover the top apps and tools that
+            can help you stay <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instagram">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h3>Instagram</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
+        </div>
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
+        </div>
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
+        </div>
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
+        </div>
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
+        </div>
+        <div class="col-md-2">
+          <figure class="instagram-item position-relative rounded-3">
+            <a href="https://templatesjungle.com/" class="image-link position-relative">
+              <div class="icon-overlay position-absolute d-flex justify-content-center">
+                <svg class="instagram">
+                  <use xlink:href="#instagram"></use>
+                </svg>
+              </div>
+              <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+            </a>
+          </figure>
         </div>
       </div>
     </div>

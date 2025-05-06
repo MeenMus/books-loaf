@@ -13,18 +13,18 @@
             </a>
         </li>
         <li>
-            <a href="/manage-books" class="nav-link {{ request()->is('manage-books') ? 'active' : '' }}">
-                <i class="bi bi-bookshelf me-2"></i> Manage Books
+            <a href="/books-list" class="nav-link {{ request()->is('books-list') || request()->is('books-page*')  ? 'active' : '' }}">
+                <i class="bi bi-bookshelf me-2"></i>Books
             </a>
         </li>
         <li>
-            <a href="/create-books" class="nav-link {{ request()->is('create-books') ? 'active' : '' }}">
-                <i class="bi bi-book me-2"></i>Create Books
+            <a href="/books-create" class="nav-link {{ request()->is('books-create') ? 'active' : '' }}">
+                <i class="bi bi-book me-2"></i>Book Creator
             </a>
         </li>
         <li>
-            <a href="/manage-genres" class="nav-link {{ request()->is('manage-genres') ? 'active' : '' }}">
-                <i class="bi bi-clipboard me-2"></i>Manage Genres
+            <a href="/genres-list" class="nav-link {{ request()->is('genres-list') ? 'active' : '' }}">
+                <i class="bi bi-clipboard me-2"></i>Genres
             </a>
         </li>
         <li>

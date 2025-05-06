@@ -6,7 +6,7 @@
   @include('admin.layouts.sidebar')
 
   <div class="main-content">
-    <h3 class="text-2xl font-bold mb-6">Manage Books</h3>
+    <h3 class="text-2xl font-bold mb-6">Books</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="admin-card">
@@ -22,19 +22,25 @@
                   <th>Genre</th>
                   <th>Price</th>
                   <th>Stock</th>
+                  <th>Select</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- Example rows, replace with dynamic data -->
+                @foreach($books as $book)
                 <tr>
-                  <td>978-3-16-148410-0</td>
-                  <td>Book Title</td>
-                  <td>Author Name</td>
-                  <td>Genre Name</td>
-                  <td>$19.99</td>
-                  <td>50</td>
+                  <td>{{$book->isbn}}</td>
+                  <td>{{$book->title}}</td>
+                  <td>{{$book->author}}</td>
+                  <td>{{ implode(', ', $book->genre_names ?? []) }}</td>
+                  <td>RM{{$book->price}}</td>
+                  <td>{{$book->stock}}</td>
+                  <td>
+                    <a href="{{ url('books-page/' . $book->id) }}" class="text-blue-600 hover:text-blue-800" style="text-decoration: none;">
+                      View <i class="bi bi-arrow-right-circle ms-1"></i>
+                    </a>
+                  </td>
                 </tr>
-                <!-- More rows can be dynamically inserted here -->
+                @endforeach
               </tbody>
             </table>
           </div>

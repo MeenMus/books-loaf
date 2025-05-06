@@ -36,7 +36,6 @@ Route::get('/checkout', [HomeController::class, 'showCheckout']);
 Route::get('/cart', [HomeController::class, 'showCart']);
 Route::get('/blog', [HomeController::class, 'showBlog']);
 Route::get('/about', [HomeController::class, 'showAbout']);
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 
 /* ---- */
 
@@ -50,15 +49,18 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
     /* MANAGE BOOKS */
-    Route::get('/manage-books', [BookController::class, 'index'])->name('manage-books');
-    Route::get('/create-books', [BookController::class, 'create'])->name('create-books');
-    Route::post('/store-books', [BookController::class, 'store'])->name('store-books');
+    Route::get('/books-create', [BookController::class, 'create'])->name('books-create');
+    Route::post('/books-store', [BookController::class, 'store'])->name('books-store');
+
+    Route::get('/books-list', [BookController::class, 'bookList'])->name('books-list');
+    Route::get('/books-page/{id}', [BookController::class, 'bookPage'])->name('books-page');
 
     /* MANAGE GENRE */
-    Route::get('/manage-genres', [GenreController::class, 'index'])->name('manage-genres');
-    Route::post('/store-genres', [GenreController::class, 'store'])->name('store-genres');
-    Route::post('/delete-genres', [GenreController::class, 'delete'])->name('delete-genres');
+    Route::get('/genres-list', [GenreController::class, 'genreList'])->name('genres-list');
+    Route::post('/genres-store', [GenreController::class, 'store'])->name('genres-store');
+    Route::post('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
 
+    
 
 
 });

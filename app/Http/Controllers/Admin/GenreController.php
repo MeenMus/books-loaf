@@ -15,10 +15,10 @@ class GenreController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index()
+    public function genreList()
     {
         $genres = Genre::get();
-        return view('admin.manage-genres', compact('genres'));
+        return view('admin.genres-list', compact('genres'));
     }
 
     public function store(Request $request)
@@ -39,4 +39,6 @@ class GenreController extends BaseController
 
         return redirect()->back();
     }
+
+
 }
