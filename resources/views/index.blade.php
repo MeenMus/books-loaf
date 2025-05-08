@@ -113,7 +113,7 @@
             </div>
             <div class="icon-box-content">
               <h4 class="card-title mb-1 text-capitalize text-dark">Quality guarantee</h4>
-              <p>Dolor sit amet orem ipsu mcons ectetur adipi elit.</p>
+              <p>We ensure top-quality products for your satisfaction.</p>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="icon-box-content">
               <h4 class="card-title mb-1 text-capitalize text-dark">Daily offers</h4>
-              <p>Amet consectetur adipi elit loreme ipsum dolor sit.</p>
+              <p>Save more with exciting deals every day.</p>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="icon-box-content">
               <h4 class="card-title mb-1 text-capitalize text-dark">100% secure payment</h4>
-              <p>Rem Lopsum dolor sit amet, consectetur adipi elit.</p>
+              <p>Shop confidently with our secure payment system.</p>
             </div>
           </div>
         </div>
@@ -916,7 +916,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"I stumbled upon this bookstore while visiting the city, and it instantly became my favorite spot. The cozy atmosphere, friendly staff, and wide selection of books make every visit a delight!"</blockquote>
+              <blockquote>"Pengalaman membeli buku di BooksLoaf memang terbaik! Proses pembelian sangat mudah dan penghantaran pun cepat. Buku sampai dalam keadaan sempurna dan dibalut dengan kemas. Saya juga suka pilihan buku yang ditawarkan – dari novel, buku motivasi, hingga bahan rujukan pelajaran. Pasti akan beli lagi lepas ni. Terima kasih BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -934,12 +934,12 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-noRM al">Emma Chamberlin</h5>
+              <h5 class="mt-1 fw-noRM al">Nurul Aina, Kelantan</h5>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"As an avid reader, I'm always on the lookout for new releases, and this bookstore never disappoints. They always have the latest titles, and their recommendations have introduced me to some incredible reads!"</blockquote>
+              <blockquote>"Shopping for books at BooksLoaf was an amazing experience! The ordering process was smooth, and delivery was fast. The books arrived in perfect condition and were well-packaged. I also love the variety of books available – from novels and self-help to academic references. Definitely coming back for more. Thank you, BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -950,19 +950,13 @@
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
               </div>
-              <h5 class="mt-1 fw-noRM al">Thomas John</h5>
+              <h5 class="mt-1 fw-noRM al">Nadhir Nasar, Perak</h5>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"I ordered a few books online from this store, and I was impressed by the quick delivery and careful packaging. It's clear that they prioritize customer satisfaction, and I'll definitely be shopping here again!"</blockquote>
+              <blockquote>"BooksLoaf 帮我找到很多实惠的教材。送货速度非常快，我在开学前就收到了全部书籍。非常推荐给学生！"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -976,18 +970,13 @@
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
               </div>
-              <h5 class="mt-1 fw-noRM al">Kevin Bryan</h5>
+              <h5 class="mt-1 fw-noRM al">Kevin Tan</h5>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“I stumbled upon this tech store while searching for a new laptop, and I couldn't be happier
-                with my experience! The staff was incredibly knowledgeable and guided me through the process of choosing
-                the perfect device for my needs. Highly recommended!”</blockquote>
+              <blockquote>“我喜欢在 BooksLoaf 浏览最新小说。他们的推荐总是很贴合我的口味，购买流程也很方便”</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -1005,14 +994,12 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-noRM al">Stevin</h5>
+              <h5 class="mt-1 fw-noRM al">Joyce Ang</h5>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“I stumbled upon this tech store while searching for a new laptop, and I couldn't be happier
-                with my experience! The staff was incredibly knowledgeable and guided me through the process of choosing
-                the perfect device for my needs. Highly recommended!”</blockquote>
+              <blockquote>“I love browsing the latest novels on BooksLoaf. The recommendations are always spot-on and the checkout process is simple.”</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -1030,7 +1017,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-noRM al">Roman</h5>
+              <h5 class="mt-1 fw-noRM al">Jennifer Huh</h5>
             </div>
           </div>
         </div>
@@ -1048,32 +1035,34 @@
         <div class="col-md-3 posts mb-4">
           <img src="images/post-item1.jpg" alt="post image" class="img-fluid rounded-3">
           <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">10 Must-Read Books of the Year: Our Top Picks!</a></h4>
-          <p class="mb-2">Dive into the world of cutting-edge technology with our latest blog post, where we highlight
-            five essential gadge. <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">The Strength of Independent Bookstores in a Digital Age*</a></h4>
+          <p class="mb-2">Bookstores have been around for centuries, maintaining a sense of support within communities even as 
+            they evolved over time. <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
           </p>
         </div>
         <div class="col-md-3 posts mb-4">
           <img src="images/post-item2.jpg" alt="post image" class="img-fluid rounded-3">
           <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">The Fascinating Realm of Science Fiction</a></h4>
-          <p class="mb-2">Explore the intersection of technology and sustainability in our latest blog post. Learn about
-            the innovative <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span> </p>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">📚 Impact of COVID-19 on Book Sales
+          </a></h4>
+          <p class="mb-2">An analysis of how the pandemic affected the U.S. book publishing market, including trade and educational sectors.
+          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span> </p>
         </div>
         <div class="col-md-3 posts mb-4">
           <img src="images/post-item3.jpg" alt="post image" class="img-fluid rounded-3">
           <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Finding Love in the Pages of a Book</a></h4>
-          <p class="mb-2">Stay ahead of the curve with our insightful look into the rapidly evolving landscape of
-            wearable technology. <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Online Purchase Behavior of Generation Y in Malaysia"</a></h4>
+          <p class="mb-2">A study investigating the online purchase behavior of Gen Y in Malaysia and identifying influencing factors.
+          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
           </p>
         </div>
         <div class="col-md-3 posts mb-4">
           <img src="images/post-item4.jpg" alt="post image" class="img-fluid rounded-3">
           <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Reading for Mental Health: How Books Can Heal and Inspire</a></h4>
-          <p class="mb-2">In today's remote work environment, productivity is key. Discover the top apps and tools that
-            can help you stay <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
+          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Factors Influencing Consumer Behaviour towards Online Purchase Intention on Popular Shopping Platforms in Malaysia"*
+          </a></h4>
+          <p class="mb-2">Research exploring how the quality of e-commerce in Malaysia impacts consumer preferences.
+          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
           </p>
         </div>
       </div>
