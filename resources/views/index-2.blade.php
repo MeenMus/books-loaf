@@ -908,7 +908,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"I stumbled upon this bookstore while visiting the city, and it instantly became my favorite spot. The cozy atmosphere, friendly staff, and wide selection of books make every visit a delight!"</blockquote>
+              <blockquote>"Pengalaman membeli buku di BooksLoaf memang terbaik! Proses pembelian sangat mudah dan penghantaran pun cepat. Buku sampai dalam keadaan sempurna dan dibalut dengan kemas. Saya juga suka pilihan buku yang ditawarkan – dari novel, buku motivasi, hingga bahan rujukan pelajaran. Pasti akan beli lagi lepas ni. Terima kasih BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -926,12 +926,12 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Emma Chamberlin</h5>
+              <h5 class="mt-1 fw-normal">Nurul Aina, Selangor</h5>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"As an avid reader, I'm always on the lookout for new releases, and this bookstore never disappoints. They always have the latest titles, and their recommendations have introduced me to some incredible reads!"</blockquote>
+              <blockquote>"Shopping for books at BooksLoaf was an amazing experience! The ordering process was smooth, and delivery was fast. The books arrived in perfect condition and were well-packaged. I also love the variety of books available – from novels and self-help to academic references. Definitely coming back for more. Thank you, BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
@@ -949,7 +949,7 @@
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
-              <h5 class="mt-1 fw-normal">Thomas John</h5>
+              <h5 class="mt-1 fw-normal">Nadhir Nasar, Perak</h5>
             </div>
           </div>
           <div class="swiper-slide">
