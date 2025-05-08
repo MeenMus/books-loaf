@@ -8,45 +8,6 @@
               <img src="images/logo.jpg" alt="logo" class="img-fluid mb-2">
               <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio
                 erat nullam fringilla.</p>
-              <div class="social-links">
-                <ul class="d-flex list-unstyled">
-                  <li>
-                    <a href="#">
-                      <svg class="facebook">
-                        <use xlink:href="#facebook" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <svg class="instagram">
-                        <use xlink:href="#instagram" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <svg class="twitter">
-                        <use xlink:href="#twitter" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <svg class="linkedin">
-                        <use xlink:href="#linkedin" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <svg class="youtube">
-                        <use xlink:href="#youtube" />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
           <div class="col-lg-2 col-sm-6 pb-3">
@@ -97,9 +58,8 @@
             <div class="footer-menu contact-item">
               <h5 class="widget-title text-capitalize pb-2">Contact Us</h5>
               <p>Do you have any queries or suggestions? <a href="mailto:"
-                  class="text-decoration-underline">nfarisya888@gmail.com                  </a></p>
-              <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222
-                  333 44</a></p>
+                  class="text-decoration-underline">booksloaf@gmail.com                </a></p>
+              <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+60 11 2161 6451</a></p>
             </div>
           </div>
         </div>
@@ -127,11 +87,6 @@
             <img src="images/paypal.jpg" alt="paypal">
           </div>
         </div>
-      </div>
-      <div class="copyright">
-        <p>© Copyright 2024 Bookly. HTML Template by <a href="https://templatesjungle.com/"
-            target="_blank">TemplatesJungle</a>
-        </p>
       </div>
     </div>
   </div>
