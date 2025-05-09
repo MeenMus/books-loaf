@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- <style>
+ <style>
   .swiper-slide {
     transition: opacity 0.8s ease-in-out;
   }
@@ -12,8 +12,14 @@
   }
   .swiper-next svg:hover, .swiper-prev svg:hover {
     background: rgba(255, 255, 255, 1);
-  }
-</style> -->
+  } 
+
+  .insta-image {
+  height: 200px; /* or any fixed height you prefer */
+  object-fit: cover;
+  width: 100%;
+}
+</style> 
 
 @include('layouts.header')
 
@@ -1075,30 +1081,31 @@
         <h3>Instagram</h3>
       </div>
       <div class="row">
-        <div class="col-md-2">
-          <figure class="instagram-item position-relative rounded-3">
-            <a href="https://templatesjungle.com/" class="image-link position-relative">
-              <div class="icon-overlay position-absolute d-flex justify-content-center">
-                <svg class="instagram">
-                  <use xlink:href="#instagram"></use>
-                </svg>
-              </div>
-              <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-            </a>
-          </figure>
+      <div class="col-md-2">
+    <figure class="instagram-item position-relative rounded-3">
+      <a href="https://www.instagram.com/p/DJcFD2PzmRN/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="image-link position-relative">
+        <div class="icon-overlay position-absolute d-flex justify-content-center">
+          <svg class="instagram">
+            <use xlink:href="#instagram"></use>
+          </svg>
         </div>
-        <div class="col-md-2">
-          <figure class="instagram-item position-relative rounded-3">
-            <a href="https://templatesjungle.com/" class="image-link position-relative">
-              <div class="icon-overlay position-absolute d-flex justify-content-center">
-                <svg class="instagram">
-                  <use xlink:href="#instagram"></use>
-                </svg>
-              </div>
-              <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-            </a>
-          </figure>
+        <img src="images/TheBenefitsofReading.jpeg" alt="instagram" class="img-fluid rounded-3 insta-image">
+      </a>
+    </figure>
+  </div>
+
+  <div class="col-md-2">
+    <figure class="instagram-item position-relative rounded-3">
+      <a href="https://www.instagram.com/p/DJcE-hSTeEa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="image-link position-relative">
+        <div class="icon-overlay position-absolute d-flex justify-content-center">
+          <svg class="instagram">
+            <use xlink:href="#instagram"></use>
+          </svg>
         </div>
+        <img src="images/TheFunfactsaboutreading.jpeg" alt="instagram" class="img-fluid rounded-3 insta-image">
+      </a>
+    </figure>
+  </div>
         <div class="col-md-2">
           <figure class="instagram-item position-relative rounded-3">
             <a href="https://templatesjungle.com/" class="image-link position-relative">
