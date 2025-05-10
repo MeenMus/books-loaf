@@ -17,8 +17,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-
-
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends BaseController
 {
@@ -37,29 +36,36 @@ class AuthController extends BaseController
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
 
-        if ($validator->fails()) {
-            Alert::error('Invalid Credentials', 'Email has already been registered!');
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'customer', // or any default role
+            ]);
+
+            // Send email verification
+            event(new Registered($user));
+
+            Alert::success('Registration successful', 'Please verify your email before logging in');
+            return redirect()->back();
+        } catch (ValidationException $e) {
+
+            Alert::error('Submission Error', $e->validator->errors()->first());
             return redirect()->back();
         }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'customer', // or any default role
-        ]);
-
-        // Send email verification
-        event(new Registered($user));
-
-        Alert::success('Registration successful', 'Please verify your email before logging in');
-        return redirect()->back();
     }
 
     public function login(Request $request)
@@ -93,7 +99,7 @@ class AuthController extends BaseController
 
         return redirect('/');
     }
-    
+
 
     public function forgotPassword(Request $request)
     {
@@ -110,7 +116,6 @@ class AuthController extends BaseController
             Alert::error('Error!', __($status));
             return redirect()->back()->withErrors(['email' => __($status)]);
         }
-
     }
 
     public function resetPassword(Request $request)

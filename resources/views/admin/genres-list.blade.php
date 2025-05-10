@@ -7,11 +7,11 @@
 
   <div class="main-content p-6">
     <div class="flex justify-between items-center mb-6">
-      <h3 class="text-2xl font-bold">Genres</h3>
+      <h3 class="font-bold">Genres</h3>
     </div>
 
     <div class="row">
-      <div class="col-6 mx-auto p-3">
+      <div class="col-6  p-3">
         <div class="admin-card bg-white p-4 rounded shadow">
           <div class="table-responsive">
             <table id="genresTable" class="table text-left table-bordered table-hover">
@@ -40,7 +40,7 @@
             </table>
           </div>
         </div>
-        <button type="button" class="btn btn-primary mt-3 float-end" data-bs-toggle="modal" data-bs-target="#addgenreModal">
+        <button type="button" class="btn btn-primary mt-3 float-start" data-bs-toggle="modal" data-bs-target="#addgenreModal">
           Add Genre
         </button>
       </div>
@@ -53,7 +53,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addgenreModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="addgenreModalLabel">Add Genre</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="{{ route('genres-store') }}" method="POST">
@@ -78,8 +78,9 @@
         info: false,
         ordering: false,
         searching: true,
-        scrollCollapse: true,
-        dom: 'f'
+        scrollY: '380px', // <-- Set fixed height
+        scrollCollapse: true, // <-- Collapse if not full height
+        dom: "<'d-flex justify-content-start mb-2'f>t", 
       });
     });
   </script>
