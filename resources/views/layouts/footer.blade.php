@@ -3,55 +3,30 @@
     <div class="row">
       <div class="footer-top-area">
         <div class="row d-flex flex-wrap justify-content-between">
-          <div class="col-lg-3 col-sm-6 pb-3">
-            <div class="footer-menu">
-              <img src="images/logo.jpg" alt="logo" class="img-fluid mb-2">
-              <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio
-                erat nullam fringilla.</p>
-            </div>
-          </div>
           <div class="col-lg-2 col-sm-6 pb-3">
             <div class="footer-menu text-capitalize">
-              <h5 class="widget-title pb-2">Quick Links</h5>
               <ul class="menu-list list-unstyled text-capitalize">
                 <li class="menu-item mb-1">
                   <a href="#">Home</a>
                 </li>
                 <li class="menu-item mb-1">
-                  <a href="#">About</a>
+                  <a href="#">FAQS</a>
                 </li>
                 <li class="menu-item mb-1">
-                  <a href="#">Shop</a>
+                  <a href="#">Privacy Policy</a>
                 </li>
                 <li class="menu-item mb-1">
-                  <a href="#">Blogs</a>
+                  <a href="#">Terms & Condition</a>
                 </li>
                 <li class="menu-item mb-1">
-                  <a href="#">Contact</a>
+                  <a href="#">Enquiry</a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
-            <div class="footer-menu text-capitalize">
-              <h5 class="widget-title pb-2">Help & Info Help</h5>
-              <ul class="menu-list list-unstyled">
-                <li class="menu-item mb-1">
-                  <a href="#">Track Your Order</a>
-                </li>
-                <li class="menu-item mb-1">
-                  <a href="#">Returns Policies</a>
-                </li>
-                <li class="menu-item mb-1">
-                  <a href="#">Shipping + Delivery</a>
-                </li>
-                <li class="menu-item mb-1">
-                  <a href="#">Contact Us</a>
-                </li>
-                <li class="menu-item mb-1">
-                  <a href="#">Faqs</a>
-                </li>
-              </ul>
+            <div class="footer-menu">
+              <img src="images/logo.jpg" alt="logo" class="img-fluid mb-2" style="center">
             </div>
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
