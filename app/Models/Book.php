@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -22,6 +23,6 @@ class Book extends Model
 
     public function genres()
     {
-        return $this->belongsTo(Genre::class, 'genre');
+        return $this->belongsToMany(Genre::class, 'book_genre');
     }
 }

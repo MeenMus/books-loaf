@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('cover_image')->nullable();
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

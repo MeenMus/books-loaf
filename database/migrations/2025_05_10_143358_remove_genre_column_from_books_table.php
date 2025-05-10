@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->collation('utf8mb4_unicode_ci')->unique();
-            $table->timestamps();
-            $table->softDeletes(); 
-
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropColumn('genre');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::table('books', function (Blueprint $table) {
+            //
+        });
     }
 };

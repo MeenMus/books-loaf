@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('book_genre', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->collation('utf8mb4_unicode_ci')->unique();
+            $table->foreignId('book_id')->constrained()->onDelete('cascade');
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes(); 
-
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('book_genre');
     }
 };
