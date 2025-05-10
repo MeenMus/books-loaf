@@ -157,12 +157,12 @@ hr{
   padding-bottom: 2em;
 }
 .padding-medium {
-  padding-top: 4em;
-  padding-bottom: 4em;
+  padding-top: 2em;
+  padding-bottom: 0em;
 }
 .padding-large {
-  padding-top: 7em;
-  padding-bottom: 7em;
+  padding-top: 5em;
+  padding-bottom: 5em;
 }
 .padding-xlarge {
   padding-top: 9.5em;
@@ -1282,7 +1282,7 @@ th{
 /* 4.9 Footer
 /*----------------------------------------------*/
 #footer .menu-list .menu-item a{
-  font-size: 0.7619em;
+  font-size: 1em;
   font-weight: 300;
   letter-spacing: 0.09em;
   color: var(--black-color);

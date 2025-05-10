@@ -106,7 +106,7 @@
             </div>
             <div class="icon-box-content">
               <h4 class="card-title mb-1 text-capitalize text-dark">Free delivery</h4>
-              <p>Consectetur adipi elit lorem ipsum dolor sit amet.</p>
+              <p>Minimum spend of RM150 (Peninsular Malaysia)</p>
             </div>
           </div>
         </div>
@@ -485,21 +485,21 @@
     </div>
   </section>
 
-  <section id="items-listing" class="padding-large">
+<section id="items-listing" class="padding-large">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="featured border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">Featured</h3>
+              <h4 class="d-flex flex-column mb-0">Book Of The Year</h4>
             </div>
             <div class="items-lists">
               <div class="item d-flex">
                 <img src="images/product-item2.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Echoes of the Ancients</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">Thariq Ridzuwan Commando's : His Treasure</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Huda Najwa</p>
 
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
@@ -519,16 +519,16 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 35.00</span>
                 </div>
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
                 <img src="images/product-item1.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">The Midnight Garden</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">Dog Man #12: The Scarlet Shedder (Paperback)n</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Pilkey, Dav</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -547,16 +547,16 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 34.90</span>
                 </div>
               </div>
               <hr>
               <div class="item d-flex">
                 <img src="images/product-item3.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Shadow of the Serpent</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">Intermezzo</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Rooney, Sally</p>
 
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
@@ -576,7 +576,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 89.95</span>
                 </div>
               </div>
             </div>
@@ -585,15 +585,15 @@
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="latest-items border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">Latest items</h3>
+              <h4 class="d-flex flex-column mb-0">#Trending Now</h4>
             </div>
             <div class="items-lists">
               <div class="item d-flex">
                 <img src="images/product-item4.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Whispering Winds</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">Rumah Untuk Alie karya Lenn Liu </a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Lenn Liu</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -612,16 +612,16 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 35.00</span>
                 </div>
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
                 <img src="images/product-item5.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">The Forgotten Realm</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -640,16 +640,16 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 65.90</span>
                 </div>
               </div>
               <hr>
               <div class="item d-flex">
                 <img src="images/product-item6.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Moonlit Secrets</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">On Palestine</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Chomsky, Noam; Pappe, Ilanr</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -668,7 +668,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 68.95</span>
                 </div>
               </div>
             </div>
@@ -677,15 +677,15 @@
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="best-reviewed border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">Best reviewed</h3>
+              <h3 class="d-flex flex-column mb-0">Gotta Have It!</h3>
             </div>
             <div class="items-lists">
               <div class="item d-flex">
                 <img src="images/product-item7.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">The Crystal Key</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">Watch Me (Shatter Me: The New Republic #01)</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Mafi, Tahereh</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -704,16 +704,16 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 69.95</span>
                 </div>
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
                 <img src="images/product-item8.png" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Starlight Sonata</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="single-product">King of Envy</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Huang, Ana</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -732,7 +732,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 69.90</span>
                 </div>
               </div>
               <hr>
@@ -902,7 +902,7 @@
     </div>
   </section>
 
-  <section id="customers-reviews" class="position-relative padding-large"
+<section id="customers-reviews" class="position-relative padding-large"
     style="background-image: url(images/banner-image-bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 600px;">
     <div class="container offset-md-3 col-md-6 ">
       <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next testimonial-button-next">
@@ -1031,7 +1031,7 @@
     </div>
   </section>
 
-  <section id="latest-posts" class="padding-large">
+<section id="latest-posts" class="padding-large">
     <div class="container">
       <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
         <h3 class="d-flex align-items-center">Latest posts</h3>
