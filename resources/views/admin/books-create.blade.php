@@ -6,7 +6,7 @@
   @include('admin.layouts.sidebar')
 
   <div class="main-content">
-    <h3 class="text-2xl font-bold mb-6">Book Creator</h3>
+    <h3 class="font-bold mb-6">Book Creator</h3>
 
     <div class="row g-4">
       <!-- Form Card -->

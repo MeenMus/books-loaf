@@ -54,15 +54,15 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/books-list', [BookController::class, 'bookList'])->name('books-list');
     Route::get('/books-page/{id}', [BookController::class, 'bookPage'])->name('books-page');
+    Route::post('/books-update/{id}', [BookController::class, 'bookUpdate'])->name('books-update');
+    Route::post('/books-update-cover/{id}', [BookController::class, 'bookUpdateCover'])->name('books-update-cover');
+    Route::delete('/books/{id}', [BookController::class, 'delete'])->name('books-delete');
+
 
     /* MANAGE GENRE */
     Route::get('/genres-list', [GenreController::class, 'genreList'])->name('genres-list');
     Route::post('/genres-store', [GenreController::class, 'store'])->name('genres-store');
     Route::post('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
-
-    
-
-
 });
 
 /* ---- */
@@ -109,8 +109,21 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 
 
+/* STORAGE ROUTES */
 
 
+Route::get('/covers/{filename}', function ($filename) {
+    // Build the full path to the image file in storage
+    $path = storage_path('app/public/covers/' . $filename);
+
+    // If the file doesn't exist, show a 404 error
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    // Return the image as a response
+    return response()->file($path);
+})->where('filename', '.*');  // This allows for subdirectories like "cover/asdasd.jpg"
 
 
 
