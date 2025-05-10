@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
@@ -55,6 +56,11 @@ class AuthController extends BaseController
                 'password' => Hash::make($request->password),
                 'role' => 'customer', // or any default role
             ]);
+
+            Profile::create([
+                'user_id' => $user->id,
+            ]);
+    
 
             // Send email verification
             event(new Registered($user));

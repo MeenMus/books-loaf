@@ -44,7 +44,7 @@ class GenreController extends BaseController
         $genre = Genre::findOrFail($request->id);
 
         if ($genre->books()->exists()) {
-            Alert::error('Cannot delete', 'This genre is still used by one or more books.');
+            Alert::error('Delete Failed!', 'This genre is still used by one or more books.');
             return redirect()->back();
         }
 

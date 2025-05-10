@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -58,11 +59,29 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/books-update-cover/{id}', [BookController::class, 'bookUpdateCover'])->name('books-update-cover');
     Route::delete('/books/{id}', [BookController::class, 'delete'])->name('books-delete');
 
-
     /* MANAGE GENRE */
     Route::get('/genres-list', [GenreController::class, 'genreList'])->name('genres-list');
     Route::post('/genres-store', [GenreController::class, 'store'])->name('genres-store');
     Route::post('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
+
+
+    /* MANAGE USERS */
+
+    Route::get('/users-list', [UserController::class, 'userList'])->name('users-list');
+    Route::get('/users-page/{id}', [UserController::class, 'userPage'])->name('users-page');
+    Route::post('/users-profile-update/{id}', [UserController::class, 'userProfileUpdate'])->name('users-profile-update');
+    Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
+    Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
+    Route::post('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
+
+
+
+
+
+
+
+
+
 });
 
 /* ---- */
