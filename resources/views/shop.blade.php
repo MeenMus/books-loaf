@@ -10,23 +10,7 @@
   @include('layouts.navbar')
 
 
-  <section class="hero-section position-relative padding-large" style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 400px;">
-    <div class="hero-content">
-      <div class="container">
-        <div class="row">
-          <div class="text-center">
-            <h1>Shop</h1>
-            <div class="breadcrumbs">
-              <span class="item">
-                <a href="index-2">Home > </a>
-              </span>
-              <span class="item text-decoration-underline">Shop</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
 
   <div class="shopify-grid padding-large">
     <div class="container">
