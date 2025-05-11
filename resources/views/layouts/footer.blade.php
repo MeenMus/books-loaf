@@ -26,7 +26,7 @@
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
             <div class="footer-menu">
-              <img src="images/logo.jpg" alt="logo" class="img-fluid mb-2" style="center">
+              <img src="images/logo.png" alt="logo" class="img-fluid mb-2" style="center; height:150px">
             </div>
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">

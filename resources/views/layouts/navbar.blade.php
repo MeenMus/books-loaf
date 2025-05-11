@@ -160,7 +160,7 @@
         <div class="container">
             <a class="navbar-brand" href="index-2">
                 <!-- <img src="images/main-logo.png" class="logo"> -->
-                <img src="images/logo.jpg" class="logo" style="height: 200px;">
+                <img src="images/logo.png" class="logo mt-2" style="height: 75px;">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <svg class="navbar-icon">
