@@ -62,7 +62,7 @@ Route::middleware(['admin'])->group(function () {
     /* MANAGE GENRE */
     Route::get('/genres-list', [GenreController::class, 'genreList'])->name('genres-list');
     Route::post('/genres-store', [GenreController::class, 'store'])->name('genres-store');
-    Route::post('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
+    Route::delete('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
 
 
     /* MANAGE USERS */
@@ -72,7 +72,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users-profile-update/{id}', [UserController::class, 'userProfileUpdate'])->name('users-profile-update');
     Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
     Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
-    Route::post('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
+    Route::delete('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
 
 
 

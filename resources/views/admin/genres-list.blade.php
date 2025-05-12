@@ -28,6 +28,7 @@
                   <td class="px-4 py-2 text-center">
                     <form action="{{ route('genres-delete') }}" method="POST" onsubmit="return confirm('Delete this genre?');">
                       @csrf
+                      @method('DELETE')
                       <button type="submit" style="all: unset; cursor: pointer;" class="text-red-600 hover:text-red-800">
                         <i class="bi bi-trash3-fill text-danger"></i>
                       </button>
@@ -80,7 +81,7 @@
         searching: true,
         scrollY: '380px', // <-- Set fixed height
         scrollCollapse: true, // <-- Collapse if not full height
-        dom: "<'d-flex justify-content-start mb-2'f>t", 
+        dom: "<'d-flex justify-content-start mb-2'f>t",
       });
     });
   </script>
