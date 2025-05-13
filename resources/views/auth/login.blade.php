@@ -87,7 +87,8 @@
     <div class="left-side"></div>
     <div class="right-side">
         <div class="login-box">
-            <img src="images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <img src="images/logo.png" alt="LoafBooks Logo" width="50%" style="display:block; margin:auto;">
+            <br>
             <h2>Welcome back!</h2>
             <form method="POST" action="">
                 @csrf
