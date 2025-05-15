@@ -73,7 +73,7 @@
     <div class="left-side"></div>
     <div class="right-side">
         <div class="forgot-box">
-            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <img src="/images/logo.png" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
             <h2>Forgot Your Password?</h2>
             <form method="POST" action="{{ url('/forgot-password') }}">
                 @csrf

@@ -76,7 +76,7 @@
     <div class="left-side"></div>
     <div class="right-side">
         <div class="register-box">
-            <img src="/images/logo.jpg" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
+            <img src="/images/logo.png" alt="LoafBooks Logo" width="120" style="display:block; margin:auto;">
             <h2>Create an Account</h2>
             <form method="POST" action="{{ route('register') }}">
                 @csrf

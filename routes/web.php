@@ -153,3 +153,7 @@ Route::get('/books/english', [BookController::class, 'english'])->name('books.en
 Route::get('/books/chinese', [BookController::class, 'chinese'])->name('books.chinese');
 Route::get('/books/revision', [BookController::class, 'revision'])->name('books.revision');
 Route::get('/books/stationery', [BookController::class, 'stationery'])->name('books.stationery');
+
+
+
+Route::get('/admin-template', [DashboardController::class, 'admintemplate'])->name('admin-template');

@@ -1,15 +1,23 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/country-states.js') }}"></script>
+<!-- Core Vendor JS -->
+<script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
 
+<!-- Plugin JS -->
+<script src="{{ asset('vendors/chart.js/chart.umd.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('js/dataTables.select.min.js') }}"></script>
 
-<!-- DATATABLE -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<!-- Template JS -->
+<script src="{{ asset('js/off-canvas.js') }}"></script>
+<script src="{{ asset('js/template.js') }}"></script>
+<script src="{{ asset('js/settings.js') }}"></script>
+<script src="{{ asset('js/todolist.js') }}"></script>
 
-<!-- Select2 JS -->
+<!-- Page-Specific & Utility JS -->
+<script src="{{ asset('js/jquery.cookie.js') }}"></script>
+<script src="{{ asset('js/dashboard.js') }}"></script>
+<script src="{{ asset('js/country-states.js') }}"></script>
+
+<!-- External Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>

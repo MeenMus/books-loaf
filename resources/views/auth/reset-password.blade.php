@@ -101,7 +101,7 @@
 
     <div class="right-side">
         <div class="forgot-box">
-            <img src="/images/logo.jpg" alt="BooksLoaf Logo" width="120">
+            <img src="/images/logo.png" alt="BooksLoaf Logo" width="120">
             <h2>Reset Your Password</h2>
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
