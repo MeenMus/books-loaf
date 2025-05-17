@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Payment;
+use App\Models\SupportTicket;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,6 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 
 class DashboardController extends BaseController
@@ -27,11 +30,15 @@ class DashboardController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function admintemplate() {
+        
 
         return view('admin.admin-template');
     }
+
     public function showDashboard()
     {
+        $adminName = Auth::user()->name;
+
         $totalBooks = Book::count();
         $totalGenres = Genre::count();
         $totalOrders = Order::count();
@@ -39,9 +46,25 @@ class DashboardController extends BaseController
         $totalUnitsSold = OrderItem::count();
         $totalRevenue = OrderItem::sum('price');
         $totalOrdersPrice = Order::sum('total_price');
+        $unreadAlerts = SupportTicket::where('status', 'open')->count();
 
+        
+         // Johor Bahru coordinates
+            $latitude = 1.4927;
+            $longitude = 103.7414;
+        
+        // Fetch weather data from Open-Meteo
+        $weatherResponse = Http::get('https://api.open-meteo.com/v1/forecast', [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'current_weather' => true,
+        ]);
 
-
+        $weatherData = null;
+        if ($weatherResponse->successful()) {
+            $weatherData = $weatherResponse->json();
+        }
+    
         // Optional future counts
 
         // Total units sold (assume each order represents 1 unit unless you have a quantity column elsewhere)
@@ -89,8 +112,36 @@ class DashboardController extends BaseController
             ->orderBy('month')
             ->get();
 
+       // Fetch total sales per day grouped by status 'completed' and 'pending'
+$salesData = Order::select(
+    DB::raw('DATE(created_at) as date'),
+    'status',
+    DB::raw('SUM(total_price) as total')
+)
+->groupBy('date', 'status')
+->orderBy('date')
+->get();
+
+
+
+// Extract unique dates sorted
+$dates = $salesData->pluck('date')->unique()->values()->all();
+    
+// Prepare online and offline sales arrays aligned with dates
+$onlineSales = [];
+$offlineSales = [];
+
+foreach ($dates as $date) {
+    $online = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'completed');
+    $offline = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'pending');
+
+    $onlineSales[] = $online ? (float) $online->total : 0;
+    $offlineSales[] = $offline ? (float) $offline->total : 0;
+}
+
 
         return view('admin.dashboard', compact(
+            'adminName',
             'totalBooks',
             'totalGenres',
             'totalOrders',
@@ -105,7 +156,13 @@ class DashboardController extends BaseController
             'ordersByStatusLine',
             'orderValuePerUser',
             'monthlyRevenue',
-            'totalOrdersPrice'
+            'totalOrdersPrice',
+            'unreadAlerts',
+            'weatherData',
+          
+            'dates',
+            'onlineSales',
+            'offlineSales'
         ));
     }
 }
