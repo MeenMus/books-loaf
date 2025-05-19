@@ -140,6 +140,31 @@ foreach ($dates as $date) {
 }
 
 
+$monthlyLabels = [];
+$monthlyOnlineSales = [];
+$monthlyOfflineSales = [];
+
+
+$monthlyData = Order::selectRaw("
+    DATE_FORMAT(created_at, '%Y-%m') as month,
+    status,
+    SUM(total_price) as total
+")
+->groupBy('month', 'status')
+->orderBy('month')
+->get()
+->groupBy('month');
+
+foreach ($monthlyData as $month => $records) {
+    $monthlyLabels[] = \Carbon\Carbon::parse($month . '-01')->format('M');
+    $online = $records->where('status', 'completed')->sum('total');
+    $offline = $records->where('status', 'pending')->sum('total');
+
+    $monthlyOnlineSales[] = $online;
+    $monthlyOfflineSales[] = $offline;
+}
+
+
         return view('admin.dashboard', compact(
             'adminName',
             'totalBooks',
@@ -162,7 +187,10 @@ foreach ($dates as $date) {
           
             'dates',
             'onlineSales',
-            'offlineSales'
+            'offlineSales',
+            'monthlyLabels',
+            'monthlyOnlineSales',
+            'monthlyOfflineSales',
         ));
     }
 }

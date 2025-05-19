@@ -110,10 +110,13 @@
           <a href="#" class="text-info">View all</a>
         </div>
         <p class="font-weight-500">
-          The total sales by day, categorized as Online (completed) and Offline (pending) orders.
+          This chart shows a comparison of Online (Completed) and Offline (Pending) sales per month.
         </p>
-        <div id="sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
-        <canvas id="sales-chart" height="100"></canvas>
+        <div id="custom-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+       <div style="height: 350px;">
+    <canvas id="custom-sales-chart"></canvas>
+</div>
+
       </div>
     </div>
   </div>
@@ -407,83 +410,61 @@
 </div>
 
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  const ctx = document.getElementById('custom-sales-chart').getContext('2d');
 
-  let salesChart; // global variable to hold the chart instance
-  const ctx = document.getElementById('sales-chart').getContext('2d');
-
-  // Pass PHP data to JS
-  const dates = @json($dates); // e.g. ['2025-05-10', '2025-05-11', ...]
-  const onlineSales = @json($onlineSales); // sales where status = completed
-  const offlineSales = @json($offlineSales); // sales where status = pending
-const ctx = document.getElementById('sales-chart').getContext('2d');
-
-  // Destroy old chart if it exists
-  if (salesChart) {
-    salesChart.destroy();
-  }
-  const salesChart = new Chart(ctx, {
-    type: 'line',
+  const customSalesChart = new Chart(ctx, {
+    type: 'bar',
     data: {
-      labels: dates,
+      labels: {!! json_encode($monthlyLabels) !!},
       datasets: [
         {
-          label: 'Online Sales (Completed)',
-          data: onlineSales,
-          borderColor: '#4ade80', // green
-          backgroundColor: 'rgba(74, 222, 128, 0.2)',
-          fill: true,
-          tension: 0.3,
-          pointRadius: 3,
-          pointHoverRadius: 6,
+          label: 'Offline Sales',
+          data: {!! json_encode($monthlyOfflineSales) !!},
+          backgroundColor: '#98BDFF',
+          borderRadius: 5,
         },
         {
-          label: 'Offline Sales (Pending)',
-          data: offlineSales,
-          borderColor: '#facc15', // yellow
-          backgroundColor: 'rgba(250, 204, 21, 0.2)',
-          fill: true,
-          tension: 0.3,
-          pointRadius: 3,
-          pointHoverRadius: 6,
-        },
+          label: 'Online Sales',
+          data: {!! json_encode($monthlyOnlineSales) !!},
+          backgroundColor: '#4B49AC',
+          borderRadius: 5,
+        }
       ]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#6C7383' }
+        },
+        y: {
+          grid: { display: true },
+          ticks: {
+            color: '#6C7383',
+            beginAtZero: true,
+            callback: function(value) {
+              return value + '$';
+            }
+          }
+        }
+      },
       plugins: {
         legend: {
           display: true,
           position: 'top',
-          labels: { font: { size: 14 } }
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-        },
-      },
-      scales: {
-        x: {
-          title: { display: true, text: 'Date' },
-          ticks: { maxRotation: 45, minRotation: 45 }
-        },
-        y: {
-          title: { display: true, text: 'Sales Amount (RM)' },
-          beginAtZero: true,
+          labels: {
+            color: '#333'
+          }
         }
-      },
-      interaction: {
-        mode: 'nearest',
-        intersect: false
-      },
-      maintainAspectRatio: false
+      }
     }
   });
-</script> 
-@endsection
+</script>
 
 
 
