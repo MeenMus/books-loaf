@@ -207,7 +207,7 @@
                             <a class="nav-link me-4" href="/">Promotion</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/">Contact Us</a>
+                            <a class="nav-link me-4" href="https://www.booksloaf.com/contact">Contact Us</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link me-4" href="about">About</a>
