@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BookController extends BaseController
 {
@@ -89,14 +91,41 @@ class BookController extends BaseController
 
         $genreNames = $book->genres->pluck('name')->toArray();
 
-        $book->fields = [
-            'Author' => $book->author,
-            'Price' => number_format($book->price, 2),
-            'Stock' => $book->stock,
-            'Genre' => implode(', ', $genreNames),
-        ];
+        
+        // Book sales analytics
+        $salesData = DB::table('order_items')
+            ->where('book_id', $book->id)
+            ->selectRaw('SUM(quantity) as total_units_sold, SUM(quantity * price) as total_revenue, MAX(created_at) as last_sold_date')
+            ->first();
 
-        return view('admin.books-page', compact('book', 'genres'));
+            // 🆕 Monthly sales chart data (last 12 months)
+        $monthlySales = DB::table('order_items')
+            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SUM(quantity) as total_sold")
+            ->where('book_id', $book->id)
+            ->where('created_at', '>=', Carbon::now()->subMonths(12))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total_sold', 'month');
+
+        // $book->fields = [
+        //     'Author' => $book->author,
+        //     'Price' => number_format($book->price, 2),
+        //     'Stock' => $book->stock,
+        //     'Genre' => implode(', ', $genreNames),
+        // ];
+
+         $book->fields = [
+        'Author' => $book->author,
+        'Price' => number_format($book->price, 2),
+        'Stock' => $book->stock,
+        'Genre' => implode(', ', $genreNames),
+        'Total Units Sold' => $salesData->total_units_sold ?? 0,
+        'Total Revenue (RM)' => number_format($salesData->total_revenue ?? 0, 2),
+        'Last Sold Date' => $salesData->last_sold_date ? \Carbon\Carbon::parse($salesData->last_sold_date)->format('d M Y') : 'Never',
+    ];
+    
+    
+        return view('admin.books-page', compact('book', 'genres', 'monthlySales'));
     }
 
 

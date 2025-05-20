@@ -184,6 +184,14 @@
       </div>
     </div>
   </div>
+<!-- Monthly Sales Chart -->
+<div class="col-12 mt-4">
+  <div class="card p-4">
+    <h5 class="fw-bold">Monthly Sales Chart (Last 12 Months)</h5>
+    <canvas id="salesChart" height="100"></canvas>
+  </div>
+</div>
+
 
 </div>
 
@@ -191,7 +199,31 @@
 @endsection
 
 @push('scripts')
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('salesChart').getContext('2d');
+  const salesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {!! json_encode($monthlyLabels ?? []) !!},
+      datasets: [{
+        label: 'Sales',
+        data: {!! json_encode($monthlySales ?? []) !!},
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 
 <script>
   const genreMap = {};
