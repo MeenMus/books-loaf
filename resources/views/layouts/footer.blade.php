@@ -26,14 +26,14 @@
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
             <div class="footer-menu">
-              <img src="images/logo.png" alt="logo" class="img-fluid mb-2" style="center; height:150px">
+              <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid mb-2" style="center; height:150px">
             </div>
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
             <div class="footer-menu contact-item">
               <h5 class="widget-title text-capitalize pb-2">Contact Us</h5>
               <p>Do you have any queries or suggestions? <a href="mailto:"
-                  class="text-decoration-underline">booksloaf@gmail.com                </a></p>
+                  class="text-decoration-underline">booksloaf@gmail.com </a></p>
               <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+60 11 2161 6451</a></p>
             </div>
           </div>
@@ -50,16 +50,16 @@
         <div class="shipping d-flex">
           <p>We ship with:</p>
           <div class="card-wrap ps-2">
-            <img src="images/dhl.png" alt="visa">
-            <img src="images/shippingcard.png" alt="mastercard">
+            <img src="{{asset('images/dhl.png')}}" alt="visa">
+            <img src="{{asset('images/shippingcard.png')}}" alt="mastercard">
           </div>
         </div>
         <div class="payment-method d-flex">
           <p>Payment options:</p>
           <div class="card-wrap ps-2">
-            <img src="images/visa.jpg" alt="visa">
-            <img src="images/mastercard.jpg" alt="mastercard">
-            <img src="images/paypal.jpg" alt="paypal">
+            <img src="{{asset('images/visa.jpg')}}" alt="visa">
+            <img src="{{asset('images/mastercard.jpg')}}" alt="mastercard">
+            <img src="{{asset('images/paypal.jpg')}}" alt="paypal">
           </div>
         </div>
       </div>
@@ -72,4 +72,4 @@
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
   crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="{{asset('js/script.js')}}"></script>

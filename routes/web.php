@@ -9,10 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Customer\ShopController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\URL;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +34,12 @@ Route::get('/', [HomeController::class, 'showIndex']);
 Route::get('/index-2', [HomeController::class, 'showIndexAlt']);
 Route::get('/single-product', [HomeController::class, 'showBook']);
 Route::get('/single-post', [HomeController::class, 'showPost']);
-Route::get('/shop', [HomeController::class, 'showShop']);
+
+
+Route::get('/shop/{id}', [ShopController::class, 'index']);
+
+
+
 Route::get('/contact', [HomeController::class, 'showContact']);
 Route::get('/checkout', [HomeController::class, 'showCheckout']);
 Route::get('/cart', [HomeController::class, 'showCart']);
@@ -122,6 +130,13 @@ Route::post('/email/verification-notification', [AuthController::class, 'resendV
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::get('/login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/login/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
+Route::get('/login/facebook', [AuthController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('/login/facebook/callback', [AuthController::class, 'handleFacebookCallback']);
+
 /* ---- */
 
 
@@ -145,15 +160,3 @@ Route::get('/covers/{filename}', function ($filename) {
 })->where('filename', '.*');  // This allows for subdirectories like "cover/asdasd.jpg"
 
 
-
-
-//Books Controller
-Route::get('/books/malay', [BookController::class, 'malay'])->name('books.malay');
-Route::get('/books/english', [BookController::class, 'english'])->name('books.english');
-Route::get('/books/chinese', [BookController::class, 'chinese'])->name('books.chinese');
-Route::get('/books/revision', [BookController::class, 'revision'])->name('books.revision');
-Route::get('/books/stationery', [BookController::class, 'stationery'])->name('books.stationery');
-
-
-
-Route::get('/admin-template', [DashboardController::class, 'admintemplate'])->name('admin-template');

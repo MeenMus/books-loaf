@@ -301,8 +301,8 @@ h6{
 /** 3.1 Form Control
 --------------------------------------------------------------*/
 .form-control {
-  padding: 1rem;
-  font-size: 21px;
+  padding: 0.5rem;
+  font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.01rem;
   line-height: normal;
@@ -1353,3 +1353,26 @@ select#input-sort {
 }
 
 
+/* Make scrollbar thinner */
+::-webkit-scrollbar {
+  width: 8px;          /* Thinner width */
+  height: 8px;         /* For horizontal scrollbar */
+}
+
+/* Scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Light background */
+  border-radius: 25px;
+}
+
+/* Scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0; /* Light gray color */
+  border-radius: 25px;
+  border: 2px solid #f0f0f0; /* To give some padding effect */
+}
+
+/* Optional: Hover effect for scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0;
+}
