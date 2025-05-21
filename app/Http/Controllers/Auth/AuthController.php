@@ -19,6 +19,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends BaseController
 {
@@ -60,7 +61,7 @@ class AuthController extends BaseController
             Profile::create([
                 'user_id' => $user->id,
             ]);
-    
+
 
             // Send email verification
             event(new Registered($user));
@@ -188,5 +189,52 @@ class AuthController extends BaseController
 
         Alert::success('Email Sent!', 'Verification email sent!');
         return redirect('login');
+    }
+
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        return $this->loginOrRegister($user);
+    }
+
+    // Facebook Login
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        return $this->loginOrRegister($user);
+    }
+
+    private function loginOrRegister($socialUser)
+    {
+        $user = User::where('email', $socialUser->getEmail())->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail(),
+                'password' => Hash::make(Str::random(24)),
+                'role' => 'customer', // or any default role
+                'email_verified_at' => now(),
+            ]);
+
+            Profile::create([
+                'user_id' => $user->id,
+            ]);
+        }
+
+        Auth::login($user, true);
+
+        return redirect('/');
     }
 }

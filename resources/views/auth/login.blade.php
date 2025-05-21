@@ -53,44 +53,35 @@
         .btn {
             width: 60%;
             padding: 10px;
-            background-color: #a75f09;
             color: white;
             border: none;
             display: block;
-            margin: 10px auto 0 auto; /* reduced top margin for less gap */
-            border-radius: 30px; /* makes it pill-style */
+            margin: 10px auto 0 auto;
+            /* reduced top margin for less gap */
+            border-radius: 30px;
+            /* makes it pill-style */
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #8a4b05;
         }
 
         .register-link {
             text-align: center;
             margin-top: 10px;
         }
-
-        .register-link a {
-            color: #a75f09;
-            text-decoration: none;
-        }
     </style>
 </head>
 
 <body>
-    
+
     @include('sweetalert::alert')
 
     <div class="left-side"></div>
     <div class="right-side">
         <div class="login-box">
             <img src="images/logo.png" alt="LoafBooks Logo" width="50%" style="display:block; margin:auto;">
-            <br>
-            <h2>Welcome back!</h2>
-            <form method="POST" action="">
+            <h3 class = "mt-4 mb-2">Welcome back!</h3>
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" placeholder="you@email.com" required>
@@ -98,18 +89,29 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
 
-                <div style="text-align: right; margin-bottom: 10px;">
-                    <a href="{{ route('forgot.password') }}" style="color: #a75f09; text-decoration: none;">Forgot your password?</a>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <input type="checkbox" name="remember" id="remember">
+                        <label for="remember" class="mb-0 ms-1">Remember Me</label>
+                    </div>
+                    <div>
+                        <a href="{{ route('forgot.password') }}">Forgot your password?</a>
+                    </div>
                 </div>
-
-
-                <div>
-                    <input type="checkbox" name="remember"> Remember Me
-                </div>
-                
                 <button type="submit" class="btn">Login</button>
             </form>
 
+            <hr class="my-3">
+            <div class="text-center  ">Or login with</div>
+
+            <div class="d-flex justify-content-center gap-1 mb-2">
+                <a href="{{ route('login.google') }}" class="btn btn-sm ">
+                    <i class="bi bi-google"></i> Google
+                </a>
+                <a href="{{ route('login.facebook') }}" class="btn btn-sm ">
+                    <i class="bi bi-facebook "></i> Facebook
+                </a>
+            </div>
             <div class="register-link">
                 <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
             </div>
