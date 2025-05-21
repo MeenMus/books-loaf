@@ -160,7 +160,7 @@
         <div class="container">
             <a class="navbar-brand" href="index-2">
                 <!-- <img src="images/main-logo.png" class="logo"> -->
-                <img src="images/logo.png" class="logo mt-2" style="height: 75px;">
+                <img src="{{asset('images/logo.png')}}" class="logo mt-2" style="height: 75px;">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <svg class="navbar-icon">
@@ -170,7 +170,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
                 <div class="offcanvas-header px-4 pb-0">
                     <a class="navbar-brand" href="index-2">
-                        <img src="images/main-logo.png" class="logo">
+                        <img src="{{asset('images/main-logo.png')}}" class="logo">
                     </a>
                     <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
                 </div>
@@ -186,19 +186,19 @@
                             <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Category</a>
                             <ul class="dropdown-menu animate slide border">
                                 <li>
-                                    <a href="{{ route('books.malay') }}" class="dropdown-item fw-light">Malay Books</a>
+                                    <a href="" class="dropdown-item fw-light">Malay Books</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('books.english') }}" class="dropdown-item fw-light">English Books</a>
+                                    <a href="" class="dropdown-item fw-light">English Books</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('books.chinese') }}" class="dropdown-item fw-light">Chinese Books</a>
+                                    <a href="" class="dropdown-item fw-light">Chinese Books</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('books.revision') }}" class="dropdown-item fw-light">Revision Books</a>
+                                    <a href="" class="dropdown-item fw-light">Revision Books</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('books.stationery') }}" class="dropdown-item fw-light">Stationery</a>
+                                    <a href="" class="dropdown-item fw-light">Stationery</a>
                                 </li>
                             </ul>
                         </li>

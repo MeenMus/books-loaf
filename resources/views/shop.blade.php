@@ -15,7 +15,7 @@
         <main class="col-md-9 d-flex flex-column" style="min-height: 100vh;">
           <div class="filter-shop d-flex flex-wrap justify-content-between mb-5">
             <div class="showing-product">
-              <h4 class = "mt-2">{{$genre->name}}</h4>
+              <h4 class="mt-2">{{$genre->name}}</h4>
             </div>
             <div class="dropdown">
               <a href="#" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
@@ -46,7 +46,9 @@
             <div class="col-lg-3 col-md-4 mb-4">
               <div class="card h-100 d-flex flex-column p-4 border rounded-3">
 
+                @if(isset($book->cover_image))
                 <img src="{{ url($book->cover_image) }}" class="img-fluid shadow-sm" alt="{{ $book->title }}">
+                @endif
 
                 <div class="mt-4 mb-auto">
                   <h6 class="fw-bold">

@@ -26,7 +26,7 @@
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
             <div class="footer-menu">
-              <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid mb-2" style="center; height:150px">
+              <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid mb-2" style="height:150px">
             </div>
           </div>
           <div class="col-lg-3 col-sm-6 pb-3">
