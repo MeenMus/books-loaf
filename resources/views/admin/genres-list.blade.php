@@ -49,8 +49,17 @@
       Add Genre
     </button>
   </div>
+
+<div class="col-6 mt-0">
+  <div class="admin-card bg-white p-4 rounded shadow">
+    <h5 class="mb-3">Top 5 Genres by Total Quantity Sold</h5>
+    <canvas id="genreChart"></canvas>
+  </div>
 </div>
+
 </div>
+
+
 
 <div class="modal fade" id="addgenreModal" tabindex="-1" aria-labelledby="addgenreModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -74,9 +83,14 @@
   </div>
 </div>
 
+
+
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     $('#genresTable').DataTable({
@@ -89,5 +103,33 @@
       dom: "<'d-flex justify-content-start mb-2'f>t",
     });
   });
+
+   const genreData = @json($topGenres);
+
+    const ctx = document.getElementById('genreChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: genreData.map(g => g.name),
+        datasets: [{
+          label: 'Books Sold',
+          data: genreData.map(g => g.total_quantity ?? 0),
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    });
 </script>
 @endpush

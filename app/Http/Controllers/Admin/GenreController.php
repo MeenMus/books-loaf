@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class GenreController extends BaseController
 {
@@ -19,7 +20,20 @@ class GenreController extends BaseController
     public function genreList()
     {
         $genres = Genre::get();
-        return view('admin.genres-list', compact('genres'));
+
+         // Top genres by total quantity sold
+        $topGenres = DB::table('genres')
+        ->select('genres.name', DB::raw('SUM(order_items.quantity) as total_quantity'))
+        ->leftjoin('book_genre', 'genres.id', '=', 'book_genre.genre_id')
+        ->join('order_items', 'book_genre.book_id', '=', 'order_items.book_id')
+        ->groupBy('genres.name')
+        ->orderByDesc('total_quantity')
+        ->limit(5)
+        ->get();
+
+       
+       
+          return view('admin.genres-list', compact('genres', 'topGenres'));
     }
 
     public function store(Request $request)
