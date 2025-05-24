@@ -15,12 +15,17 @@ class ShopController extends BaseController
     {
         $genres = Genre::orderBy('name', 'asc')->get();
 
-        $genre = Genre::findOrFail($id);
+        $sort = $request->input('sort');
+
+        if ($id === 'all') {
+            $query = Book::query();
+            $genre = (object) ['name' => 'ALL'];
+        } else {
+            $genre = Genre::findOrFail($id);
+            $query = $genre->books();
+        }
 
         // Sorting
-        $sort = $request->input('sort');
-        $query = $genre->books();
-
         switch ($sort) {
             case 'name_asc':
                 $query->orderBy('title', 'asc');
@@ -41,12 +46,12 @@ class ShopController extends BaseController
                 $query->orderBy('rating', 'asc');
                 break;
             default:
-                // Optional: default sorting
                 $query->orderBy('title', 'asc');
                 break;
         }
 
-        $books = $query->paginate(12)->withQueryString(); // Maintain query params like sort
+        $books = $query->paginate(12)->withQueryString();
+
 
         return view('shop', compact('genres', 'books', 'genre', 'sort'));
     }

@@ -1,4 +1,5 @@
 @include('layouts.header')
+@include('sweetalert::alert')
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="search" xmlns="http://www.w3.org/2000/symbolsvg" viewBox="0 0 24 24">
@@ -158,8 +159,7 @@
 
     <nav id="header-nav" class="navbar navbar-expand-lg py-3">
         <div class="container">
-            <a class="navbar-brand" href="index-2">
-                <!-- <img src="images/main-logo.png" class="logo"> -->
+            <a class="navbar-brand" href="/">
                 <img src="{{asset('images/logo.png')}}" class="logo mt-2" style="height: 75px;">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -186,74 +186,21 @@
                             <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Category</a>
                             <ul class="dropdown-menu animate slide border">
                                 <li>
-                                    <a href="" class="dropdown-item fw-light">Malay Books</a>
+                                    <a href="{{ url('shop/all') }}" class="dropdown-item fw-light">Browse Books</a>
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item fw-light">English Books</a>
+                                    <a href="{{ url('shop/27') }}" class="dropdown-item fw-light">Malay Books</a>
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item fw-light">Chinese Books</a>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item fw-light">Revision Books</a>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item fw-light">Stationery</a>
+                                    <a href="{{ url('shop/13') }}" class="dropdown-item fw-light">Chinese Books</a>
                                 </li>
                             </ul>
                         </li>
 
-                        <!--                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/">Promotion</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link me-4" href="https://www.booksloaf.com/contact">Contact Us</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link me-4" href="about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="shop">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="blog">Blogs</a>
-                        </li> -->
-                        <!-- <li class="nav-item dropdown">
-                            <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu animate slide border">
-                                <li>
-                                    <a href="about" class="dropdown-item active fw-light">About <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="shop" class="dropdown-item fw-light">Shop <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="single-product" class="dropdown-item fw-light">Single Product <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="cart" class="dropdown-item fw-light">Cart <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="checkout" class="dropdown-item fw-light">Checkout <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="blog" class="dropdown-item fw-light">Blog <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="single-post" class="dropdown-item fw-light">Single Post <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="contact" class="dropdown-item fw-light">Contact <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                            </ul>
-                        </li> -->
 
-                        <!-- <li class="nav-item">
-                            <a class="nav-link me-4" href="contact">Contact</a>
-                        </li> -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link text-decoration-underline me-4" href="https://templatesjungle.gumroad.com/l/bookly-bookstore-ecommerce-bootstrap-html-css-website-template" target="_blank">Get Pro</a>
-                        </li> -->
                     </ul>
                     <div class="user-items d-flex">
                         <ul class="d-flex justify-content-end list-unstyled mb-0">
@@ -264,20 +211,7 @@
                                     </svg>
                                 </a>
                             </li>
-                            <!--old UI FOR Profile-->
-                            <!-- <li class="pe-3">
-                                <a href="/login">
-                                    <svg class="user">
-                                        <use xlink:href="#user"></use>
-                                    </svg>
-                                </a>
-                                @auth
-                                <div class="d-flex flex-column align-items-start">
-                                    <span>{{ Auth::user()->name }}</span>
-                                    <button id="logout-btn" class="btn btn-sm btn-outline-danger mt-1 p-1" style="font-size: 12px;">Logout</button>
-                                </div>
-                                @endauth
-                            </li> -->
+
                             <li class="pe-3 dropdown">
                                 <a href="#" class="dropdown-toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <svg class="user me-1">
@@ -317,45 +251,18 @@
                                 </ul>
                             </li>
                             <li class="wishlist-dropdown dropdown pe-3">
-                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                <a class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <svg class="wishlist">
                                         <use xlink:href="#heart"></use>
                                     </svg>
                                 </a>
-                                <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
-                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary">Your wishlist</span>
-                                        <span class="badge bg-primary rounded-pill">2</span>
-                                    </h4>
-                                    <ul class="list-group mb-3">
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h5>
-                                                    <a href="single-product">The Emerald Crown</a>
-                                                </h5>
-                                                <small>Special discounted price.</small>
-                                                <a href="#" class="d-block fw-medium text-capitalize mt-2">Add to cart</a>
+                                <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3" id="likesDropdown">
+                                    <div id="likesContent">
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
                                             </div>
-                                            <span class="text-primary">$2000</span>
-                                        </li>
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h5>
-                                                    <a href="single-product">The Last Enchantment</a>
-                                                </h5>
-                                                <small>Perfect for enlightened people.</small>
-                                                <a href="#" class="d-block fw-medium text-capitalize mt-2">Add to cart</a>
-                                            </div>
-                                            <span class="text-primary">$400</span>
-                                        </li>
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between">
-                                            <span class="text-capitalize"><b>Total (USD)</b></span>
-                                            <strong>$1470</strong>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex flex-wrap justify-content-center">
-                                        <a href="#" class="w-100 btn btn-dark mb-1" type="submit">Add all to cart</a>
-                                        <a href="cart" class="w-100 btn btn-primary" type="submit">View cart</a>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -363,40 +270,15 @@
                                 <a href="cart" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <svg class="cart">
                                         <use xlink:href="#cart"></use>
-                                    </svg><span class="fs-6 fw-light">(02)</span>
+                                    </svg>
                                 </a>
-                                <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
-                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary">Your cart</span>
-                                        <span class="badge bg-primary rounded-pill">2</span>
-                                    </h4>
-                                    <ul class="list-group mb-3">
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h5>
-                                                    <a href="single-product">Secrets of the Alchemist</a>
-                                                </h5>
-                                                <small>High quality in good price.</small>
+                                <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3" id="cartDropdown">
+                                    <div id="cartContent">
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
                                             </div>
-                                            <span class="text-primary">$870</span>
-                                        </li>
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
-                                            <div>
-                                                <h5>
-                                                    <a href="single-product">Quest for the Lost City</a>
-                                                </h5>
-                                                <small>Professional Quest for the Lost City.</small>
-                                            </div>
-                                            <span class="text-primary">$600</span>
-                                        </li>
-                                        <li class="list-group-item bg-transparent d-flex justify-content-between">
-                                            <span class="text-capitalize"><b>Total (USD)</b></span>
-                                            <strong>$1470</strong>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex flex-wrap justify-content-center">
-                                        <a href="cart" class="w-100 btn btn-dark mb-1" type="submit">View Cart</a>
-                                        <a href="checkout" class="w-100 btn btn-primary" type="submit">Go to checkout</a>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -408,3 +290,53 @@
     </nav>
 
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let likesLoaded = false;
+        let cartLoaded = false;
+
+        const dropdownLikesToggle = document.querySelector('.wishlist-dropdown .dropdown-toggle');
+        const dropdownCartToggle = document.querySelector('.cart-dropdown .dropdown-toggle');
+
+        if (dropdownLikesToggle) {
+            dropdownLikesToggle.addEventListener('show.bs.dropdown', function () {
+                if (!likesLoaded) {
+                    fetchLikes();
+                }
+            });
+        }
+
+        if (dropdownCartToggle) {
+            dropdownCartToggle.addEventListener('show.bs.dropdown', function () {
+                if (!cartLoaded) {
+                    fetchCart();
+                }
+            });
+        }
+
+        function fetchLikes() {
+            fetch('{{ route('user-likes') }}')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('likesContent').innerHTML = data.html;
+                    likesLoaded = true;
+                })
+                .catch(() => {
+                    document.getElementById('likesContent').innerHTML = '<div>Please login to view likes.</div>';
+                });
+        }
+
+        function fetchCart() {
+            fetch('{{ route('user-cart') }}')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('cartContent').innerHTML = data.html;
+                    cartLoaded = true;
+                })
+                .catch(() => {
+                    document.getElementById('cartContent').innerHTML = '<div>Please login to view cart.</div>';
+                });
+        }
+    });
+</script>

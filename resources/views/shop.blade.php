@@ -52,7 +52,7 @@
 
                 <div class="mt-4 mb-auto">
                   <h6 class="fw-bold">
-                    <a href="#" class="text-dark text-decoration-none">{{ $book->title }}</a>
+                    <a href="{{ url('book/' . $book->id) }}" class="text-dark text-decoration-none">{{ $book->title }}</a>
                   </h6>
                   <p class="fs-6 text-black-50">{{ $book->author }}</p>
                 </div>
@@ -119,7 +119,7 @@
             <div style="max-height: 1350px; overflow-y: auto;">
               <ul class="product-categories mb-0 sidebar-list list-unstyled" id="genreList">
                 <li class="cat-item">
-                  <a href="0">All</a>
+                  <a href="all">All</a>
                 </li>
                 <br>
                 @foreach($genres as $genre)

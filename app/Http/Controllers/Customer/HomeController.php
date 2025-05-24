@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends BaseController
 {
@@ -45,11 +46,6 @@ class HomeController extends BaseController
         return view('contact');
     }
 
-    public function showCheckout()
-    {
-        return view('checkout');
-    }
-
     public function showCart()
     {
         return view('cart');
@@ -63,5 +59,24 @@ class HomeController extends BaseController
     public function showAbout()
     {
         return view('about');
+    }
+
+    public function test()
+    {
+        $cart = Auth::user()->cart()->with('items.book')->first();
+
+        $cartItems = $cart ? $cart->items : collect();
+
+        $total = $cartItems->sum(fn($item) => $item->book->price);
+
+        
+
+        return response()->json([
+            'html' => view('components.cart-dropdown-content', [
+                'cartItems' => $cartItems,
+                'total' => $total
+            ])->render()
+        ]);
+
     }
 }

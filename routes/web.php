@@ -6,10 +6,13 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Customer\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Customer\ShopController;
+use App\Http\Controllers\Customer\BuyBookController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\LikeController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -38,13 +41,27 @@ Route::get('/single-post', [HomeController::class, 'showPost']);
 
 Route::get('/shop/{id}', [ShopController::class, 'index']);
 
+Route::get('/book/{id}', [BuyBookController::class, 'index']);
+
+Route::post('/cart-add/{id}', [CartController::class, 'addCart'])->name('cart-add')->middleware('auth');
+Route::post('/like/{book}', [LikeController::class, 'toggleLike'])->name('like')->middleware('auth');
+Route::post('/cart-add-all-liked', [CartController::class, 'addAllLiked'])->name('cart-add-all-liked')->middleware('auth');
+Route::get('/user-likes', [LikeController::class, 'fetchLikes'])->name('user-likes')->middleware('auth');
+Route::get('/user-cart', [CartController::class, 'fetchCart'])->name('user-cart')->middleware('auth');
+Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
+Route::delete('/cart-remove/{id}', [CartController::class, 'removeCart'])->name('cart-remove')->middleware('auth');
+Route::post('/cart-update', [CartController::class, 'updateCart'])->name('cart-update')->middleware('auth');
+
+Route::get('/checkout', [CartController::class, 'showCheckout'])->name('checkout')->middleware('auth');
+
+
 
 
 Route::get('/contact', [HomeController::class, 'showContact']);
-Route::get('/checkout', [HomeController::class, 'showCheckout']);
-Route::get('/cart', [HomeController::class, 'showCart']);
 Route::get('/blog', [HomeController::class, 'showBlog']);
 Route::get('/about', [HomeController::class, 'showAbout']);
+
+Route::get('/test', [HomeController::class, 'test']);
 
 /* ---- */
 
