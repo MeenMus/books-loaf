@@ -124,7 +124,6 @@
           <nav>
             <div class="nav nav-tabs d-flex justify-content-center py-3" id="nav-tab" role="tablist">
               <button class="nav-link text-capitalize active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
-              <button class="nav-link text-capitalize" id="nav-information-tab" data-bs-toggle="tab" data-bs-target="#nav-information" type="button" role="tab" aria-controls="nav-information" aria-selected="false">Additional information</button>
               <button class="nav-link text-capitalize" id="nav-shipping-tab" data-bs-toggle="tab" data-bs-target="#nav-shipping" type="button" role="tab" aria-controls="nav-shipping" aria-selected="false">Shipping & Return</button>
               <button class="nav-link text-capitalize" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews (02)</button>
             </div>
@@ -133,16 +132,24 @@
             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
               <p>{{$book->description}}</p>
             </div>
-            <div class="tab-pane fade" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
-              <p>It is Comfortable and Best</p>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
             <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
-              <p>Returns Policy</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros justo, accumsan non dui sit amet. Phasellus semper volutpat mi sed imperdiet. Ut odio lectus, vulputate non ex non, mattis sollicitudin purus. Mauris consequat justo a enim interdum, in consequat dolor accumsan. Nulla iaculis diam purus, ut vehicula leo efficitur at.</p>
-              <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In blandit nunc enim, sit amet pharetra erat aliquet ac.</p>
-              <p>Shipping</p>
-              <p>Pellentesque ultrices ut sem sit amet lacinia. Sed nisi dui, ultrices ut turpis pulvinar. Sed fringilla ex eget lorem consectetur, consectetur blandit lacus varius. Duis vel scelerisque elit, et vestibulum metus. Integer sit amet tincidunt tortor. Ut lacinia ullamcorper massa, a fermentum arcu vehicula ut. Ut efficitur faucibus dui Nullam tristique dolor eget turpis consequat varius. Quisque a interdum augue. Nam ut nibh mauris.</p>
+              <h4>Return Policy</h4>
+              <p><b>Digital Products</b></p>
+              <p>Due to the nature of digital content, eBook purchases are non-refundable once downloaded or accessed.</p>
+              <p>If you experience issues with your download or receive the wrong file, please contact us within 3 days for assistance.</p>
+              <p><b>Physical Books</b></p>
+              <p>Returns are accepted within 7 days of receiving your order if the item is damaged, defective, or incorrect and book is unused and in original condition.</p>
+              <p>To request a return, contact our support team with your order number and a photo of the issue.</p>
+              <hr style="height:1px; border-width:0; color:black; background-color:black">
+              <br>
+              <h4>Shipping</h4>
+              <p><b>Digital Products</b></p>
+              <p>All eBooks are delivered instantly via email and are also accessible from your account dashboard after purchase.</p>
+              <p>No physical shipping is required.</p>
+              <p><b>Physical Books</b></p>
+              <p>Orders are processed within 1–2 business days.</p>
+              <p>Estimated delivery time: 3–7 business days (West Malaysia), 5–10 business days (East Malaysia).</p>
+              <p>Tracking information will be provided via email once your order is shipped.</p>
             </div>
             <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
               <div class="review-box review-style d-flex gap-3 flex-column">
