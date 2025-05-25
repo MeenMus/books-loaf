@@ -174,4 +174,19 @@
       preloader.classList.add("hide-preloader");
     });
 
+  const categorySwiper = new Swiper('.category-swiper', {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.category-slider-button-next',
+      prevEl: '.category-slider-button-prev',
+    },
+    breakpoints: {
+      576: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      992: { slidesPerView: 4 },
+      1200: { slidesPerView: 5 }
+    }
+  });
+
 })(jQuery);
