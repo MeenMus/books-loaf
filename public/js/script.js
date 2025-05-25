@@ -178,9 +178,9 @@
     slidesPerView: 2,
     spaceBetween: 20,
     navigation: {
-      nextEl: '.category-slider-button-next',
-      prevEl: '.category-slider-button-prev',
-    },
+    nextEl: '.product-slider-button-next', // Fixed
+    prevEl: '.product-slider-button-prev', // Fixed
+  },
     breakpoints: {
       576: { slidesPerView: 2 },
       768: { slidesPerView: 3 },

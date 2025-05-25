@@ -18,6 +18,24 @@
   height: 200px; /* or any fixed height you prefer */
   object-fit: cover;
   width: 100%;
+  
+  /* Custom styles for the swiper container */
+  .category-swiper {
+    padding: 0 15px;
+  }
+  
+  /* Arrow styling */
+  .chevron-forward-circle,
+  .chevron-back-circle {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .chevron-forward-circle:hover,
+  .chevron-back-circle:hover {
+    background-color: #f8f9fa !important;
+    transform: scale(1.05);
+  }
 }
 </style> 
 
@@ -865,85 +883,89 @@
     </div>
   </section>
 
-  <section id="categories" class="padding-large pt-0">
-    <div class="container position-relative">
-      <div class="section-title d-flex justify-content-between align-items-center mb-4">
-        <h3 class="d-flex align-items-center">Categories</h3>
-      </div>
+ <section id="categories" class="padding-large pt-0">
+  <div class="container position-relative">
+    <div class="section-title d-flex justify-content-between align-items-center mb-4">
+      <h3 class="d-flex align-items-center">Categories</h3>
+    </div>
 
-      <!-- Swiper navigation buttons -->
-      <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
-        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
-          <use xlink:href="#alt-arrow-right-outline"></use>
-        </svg>
-      </div> 
-        <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
-        <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+    <!-- Swiper container with padding for arrows -->
+    <div class="position-relative px-5">
+      <!-- Previous Arrow (positioned left outside content) -->
+      <div class="position-absolute top-50 start-0 translate-middle-y z-1 swiper-prev product-slider-button-prev">
+        <svg class="chevron-back-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
           <use xlink:href="#alt-arrow-left-outline"></use>
         </svg>
       </div>
-      <!-- Swiper container -->
+
+      <!-- Swiper content -->
       <div class="swiper category-swiper">
         <div class="swiper-wrapper">
-
-          <!-- Category Slide -->
+          <!-- Category Slides -->
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/public.png" alt="Bacaan Umum" style="height:150px;" />
-              <p>Bacaan Umum</p>
+              <img src="images/public.png" alt="Bacaan Umum" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Bacaan Umum</p>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/children.png" alt="Children's Books" style="height:150px;" />
-              <p>Children's Books</p>
+              <img src="images/children.png" alt="Children's Books" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Children's Books</p>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/thriller.png" alt="Crime & Thriller" style="height:150px;" />
-              <p>Crime & Thriller</p>
+              <img src="images/thriller.png" alt="Crime & Thriller" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Crime & Thriller</p>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/romance.png" alt="Romance" style="height:150px;" />
-              <p>Romance</p>
+              <img src="images/romance.png" alt="Romance" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Romance</p>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/fiction.png" alt="Non-Fiction Books" style="height:150px;" />
-              <p>Non-Fiction Books</p>
+              <img src="images/fiction.png" alt="Non-Fiction Books" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Non-Fiction Books</p>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="category-card text-center">
-              <img src="images/cooking.png" alt="Cooking" style="height:150px;" />
-              <p>Cooking</p>
+              <img src="images/cooking.png" alt="Cooking" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Cooking</p>
             </div>
           </div>
-
         </div>
       </div>
+
+      <!-- Next Arrow (positioned right outside content) -->
+      <div class="position-absolute top-50 end-0 translate-middle-y z-1 swiper-next product-slider-button-next">
+        <svg class="chevron-forward-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
+          <use xlink:href="#alt-arrow-right-outline"></use>
+        </svg>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 <section id="customers-reviews" class="position-relative padding-large"
     style="background-image: url(images/banner-image-bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 600px;">
     <div class="container offset-md-3 col-md-6 ">
       <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next testimonial-button-next">
-        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="40" height="40">
           <use xlink:href="#alt-arrow-right-outline"></use>
         </svg>
       </div>
       <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev testimonial-button-prev">
-        <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+        <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="40" height="40">
           <use xlink:href="#alt-arrow-left-outline"></use>
         </svg>
       </div>
