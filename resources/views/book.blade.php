@@ -130,7 +130,7 @@
           </nav>
           <div class="tab-content border-bottom py-4" id="nav-tabContent">
             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <p>{{$book->description}}</p>
+              <p style="line-height: 1.8;">{!! nl2br(e($book->description)) !!}</p>
             </div>
             <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
               <h4>Return Policy</h4>
