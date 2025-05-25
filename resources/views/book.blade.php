@@ -133,23 +133,27 @@
               <p style="line-height: 1.8;">{!! nl2br(e($book->description)) !!}</p>
             </div>
             <div class="tab-pane fade" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
-              <h4>Return Policy</h4>
-              <p><b>Digital Products</b></p>
-              <p>Due to the nature of digital content, eBook purchases are non-refundable once downloaded or accessed.</p>
-              <p>If you experience issues with your download or receive the wrong file, please contact us within 3 days for assistance.</p>
-              <p><b>Physical Books</b></p>
-              <p>Returns are accepted within 7 days of receiving your order if the item is damaged, defective, or incorrect and book is unused and in original condition.</p>
-              <p>To request a return, contact our support team with your order number and a photo of the issue.</p>
-              <hr style="height:1px; border-width:0; color:black; background-color:black">
+              <h3>🔁 Return Policy</h3>
               <br>
-              <h4>Shipping</h4>
               <p><b>Digital Products</b></p>
-              <p>All eBooks are delivered instantly via email and are also accessible from your account dashboard after purchase.</p>
-              <p>No physical shipping is required.</p>
+              <p><li>Due to the nature of digital content, eBook purchases are non-refundable once downloaded or accessed.</li></p>
+              <p><li>If you experience issues with your download or receive the wrong file, please contact us within 3 days for assistance.</li></p>
+              <br>
               <p><b>Physical Books</b></p>
-              <p>Orders are processed within 1–2 business days.</p>
-              <p>Estimated delivery time: 3–7 business days (West Malaysia), 5–10 business days (East Malaysia).</p>
-              <p>Tracking information will be provided via email once your order is shipped.</p>
+              <p><li>Returns are accepted within 7 days of receiving your order if the item is damaged, defective, or incorrect and book is unused and in original condition.</li></p>
+              <p><li>To request a return, contact our support team with your order number and a photo of the issue.</li></p>
+              <br>
+              <hr style="height:1px; border-width:0; color:black; background-color:black">
+              <h3>🚚 Shipping</h3>
+              <br>
+              <p><b>Digital Products</b></p>
+              <p><li>All eBooks are delivered instantly via email and are also accessible from your account dashboard after purchase.</li></p>
+              <p><li>No physical shipping is required.</li></p>
+              <br>
+              <p><b>Physical Books</b></p>
+              <p><li>Orders are processed within 1–2 business days.</li></p>
+              <p><li>Estimated delivery time: 3–7 business days (West Malaysia), 5–10 business days (East Malaysia).</li></p>
+              <p><li>Tracking information will be provided via email once your order is shipped.</li></p>
             </div>
             <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
               <div class="review-box review-style d-flex gap-3 flex-column">
