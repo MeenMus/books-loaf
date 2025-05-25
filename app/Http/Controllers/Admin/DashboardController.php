@@ -113,57 +113,100 @@ class DashboardController extends BaseController
             ->get();
 
        // Fetch total sales per day grouped by status 'completed' and 'pending'
-$salesData = Order::select(
-    DB::raw('DATE(created_at) as date'),
-    'status',
-    DB::raw('SUM(total_price) as total')
-)
-->groupBy('date', 'status')
-->orderBy('date')
-->get();
+        $salesData = Order::select(
+            DB::raw('DATE(created_at) as date'),
+            'status',
+            DB::raw('SUM(total_price) as total')
+        )
+        ->groupBy('date', 'status')
+        ->orderBy('date')
+        ->get();
 
 
 
-// Extract unique dates sorted
-$dates = $salesData->pluck('date')->unique()->values()->all();
-    
-// Prepare online and offline sales arrays aligned with dates
-$onlineSales = [];
-$offlineSales = [];
+        // Extract unique dates sorted
+        $dates = $salesData->pluck('date')->unique()->values()->all();
+            
+        // Prepare online and offline sales arrays aligned with dates
+        $onlineSales = [];
+        $offlineSales = [];
 
-foreach ($dates as $date) {
-    $online = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'completed');
-    $offline = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'pending');
+        foreach ($dates as $date) {
+            $online = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'completed');
+            $offline = $salesData->firstWhere(fn($row) => $row->date == $date && $row->status == 'pending');
 
-    $onlineSales[] = $online ? (float) $online->total : 0;
-    $offlineSales[] = $offline ? (float) $offline->total : 0;
-}
-
-
-$monthlyLabels = [];
-$monthlyOnlineSales = [];
-$monthlyOfflineSales = [];
+            $onlineSales[] = $online ? (float) $online->total : 0;
+            $offlineSales[] = $offline ? (float) $offline->total : 0;
+        }
 
 
-$monthlyData = Order::selectRaw("
-    DATE_FORMAT(created_at, '%Y-%m') as month,
-    status,
-    SUM(total_price) as total
-")
-->groupBy('month', 'status')
-->orderBy('month')
-->get()
-->groupBy('month');
+        $monthlyLabels = [];
+        $monthlyOnlineSales = [];
+        $monthlyOfflineSales = [];
 
-foreach ($monthlyData as $month => $records) {
-    $monthlyLabels[] = \Carbon\Carbon::parse($month . '-01')->format('M');
-    $online = $records->where('status', 'completed')->sum('total');
-    $offline = $records->where('status', 'pending')->sum('total');
 
-    $monthlyOnlineSales[] = $online;
-    $monthlyOfflineSales[] = $offline;
-}
+        $monthlyData = Order::selectRaw("
+            DATE_FORMAT(created_at, '%Y-%m') as month,
+            status,
+            SUM(total_price) as total
+        ")
+        ->groupBy('month', 'status')
+        ->orderBy('month')
+        ->get()
+        ->groupBy('month');
 
+        foreach ($monthlyData as $month => $records) {
+            $monthlyLabels[] = \Carbon\Carbon::parse($month . '-01')->format('M');
+            $online = $records->where('status', 'completed')->sum('total');
+            $offline = $records->where('status', 'pending')->sum('total');
+
+            $monthlyOnlineSales[] = $online;
+            $monthlyOfflineSales[] = $offline;
+        }
+
+        $booksSoldByGenre = DB::table('order_items')
+            ->join('books', 'order_items.book_id', '=', 'books.id')
+            ->join('book_genre', 'books.id', '=', 'book_genre.book_id')
+            ->join('genres', 'book_genre.genre_id', '=', 'genres.id')
+            ->select('genres.name as genre', DB::raw('SUM(order_items.quantity) as total_sold'))
+            ->groupBy('genres.name')
+            ->orderByDesc('total_sold')
+            ->get();
+
+        $newCustomersThisMonth = User::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+
+        $totalCarts = DB::table('carts')->count();
+
+        // Assume users with a cart and an order have converted (not 100% accurate, but practical)
+        $convertedCarts = DB::table('carts')
+            ->join('orders', 'carts.user_id', '=', 'orders.user_id')
+            ->distinct('carts.id')
+            ->count();
+
+        $cartAbandonmentRate = $totalCarts > 0
+            ? round((($totalCarts - $convertedCarts) / $totalCarts) * 100, 2)
+            : 0;
+
+        $newCustomers = User::where('created_at', '>=', Carbon::now()->subDays(30))->count();
+
+        $completedOrders = Order::where('status', 'completed')->count();
+
+        $cartConversionRate = $totalCarts > 0 ? ($completedOrders / $totalCarts) * 100 : 0;
+
+        $topOrders = DB::table('order_items')
+        ->join('orders', 'order_items.order_id', '=', 'orders.id')
+        ->join('books', 'order_items.book_id', '=', 'books.id')
+        ->select(
+            'books.title as product',
+            DB::raw('order_items.price * order_items.quantity as total_price'),
+            'orders.created_at as date',
+            'orders.status as order_status'
+        )
+        ->orderBy('orders.created_at', 'desc')
+        ->limit(10)
+        ->get();
 
         return view('admin.dashboard', compact(
             'adminName',
@@ -191,6 +234,17 @@ foreach ($monthlyData as $month => $records) {
             'monthlyLabels',
             'monthlyOnlineSales',
             'monthlyOfflineSales',
+
+            'booksSoldByGenre',
+            'cartAbandonmentRate',
+            'newCustomersThisMonth',
+            'totalCarts',
+            'convertedCarts',
+            'newCustomers',
+            'cartConversionRate',
+            'completedOrders',
+
+            'topOrders'
         ));
     }
 }

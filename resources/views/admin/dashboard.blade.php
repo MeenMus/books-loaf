@@ -1,6 +1,41 @@
 @extends('admin.layouts.main')
 
 @section('content')
+
+<style>
+  .progress {
+    height: 30px;
+    font-size: 1rem;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    line-height: 30px;
+    font-weight: 600;
+    color: white;
+    transition: width 0.6s ease;
+  }
+
+  /* Color coding based on percentage */
+  .progress-bar-low {
+    background-color: #e74c3c; /* red */
+  }
+
+  .progress-bar-medium {
+    background-color: #f1c40f; /* yellow */
+    color: black;
+  }
+
+  .progress-bar-high {
+    background-color: #2ecc71; /* green */
+  }
+
+  
+</style>
+
+
 <div class="row">
   <div class="col-md-12 grid-margin">
     <div class="row">
@@ -114,15 +149,140 @@
         </p>
         <div id="custom-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
        <div style="height: 350px;">
-    <canvas id="custom-sales-chart"></canvas>
-</div>
-
+            <canvas id="custom-sales-chart"></canvas>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card position-relative">
+      <div class="card-body">
+        <h4 class="card-title">Insights</h4>
+
+        <!-- Carousel Start -->
+        <div id="chartCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Slide 1: Books Sold by Genre -->
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-6">
+                 <!-- Chart Wrapper with Controlled Height -->
+                  <div class="chart-wrapper" style="height: 300px;">
+                    <canvas id="books-pie-chart"></canvas>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <h5>Books Sold by Genre</h5>
+                  @php $totalSold = $booksSoldByGenre->sum('total_sold'); @endphp
+                 @foreach ($booksSoldByGenre as $genreData)
+                  @php
+                    $percentage = $totalSold > 0 ? round(($genreData->total_sold / $totalSold) * 100, 2) : 0;
+                    $barClass = 'progress-bar-low';
+                    if ($percentage >= 70) {
+                      $barClass = 'progress-bar-high';
+                    } elseif ($percentage >= 40) {
+                      $barClass = 'progress-bar-medium';
+                    }
+                  @endphp
+                  <div class="mb-2">
+                    <strong>{{ $genreData->genre }} ({{ $genreData->total_sold }} books)</strong>
+                    <div class="progress">
+                      <div class="progress-bar {{ $barClass }}" role="progressbar"
+                          style="width: {{ $percentage }}%;"
+                          aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ $percentage }}%
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Metrics Overview -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-6">
+                 <div class="chart-wrapper" style="height: 300px;">
+                  <canvas id="metrics-pie-chart"></canvas>
+                </div>
+
+                </div>
+                <div class="col-md-6">
+                  <h5>Key Metrics This Month</h5>
+                  <ul class="list-group">
+                    <li class="list-group-item">New Customers: <strong>{{ $newCustomersThisMonth }}</strong></li>
+                    <li class="list-group-item">Total Carts: <strong>{{ $totalCarts }}</strong></li>
+                    <li class="list-group-item">Completed Orders: <strong>{{ $completedOrders }}</strong></li>
+                    <li class="list-group-item">Conversion Rate: <strong>{{ round($cartConversionRate, 2) }}%</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#chartCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#chartCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        <!-- Carousel End -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Top Orders</h4>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table id="top-orders-table" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price (RM)</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($topOrders as $order)
+            <tr>
+              <td>{{ $order->product }}</td>
+              <td>{{ number_format($order->total_price, 2) }}</td>
+              <td>{{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}</td>
+              <td>
+                @if ($order->order_status === 'completed')
+                  <span class="badge bg-success">Completed</span>
+                @else
+                  <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
+                @endif
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<!-- container from template -->
+<!-- <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card position-relative">
       <div class="card-body">
@@ -328,8 +488,8 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
+</div> -->
+<!-- <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -407,17 +567,41 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+@endpush
+
 @push('scripts')
+<!-- jQuery (required for DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-  const ctx = document.getElementById('custom-sales-chart').getContext('2d');
 
-  const customSalesChart = new Chart(ctx, {
+   $(document).ready(function () {
+    $('#top-orders-table').DataTable({
+      pageLength: 10, // how many rows per page
+      lengthChange: false, // hide "Show X entries"
+      ordering: true, // enable sorting
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search product..."
+      }
+    });
+  });
+  
+   // Existing Bar Chart - DO NOT TOUCH
+  const ctxBar = document.getElementById('custom-sales-chart').getContext('2d');
+
+  const customSalesChart = new Chart(ctxBar, {
     type: 'bar',
     data: {
       labels: {!! json_encode($monthlyLabels) !!},
@@ -462,6 +646,57 @@
           labels: {
             color: '#333'
           }
+        }
+      }
+    }
+  });
+
+  // NEW: Pie Chart for Books Sold by Genre
+    // Books Sold by Genre Pie
+  const ctxBooks = document.getElementById('books-pie-chart').getContext('2d');
+  new Chart(ctxBooks, {
+    type: 'pie',
+    data: {
+      labels: {!! json_encode($booksSoldByGenre->pluck('genre')) !!},
+      datasets: [{
+        label: 'Books Sold',
+        data: {!! json_encode($booksSoldByGenre->pluck('total_sold')) !!},
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  // Metrics Pie Chart
+  const ctxMetrics = document.getElementById('metrics-pie-chart').getContext('2d');
+  new Chart(ctxMetrics, {
+    type: 'pie',
+    data: {
+      labels: ['New Customers', 'Total Carts', 'Completed Orders'],
+      datasets: [{
+        label: 'Metrics',
+        data: [
+          {{ $newCustomersThisMonth }},
+          {{ $totalCarts }},
+          {{ $completedOrders }}
+        ],
+        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
         }
       }
     }
