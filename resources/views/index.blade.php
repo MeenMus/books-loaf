@@ -866,37 +866,69 @@
   </section>
 
   <section id="categories" class="padding-large pt-0">
-    <div class="container">
-      <div class="section-title overflow-hidden mb-4">
+    <div class="container position-relative">
+      <div class="section-title d-flex justify-content-between align-items-center mb-4">
         <h3 class="d-flex align-items-center">Categories</h3>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 border-0 rounded-3 position-relative">
-            <a href="shop">
-              <img src="images/category1.jpg" class="img-fluid rounded-3" alt="cart item">
-              <h6 class=" position-absolute bottom-0 bg-primary m-4 py-2 px-3 rounded-3"><a href="shop"
-                  class="text-white">Romance</a></h6>
-            </a>
+
+      <!-- Swiper navigation buttons -->
+      <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
+        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+          <use xlink:href="#alt-arrow-right-outline"></use>
+        </svg>
+      </div> 
+        <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
+        <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+          <use xlink:href="#alt-arrow-left-outline"></use>
+        </svg>
+      </div>
+      <!-- Swiper container -->
+      <div class="swiper category-swiper">
+        <div class="swiper-wrapper">
+
+          <!-- Category Slide -->
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/public.png" alt="Bacaan Umum" style="height:150px;" />
+              <p>Bacaan Umum</p>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center mb-4 border-0 rounded-3">
-            <a href="shop">
-              <img src="images/category2.jpg" class="img-fluid rounded-3" alt="cart item">
-              <h6 class=" position-absolute bottom-0 bg-primary m-4 py-2 px-3 rounded-3"><a href="shop"
-                  class="text-white">Lifestyle</a></h6>
-            </a>
+
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/children.png" alt="Children's Books" style="height:150px;" />
+              <p>Children's Books</p>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center mb-4 border-0 rounded-3">
-            <a href="shop">
-              <img src="images/category3.jpg" class="img-fluid rounded-3" alt="cart item">
-              <h6 class=" position-absolute bottom-0 bg-primary m-4 py-2 px-3 rounded-3"><a href="shop"
-                  class="text-white">Recipe</a></h6>
-            </a>
+
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/thriller.png" alt="Crime & Thriller" style="height:150px;" />
+              <p>Crime & Thriller</p>
+            </div>
           </div>
+
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/romance.png" alt="Romance" style="height:150px;" />
+              <p>Romance</p>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/fiction.png" alt="Non-Fiction Books" style="height:150px;" />
+              <p>Non-Fiction Books</p>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="category-card text-center">
+              <img src="images/cooking.png" alt="Cooking" style="height:150px;" />
+              <p>Cooking</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1031,49 +1063,7 @@
     </div>
   </section>
 
-<section id="latest-posts" class="padding-large">
-    <div class="container">
-      <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
-        <h3 class="d-flex align-items-center">Latest posts</h3>
-        <a href="shop" class="btn">View All</a>
-      </div>
-      <div class="row">
-        <div class="col-md-3 posts mb-4">
-          <img src="images/post-item1.jpg" alt="post image" class="img-fluid rounded-3">
-          <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">The Strength of Independent Bookstores in a Digital Age*</a></h4>
-          <p class="mb-2">Bookstores have been around for centuries, maintaining a sense of support within communities even as 
-            they evolved over time. <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
-          </p>
-        </div>
-        <div class="col-md-3 posts mb-4">
-          <img src="images/post-item2.jpg" alt="post image" class="img-fluid rounded-3">
-          <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">📚 Impact of COVID-19 on Book Sales
-          </a></h4>
-          <p class="mb-2">An analysis of how the pandemic affected the U.S. book publishing market, including trade and educational sectors.
-          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span> </p>
-        </div>
-        <div class="col-md-3 posts mb-4">
-          <img src="images/post-item3.jpg" alt="post image" class="img-fluid rounded-3">
-          <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Online Purchase Behavior of Generation Y in Malaysia"</a></h4>
-          <p class="mb-2">A study investigating the online purchase behavior of Gen Y in Malaysia and identifying influencing factors.
-          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
-          </p>
-        </div>
-        <div class="col-md-3 posts mb-4">
-          <img src="images/post-item4.jpg" alt="post image" class="img-fluid rounded-3">
-          <a href="blog" class="fs-6 text-primary">Books</a>
-          <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post">Factors Influencing Consumer Behaviour towards Online Purchase Intention on Popular Shopping Platforms in Malaysia"*
-          </a></h4>
-          <p class="mb-2">Research exploring how the quality of e-commerce in Malaysia impacts consumer preferences.
-          <span><a class="text-decoration-underline text-black-50" href="single-post">Read More</a></span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <br> </br>
 
   <section id="instagram">
     <div class="container">
