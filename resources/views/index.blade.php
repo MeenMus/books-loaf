@@ -923,6 +923,15 @@
           <div class="swiper-slide">
             <div class="card-container">
               <div class="client-card">
+              <img src="images/self care.png" alt="Self Help" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Self Help</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/thriller.png" alt="Crime & Thriller" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Crime & Thriller</p>
               </div>
@@ -942,7 +951,7 @@
             <div class="card-container">
               <div class="client-card">
               <img src="images/fiction.png" alt="Non-Fiction Books" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Non-Fiction</p>
+              <p class="mt-2">Non-Fiction</p >
               </div>
             </div>
           </div>
