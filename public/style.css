@@ -1376,3 +1376,44 @@ select#input-sort {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a0a0a0;
 }
+
+/*Homepage Categories*/
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+}
+
+.client-card {
+  width: 200px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* no shadow initially */
+}
+
+.client-card img {
+  width: 60px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.client-card p {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.client-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  background-color: #f9fbfd;
+  transform: translateY(-5px);
+}
+
+.client-card:hover img {
+  transform: scale(1.1);
+}

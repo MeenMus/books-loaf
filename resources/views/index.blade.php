@@ -903,44 +903,56 @@
         <div class="swiper-wrapper">
           <!-- Category Slides -->
           <div class="swiper-slide">
-            <div class="category-card text-center">
+           <div class="card-container">
+              <div class="client-card">
               <img src="images/public.png" alt="Bacaan Umum" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Bacaan Umum</p>
+                </div>
             </div>
           </div>
 
           <div class="swiper-slide">
-            <div class="category-card text-center">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/children.png" alt="Children's Books" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Children's Books</p>
+              </div>
             </div>
           </div>
 
           <div class="swiper-slide">
-            <div class="category-card text-center">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/thriller.png" alt="Crime & Thriller" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Crime & Thriller</p>
+              </div>
             </div>
           </div>
 
           <div class="swiper-slide">
-            <div class="category-card text-center">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/romance.png" alt="Romance" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Romance</p>
+              </div>
             </div>
           </div>
 
           <div class="swiper-slide">
-            <div class="category-card text-center">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/fiction.png" alt="Non-Fiction Books" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Non-Fiction Books</p>
+              <p class="mt-2">Non-Fiction</p>
+              </div>
             </div>
           </div>
 
           <div class="swiper-slide">
-            <div class="category-card text-center">
+            <div class="card-container">
+              <div class="client-card">
               <img src="images/cooking.png" alt="Cooking" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Cooking</p>
+              </div>
             </div>
           </div>
         </div>
