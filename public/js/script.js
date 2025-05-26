@@ -181,6 +181,10 @@
     nextEl: '.product-slider-button-next', // Fixed
     prevEl: '.product-slider-button-prev', // Fixed
   },
+    autoplay: {
+    delay: 3000, // Slide changes every 3 seconds
+    disableOnInteraction: false, // Keeps autoplay after user interaction
+  },
     breakpoints: {
       576: { slidesPerView: 2 },
       768: { slidesPerView: 3 },
