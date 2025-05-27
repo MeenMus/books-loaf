@@ -136,6 +136,52 @@
   justify-content: center;
   gap: 8px;
 }
+
+
+@media (max-width: 768px) {
+  #navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #navbar li {
+    width: 100% !important;
+    justify-content: flex-start;
+    padding: 10px 15px;
+    position: relative;
+  }
+
+  #navbar li .icon {
+    display: none;
+  }
+
+  #navbar li .title {
+    transform: scale(1);
+    color: #333;
+  }
+
+  /* Hide dropdown menu by default */
+  #navbar .dropdown-menu {
+    display: none;
+    position: static !important;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-top: 5px;
+    padding-left: 25px;
+  }
+
+  /* Show dropdown on hover */
+  #navbar .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  #navbar .dropdown-menu .dropdown-item {
+    padding: 5px 0;
+  }
+}
+
     </style>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
