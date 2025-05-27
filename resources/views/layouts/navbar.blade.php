@@ -5,7 +5,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
 #navbar {
@@ -314,7 +313,7 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
-                        <li style="--i:#a955ff;--j:#ea51ff">
+                        <li style="--i:#A955ff;--j:#ea51ff">
                             <a href="{{ url('/') }}" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
                                 <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                                 <span class="title">Home</span>
