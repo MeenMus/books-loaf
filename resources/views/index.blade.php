@@ -915,7 +915,7 @@
             <div class="card-container">
               <div class="client-card">
               <img src="images/children.png" alt="Children's Books" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Children's Books</p>
+              <p class="mt-2">Children's</p>
               </div>
             </div>
           </div>
