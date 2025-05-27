@@ -19,7 +19,7 @@
       <h4 class="font-weight-bold">Profile</h4>
       <hr>
       <div class="mb-3">
-        <label class="form-label fw-semibold mb-1">Name :</label>
+        <label class="form-label small fw-semibold mb-1">Name :</label>
         <p class="editable-field" data-label="name" data-value="{{ $user->name }}">
           <span class="field-text">{{ $user->name }}</span>
           <span class="edit-overlay"><i class="bi bi-pencil-fill"></i> Edit</span>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label fw-semibold mb-1">Email :</label>
+        <label class="form-label small fw-semibold mb-1">Email :</label>
         <p class="editable-field" data-label="email" data-value="{{ $user->email }}">
           <span class="field-text">{{ $user->email }}</span>
           <span class="edit-overlay"><i class="bi bi-pencil-fill"></i> Edit</span>
@@ -37,7 +37,7 @@
       <form id="role-form" action="{{ route('users-role-update', ['id' => $user->id]) }}" method="POST">
         @csrf
         <div class="mb-4">
-        <label class="form-label fw-semibold mb-1">Role :</label>
+        <label class="form-label small fw-semibold mb-1">Role :</label>
           <select name="role" id="role-dropdown" class="form-select text-dark">
             <option value="customer" {{ $user->role === 'customer' ? 'selected' : '' }}>Customer</option>
             <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
@@ -47,7 +47,7 @@
       </form>
 
       <div class="mb-1">
-        <label class="form-label fw-semibold mb-1">Joined At :</label>
+        <label class="form-label small fw-semibold mb-1">Joined At :</label>
         <p>
           {{ $user->email_verified_at ?? '-' }}
         </p>
@@ -269,19 +269,25 @@
   })();
 
 
-  const phoneInput = document.querySelector("#phone");
+    document.addEventListener("DOMContentLoaded", function() {
+      const phoneInput = document.querySelector("#phone");
 
-  const iti = window.intlTelInput(phoneInput, {
-    initialCountry: "my", // Set default to Malaysia
-    preferredCountries: ["my"], // Optional: preferred countries on top
-    separateDialCode: true, //  Shows the country code next to the flag (like +60)
-    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-  });
+      if (phoneInput) {
+        const iti = window.intlTelInput(phoneInput, {
+          initialCountry: "my",
+          preferredCountries: ["my"],
+          separateDialCode: true,
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
 
-  document.querySelector("form").addEventListener("submit", function(e) {
-    const fullNumber = iti.getNumber(); // Gets full number in +60123456789 format
-    phoneInput.value = fullNumber; // Replace input value before submission
-  });
+        const form = phoneInput.closest("form");
+
+        form.addEventListener("submit", function() {
+          const fullNumber = iti.getNumber(); // e.g. +60123456789
+          phoneInput.value = fullNumber; // overwrite before submission
+        });
+      }
+    });
 </script>
 
 @endpush

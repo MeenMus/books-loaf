@@ -44,13 +44,13 @@ class UserController extends BaseController
         try {
 
             $request->validate([
-                'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
-                'address_line_1' => 'required|string|max:255',
+                'phone' => 'regex:/^\+?[1-9]\d{1,14}$/',
+                'address_line_1' => 'string|max:255',
                 'address_line_2' => 'nullable|string|max:255',
-                'city' => 'required|string|max:255',
-                'state' => 'required|string|max:255',
-                'postal_code' => 'required|string|max:20',
-                'country' => 'required|string|max:255',
+                'city' => 'string|max:255',
+                'state' => 'string|max:255',
+                'postal_code' => 'string|max:20',
+                'country' => 'string|max:255',
             ]);
 
             $profile = Profile::where('user_id', $id)->first();

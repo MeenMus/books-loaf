@@ -29,7 +29,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/orders-list" class="nav-link">
                 <i class="icon-clipboard menu-icon"></i>
                 <span class="menu-title">Orders</span>
             </a>

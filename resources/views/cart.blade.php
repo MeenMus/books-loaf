@@ -99,15 +99,7 @@
             <div class="total-price pb-3">
               <table cellspacing="0" class="table text-capitalize">
                 <tbody>
-                  <tr class="subtotal pt-2 pb-2 border-top border-bottom">
-                    <th>Subtotal</th>
-                    <td data-title="Subtotal">
-                      <span class="price-amount amount text-primary ps-5 fw-light">
-                        <bdi><span class="price-currency-symbol">RM</span>{{ number_format($total, 2) }}</bdi>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr class="order-total pt-2 pb-2 border-bottom">
+                  <tr class="order-total pt-2 pb-2 border-top border-bottom">
                     <th>Total</th>
                     <td data-title="Total">
                       <span class="price-amount amount text-primary ps-5 fw-light">

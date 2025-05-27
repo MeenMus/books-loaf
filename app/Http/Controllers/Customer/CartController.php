@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Models\Book;
+use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -145,6 +146,8 @@ class CartController extends BaseController
 
     public function showCheckout()
     {
-        return view('checkout');
+        $cart = Cart::with('items.book')->where('user_id', auth()->id())->first();
+
+        return view('checkout',compact('cart'));
     }
 }

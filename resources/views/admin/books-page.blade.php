@@ -37,7 +37,7 @@
           </h5>
           <hr>
           <div class="mb-2">
-            <label class="form-label fw-semibold mb-1">Author :</label>
+            <label class="form-label small fw-semibold mb-1">Author :</label>
             <p class="editable-field" data-label="Author" data-value="{{ $book->author }}">
               <span class="field-text">{{ $book->author }}</span>
               <span class="edit-overlay">
@@ -47,7 +47,7 @@
           </div>
 
           <div class="mb-2">
-            <strong>Price:</strong>
+            <label class="form-label small fw-semibold mb-1">Price:</label>
             <p class="editable-field" data-label="Price" data-value="{{ number_format($book->price, 2) }}">
               <span class="field-text">RM {{ number_format($book->price, 2) }}</span>
               <span class="edit-overlay">
@@ -57,7 +57,7 @@
           </div>
 
           <div class="mb-2">
-            <label class="form-label fw-semibold mb-1">Stock :</label>
+            <label class="form-label small fw-semibold mb-1">Stock :</label>
             <p class="editable-field" data-label="Stock" data-value="{{ $book->stock }}">
               <span class="field-text">{{ $book->stock }} available</span>
               <span class="edit-overlay">
@@ -67,7 +67,7 @@
           </div>
 
           <div class="mb-2">
-            <label class="form-label fw-semibold mb-1">Genre :</label>
+            <label class="form-label small fw-semibold mb-1">Genre :</label>
             <p class="editable-field" data-label="Genre" data-value="{{ $book->genres->pluck('name')->implode(', ') }}">
               <span class="field-text">{{ $book->genres->pluck('name')->implode(', ') }}</span>
               <span class="edit-overlay">
@@ -77,7 +77,7 @@
           </div>
 
           <div class="mb-2">
-            <label class="form-label fw-semibold mb-1">ISBN :</label>
+            <label class="form-label small fw-semibold mb-1">ISBN :</label>
             <p>
               <span class="field-text">{{ $book->isbn }}</span>
             </p>

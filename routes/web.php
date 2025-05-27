@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -13,6 +15,8 @@ use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\Customer\BuyBookController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\LikeController;
+use App\Http\Controllers\Customer\OrderController;
+use App\Http\Controllers\Customer\ProfileController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -53,8 +57,13 @@ Route::delete('/cart-remove/{id}', [CartController::class, 'removeCart'])->name(
 Route::post('/cart-update', [CartController::class, 'updateCart'])->name('cart-update')->middleware('auth');
 
 Route::get('/checkout', [CartController::class, 'showCheckout'])->name('checkout')->middleware('auth');
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place-order')->middleware('auth');
 
+Route::get('/profile', [ProfileController::class, 'create'])->name('profile')->middleware('auth');
+Route::post('/profile-update', [ProfileController::class, 'store'])->name('profile-update')->middleware('auth');
 
+Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
+Route::get('/orders-receipt/{order}', [OrderController::class, 'printReceipt'])->name('orders-receipt')->middleware('auth');
 
 
 Route::get('/contact', [HomeController::class, 'showContact']);
@@ -89,6 +98,13 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/genres-store', [GenreController::class, 'store'])->name('genres-store');
     Route::delete('/genres-delete', [GenreController::class, 'delete'])->name('genres-delete');
 
+    /* MANAGE ORDERS */
+    Route::get('/orders-list', [AdminOrderController::class, 'orderList'])->name('orders-list');
+    Route::get('/orders-page/{id}', [AdminOrderController::class, 'orderPage'])->name('orders-page');
+    Route::patch('/orders-update/{order}', [AdminOrderController::class, 'orderUpdate'])->name('orders-update');
+    Route::get('/orders-receipt/{order}', [AdminOrderController::class, 'printReceipt'])->name('orders-receipt');
+
+
 
     /* MANAGE USERS */
 
@@ -98,15 +114,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
     Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
     Route::delete('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
-
-
-
-
-
-
-
-
-
 });
 
 /* ---- */
@@ -175,5 +182,3 @@ Route::get('/covers/{filename}', function ($filename) {
     // Return the image as a response
     return response()->file($path);
 })->where('filename', '.*');  // This allows for subdirectories like "cover/asdasd.jpg"
-
-
