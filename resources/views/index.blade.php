@@ -191,13 +191,10 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="card position-relative p-4 border rounded-3">
-              <div class="position-absolute">
-                <p class="bg-primary py-1 px-3 fs-6 text-white rounded-2">10% off</p>
-              </div>
-              <img src="images/product-item1.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">House of Sky Breath</a></h6>
+              <img src="images/bayang-sofea.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/60">Bayang Sofea</a></h6>
               <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                <p class="my-2 me-2 fs-6 text-black-50">Teme Abdullah</p>
 
                 <div class="rating text-warning d-flex align-items-center">
                   <svg class="star star-fill">
@@ -217,7 +214,7 @@
                   </svg>
                 </div>
               </div>
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 34.00</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -237,54 +234,10 @@
           </div>
           <div class="swiper-slide">
             <div class="card position-relative p-4 border rounded-3">
-              <img src="images/product-item2.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">Heartland Stars</a></h6>
+              <img src="images/great-big-beautiful-life.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/164">Great Big Beautiful Life</a></h6>
               <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
-
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
-              <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
-                  data-bs-title="Tooltip on top">
-                  <svg class="cart">
-                    <use xlink:href="#cart"></use>
-                  </svg>
-                </button>
-                <a href="#" class="btn btn-dark">
-                  <span>
-                    <svg class="wishlist">
-                      <use xlink:href="#heart"></use>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/product-item3.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">Heavenly Bodies</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                <p class="my-2 me-2 fs-6 text-black-50">Emily Henry</p>
 
                 <div class="rating text-warning d-flex align-items-center">
                   <svg class="star star-fill">
@@ -305,7 +258,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 80.00</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -325,18 +278,12 @@
           </div>
           <div class="swiper-slide">
             <div class="card position-relative p-4 border rounded-3">
-              <div class="position-absolute">
-                <p class="bg-primary py-1 px-3 fs-6 text-white rounded-2">10% off</p>
-              </div>
-              <img src="images/product-item4.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">His Saving Grace</a></h6>
+              <img src="images/library-of-lost-hearts.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/27">Library of Lost Hearts</a></h6>
               <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                <p class="my-2 me-2 fs-6 text-black-50">NF Afrina</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
                   <svg class="star star-fill">
                     <use xlink:href="#star-fill"></use>
                   </svg>
@@ -352,7 +299,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 39.00</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -372,10 +319,51 @@
           </div>
           <div class="swiper-slide">
             <div class="card position-relative p-4 border rounded-3">
-              <img src="images/product-item5.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">My Dearest Darkest</a></h6>
+              <img src="images/siapa-sangka-terjatuh-cinta.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/62">Siapa Sangka Terjatuh Cinta</a></h6>
               <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                <p class="my-2 me-2 fs-6 text-black-50">Violet Fasha</p>
+
+                <div class="rating text-warning d-flex align-items-center">
+                  <svg class="star star-fill">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                  <svg class="star star-fill">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                  <svg class="star star-fill">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                  <svg class="star star-fill">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                </div>
+              </div>
+
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 32.00</span>
+              <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
+                <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-title="Tooltip on top">
+                  <svg class="cart">
+                    <use xlink:href="#cart"></use>
+                  </svg>
+                </button>
+                <a href="#" class="btn btn-dark">
+                  <span>
+                    <svg class="wishlist">
+                      <use xlink:href="#heart"></use>
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card position-relative p-4 border rounded-3">
+              <img src="images/surrounded-by-idiots.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/174">Surrounded by Idiots</a></h6>
+              <div class="review-content d-flex">
+                <p class="my-2 me-2 fs-6 text-black-50">Thomas Erikson</p>
 
                 <div class="rating text-warning d-flex align-items-center d-flex align-items-center">
                   <svg class="star star-fill">
@@ -390,13 +378,11 @@
                   <svg class="star star-fill">
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
+                  <br>
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 62.90</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -416,10 +402,10 @@
           </div>
           <div class="swiper-slide">
             <div class="card position-relative p-4 border rounded-3">
-              <img src="images/product-item6.png" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="single-product">The Story of Success</a></h6>
+              <img src="images/the-midnight-library.jpg" class="img-fluid shadow-sm" alt="product item">
+              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/119">The Midnight Library</a></h6>
               <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                <p class="my-2 me-2 fs-6 text-black-50">Matt Haig</p>
 
                 <div class="rating text-warning d-flex align-items-center">
                   <svg class="star star-fill">
@@ -440,7 +426,7 @@
                 </div>
               </div>
 
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+              <span class="price text-primary fw-bold mb-2 fs-5">RM 42.00</span>
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                   data-bs-title="Tooltip on top">
@@ -637,7 +623,7 @@
               <div class="item d-flex">
                 <img src="images/seven-husband-of-evelyn-hugo.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="http://127.0.0.1:8000/book/176">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/176">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -729,7 +715,7 @@
               <div class="item d-flex">
                 <img src="images/king-of-envy.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="http://127.0.0.1:8000/book/177">King of Envy</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/175">King of Envy</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Huang, Ana</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -905,8 +891,8 @@
           <div class="swiper-slide">
            <div class="card-container">
               <div class="client-card">
-              <img src="images/public.png" alt="Bacaan Umum" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Bacaan Umum</p>
+              <img src="images/public.png" alt="Fiction" class="img-fluid" style="height:150px; object-fit: contain;" />
+              <p class="mt-2">Fiction</p>
                 </div>
             </div>
           </div>
@@ -1147,7 +1133,7 @@
                   <use xlink:href="#instagram"></use>
                 </svg>
               </div>
-              <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
+              <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image" >
             </a>
           </figure>
         </div>
