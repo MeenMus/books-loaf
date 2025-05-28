@@ -13,7 +13,7 @@
 
     <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
         <div>
-            <h5><a href="{{ url('book', $book->id) }}">{{ $book->title }}</a></h5>
+            <h6><a href="{{ url('book', $book->id) }}">{{ $book->title }}</a></h6>
             <small>Quantity: {{ $cart->quantity }}</small>
         </div>
         <span class="text-primary">RM{{ number_format($book->price, 2) }}</span>

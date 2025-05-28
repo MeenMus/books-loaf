@@ -69,7 +69,7 @@ class OrderController extends BaseController
             }
 
             DB::transaction(function () use ($user, $cart) {
-                $total = $cart->items->sum(fn($item) => $item->book->price * $item->quantity+10);
+                $total = $cart->items->sum(fn($item) => $item->book->price * $item->quantity + 10);
 
                 $order = $user->orders()->create([
                     'total_price' => $total,
@@ -106,6 +106,7 @@ class OrderController extends BaseController
             return redirect()->back();
         }
     }
+
 
     public function printReceipt(Order $order)
     {

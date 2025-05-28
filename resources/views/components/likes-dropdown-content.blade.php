@@ -13,7 +13,7 @@
 
     <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
         <div>
-            <h5><a href="{{ url('book', $book->id) }}">{{ $book->title }}</a></h5>
+            <h6><a href="{{ url('book', $book->id) }}">{{ $book->title }}</a></h6>
             <form action="{{ route('cart-add', $book->id) }}" method="POST" class="mt-2">
                 @csrf
                 <input type="hidden" name="quantity" value="1">

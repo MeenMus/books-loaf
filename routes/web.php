@@ -57,13 +57,17 @@ Route::delete('/cart-remove/{id}', [CartController::class, 'removeCart'])->name(
 Route::post('/cart-update', [CartController::class, 'updateCart'])->name('cart-update')->middleware('auth');
 
 Route::get('/checkout', [CartController::class, 'showCheckout'])->name('checkout')->middleware('auth');
-Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place-order')->middleware('auth');
+Route::post('/order-now/{id}', [CartController::class, 'orderNow'])->name('order-now')->middleware('auth');
 
 Route::get('/profile', [ProfileController::class, 'create'])->name('profile')->middleware('auth');
 Route::post('/profile-update', [ProfileController::class, 'store'])->name('profile-update')->middleware('auth');
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
 Route::get('/orders-receipt/{order}', [OrderController::class, 'printReceipt'])->name('orders-receipt')->middleware('auth');
+
+Route::post('/checkout-stripe', [PaymentController::class, 'redirectToStripeCheckout'])->name('checkout-stripe')->middleware('auth');
+Route::get('/checkout-success', [PaymentController::class, 'stripeSuccess'])->name('checkout-success')->middleware('auth');
+Route::get('/checkout-cancel', [PaymentController::class, 'stripeCancel'])->name('checkout-cancel')->middleware('auth');
 
 
 Route::get('/contact', [HomeController::class, 'showContact']);

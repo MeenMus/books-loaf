@@ -49,6 +49,42 @@ class CartController extends BaseController
         }
     }
 
+
+    public function orderNow(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+
+            // Ensure the user has a cart
+            $cart = $user->cart()->firstOrCreate([]);
+
+
+            // Check if the book is already in the cart
+            $item = $cart->items()->where('book_id', $id)->first();
+
+            if ($item) {
+                // Increment quantity if it exists
+                $item->quantity += $request->quantity;
+                $item->save();
+            } else {
+                // Add new cart item
+                $cart->items()->create([
+                    'book_id' => $id,
+                    'quantity' => $request->quantity,
+                ]);
+            }
+
+            Alert::success('Cart Updated!', 'Book has been successfully added to cart.');
+            return redirect('checkout');
+        } catch (ValidationException $e) {
+            Alert::error('Submission Error', $e->validator->errors()->first());
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Something went wrong. Please try again.');
+            return redirect()->back();
+        }
+    }
+
     public function addAllLiked()
     {
         $user = Auth::user();
@@ -148,6 +184,6 @@ class CartController extends BaseController
     {
         $cart = Cart::with('items.book')->where('user_id', auth()->id())->first();
 
-        return view('checkout',compact('cart'));
+        return view('checkout', compact('cart'));
     }
 }

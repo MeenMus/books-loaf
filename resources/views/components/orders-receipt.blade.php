@@ -87,6 +87,7 @@
         <thead>
             <tr>
                 <th>Book</th>
+                <th>ISBN</th>
                 <th>Qty</th>
                 <th>Price</th>
                 <th>Subtotal</th>
@@ -96,6 +97,7 @@
             @foreach ($order->orderItems as $item)
             <tr>
                 <td>{{ $item->book->title }}</td>
+                <td>{{ $item->book->isbn }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>RM{{ number_format($item->price, 2) }}</td>
                 <td>RM{{ number_format($item->quantity * $item->price, 2) }}</td>

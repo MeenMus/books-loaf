@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\OrderStatusUpdatedMail;
 use App\Models\Order;
 use App\Models\Profile;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -65,6 +67,9 @@ class OrderController extends BaseController
                 'status' => $validated['status'],
                 'tracking_id' => $validated['tracking_id'] ?? $order->tracking_id,
             ]);
+
+            // Email user about status change
+            Mail::to($order->email)->send(new OrderStatusUpdatedMail($order));
 
             Alert::success('Status Updated!', 'Order #' . $order->id . ' status has been changed to ' . $validated['status']);
             return redirect()->back();

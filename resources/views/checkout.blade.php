@@ -10,7 +10,7 @@
 
   <section class="checkout-wrap padding-medium">
     <div class="container">
-      <form action="{{ route('place-order') }}" method="POST">
+      <form action="{{ route('checkout-stripe') }}" method="POST">
         @csrf
         <div class="row d-flex flex-wrap">
           <div class="col-lg-6">
