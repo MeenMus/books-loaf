@@ -13,10 +13,12 @@
 </div>
 
 
-<div class="row g-4">
-  <div class="col-4 d-flex">
-    <div class="card p-4 fs-6 w-100">
-      <h4 class="font-weight-bold">Profile</h4>
+<div class="row g-4 align-items-stretch">
+
+  <!-- Profile Section -->
+  <div class="col-md-4 d-flex">
+   <div class="card p-4 fs-6 w-100 h-200">
+      <h4 class="fw-bold">Profile</h4>
       <hr>
       <div class="mb-3">
         <label class="form-label small fw-semibold mb-1">Name :</label>
@@ -25,7 +27,6 @@
           <span class="edit-overlay"><i class="bi bi-pencil-fill"></i> Edit</span>
         </p>
       </div>
-
       <div class="mb-3">
         <label class="form-label small fw-semibold mb-1">Email :</label>
         <p class="editable-field" data-label="email" data-value="{{ $user->email }}">
@@ -33,11 +34,10 @@
           <span class="edit-overlay"><i class="bi bi-pencil-fill"></i> Edit</span>
         </p>
       </div>
-
       <form id="role-form" action="{{ route('users-role-update', ['id' => $user->id]) }}" method="POST">
         @csrf
         <div class="mb-4">
-        <label class="form-label small fw-semibold mb-1">Role :</label>
+          <label class="form-label small fw-semibold mb-1">Role :</label>
           <select name="role" id="role-dropdown" class="form-select text-dark">
             <option value="customer" {{ $user->role === 'customer' ? 'selected' : '' }}>Customer</option>
             <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
@@ -45,39 +45,113 @@
         </div>
         <input type="hidden" name="user_id" value="{{ $user->id }}">
       </form>
-
       <div class="mb-1">
         <label class="form-label small fw-semibold mb-1">Joined At :</label>
-        <p>
-          {{ $user->email_verified_at ?? '-' }}
-        </p>
+        <p>{{ $user->email_verified_at ?? '-' }}</p>
       </div>
-
-
-      <div class="mb-0">
-        <div class="d-flex gap-2 mt-3">
-          <!-- Change Password Button -->
-          <button type="button" class="btn btn-warning btn-sm fw-semibold text-dark" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
-            <i class="bi bi-shield-lock-fill"></i> Change Password
+      <div class="d-flex gap-2 mt-3">
+        <button type="button" class="btn btn-warning btn-sm fw-semibold text-dark" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+          <i class="bi bi-shield-lock-fill"></i> Change Password
+        </button>
+        <form action="{{ route('users-delete', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" class="d-inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger btn-sm text-dark fw-semibold">
+            <i class="bi bi-trash-fill"></i> Delete User
           </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-          <!-- Delete Button -->
-          <form action="{{ route('users-delete', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" class="d-inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm text-dark fw-semibold">
-              <i class="bi bi-trash-fill"></i> Delete User
-            </button>
-          </form>
+  <!-- Orders Section -->
+  <div class="col-md-8 d-flex flex-column">
+    @foreach ($orders as $order)
+   <div class="card mb-4 shadow-sm h-100">
+      <div class="row g-0">
+        <!-- Left: Order Info -->
+        <div class="col-md-3 bg-light p-3 d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="mb-1">Order #{{ $order->id }}</h5>
+            <small>{{ $order->created_at->format('F j, Y') }}</small>
+            <hr>
+            @php
+              $trackingId = $order->tracking_id;
+              $trackingUrl = null;
+              if (str_starts_with($trackingId, 'MY')) {
+                $trackingUrl = "https://gdexpress.com/tracking/?consignmentno=$trackingId";
+              } elseif (str_starts_with($trackingId, '65')) {
+                $trackingUrl = "https://www.jtexpress.my/tracking/$trackingId";
+              } elseif (str_starts_with($trackingId, 'E')) {
+                $trackingUrl = "https://tracking.pos.com.my/tracking/$trackingId";
+              } elseif (str_starts_with($trackingId, 'NV')) {
+                $trackingUrl = "https://www.ninjavan.co/en-my/tracking?id=$trackingId";
+              }
+            @endphp
+            <a href="{{ $trackingUrl ?? '#' }}" class="btn btn-outline-dark px-2 py-2 w-100 mt-1 {{ $trackingUrl ? '' : 'disabled' }}" {{ $trackingUrl ? 'target=_blank' : 'aria-disabled=true' }}>
+              Track Shipment
+            </a>
+          </div>
+          <div class="mt-3">
+            <div class="fw-bold text-primary mb-1">Total: RM{{ number_format($order->total_price, 2) }}</div>
+            <span class="badge bg-{{ $order->status === 'completed' ? 'success' : ($order->status === 'canceled' ? 'danger' : 'warning') }}">
+              {{ ucfirst($order->status) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Shipping and Items -->
+        <div class="col-md-9 p-3">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <strong class="fw-semibold">Shipping to:</strong>
+              <a href="{{ route('orders-receipt', $order->id) }}" target="_blank" class="btn btn-outline-dark px-2 py-2" style="font-size: 0.85rem;">
+                <i class="bi bi-printer"></i> Receipt
+              </a>
+            </div>
+            {{ $order->name }}<br>
+            {{ $order->address_line_1 }}<br>
+            @if ($order->address_line_2) {{ $order->address_line_2 }}<br> @endif
+            {{ $order->city }}, {{ $order->state }} {{ $order->postal_code }}<br>
+            {{ $order->country }}<br>
+            <small>Phone: {{ $order->phone }}</small>
+          </div>
+
+          <hr>
+          <div class="row g-2 mt-2">
+            @foreach ($order->orderItems as $item)
+            <div class="col-12 d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <img src="{{ url($item->book->cover_image) }}" alt="{{ $item->book->title }}" class="img-thumbnail me-3" style="width: 60px; height: auto;">
+                <div>
+                  <div class="fw-semibold">
+                    <a href="{{ url('book', $item->book->id) }}">{{ $item->book->title }}</a>
+                  </div>
+                  <div class="small">Quantity: {{ $item->quantity }}</div>
+                </div>
+              </div>
+              <div class="text-end text-primary fw-medium">
+                RM{{ number_format($item->price, 2) }}
+              </div>
+            </div>
+            @endforeach
+          </div>
         </div>
       </div>
+    </div>
+    @endforeach
+
+    <div class="mt-4">
+      {{ $orders->onEachSide(1)->links('pagination::bootstrap-5') }}
     </div>
   </div>
 </div>
 
 
+
 <div class="row mt-1 g-4">
-  <div class="col-4 d-flex">
+  <!-- Address Info -->
+  <div class="col-md-4 d-flex">
     <div class="card p-4 fs-6 w-100">
       <h4 class="font-weight-bold">Address Information</h4>
       <hr>
@@ -86,7 +160,6 @@
         @csrf
         <div class="mb-3">
           <label for="phone" class="form-label">Phone</label>
-          <br>
           <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone', $profile->phone ?? '') }}">
         </div>
 
@@ -106,7 +179,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="country" class="form-label ">Country</label>
+          <label for="country" class="form-label">Country</label>
           <select id="country" name="country" class="form-select text-dark">
             <option value="">Country</option>
           </select>
@@ -128,10 +201,28 @@
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </form>
-
     </div>
   </div>
-</div>
+
+
+<div class="col-md-8 d-flex flex-column gap-4">
+  <!-- Card: Top Purchased Books -->
+  <div class="card p-4 w-100">
+    <h5 class="mb-3">Top Purchased Books</h5>
+    <canvas id="topBooksChart" height="200"></canvas>
+  </div>
+
+  <!-- Card: Book Categories Breakdown -->
+<div class="card p-3 w-100">
+  <h5 class="mb-3">Book Categories Breakdown</h5>
+  <div style="position: relative; width: 250px; height: 250px; margin: auto;">
+    <canvas id="categoryPieChart"></canvas>
+  </div>
+
+
+
+
+
 
 
 
@@ -177,11 +268,12 @@
   </div>
 </div>
 
+
 @endsection
 
 @push('scripts')
 
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   document.querySelectorAll('.editable-field').forEach(field => {
     field.addEventListener('click', () => {
@@ -288,6 +380,52 @@
         });
       }
     });
+
+     // Bar chart for Top Purchased Books
+  const topBooksCtx = document.getElementById('topBooksChart').getContext('2d');
+   const topBooksChart = new Chart(topBooksCtx, {
+    type: 'bar',
+    data: {
+      labels: @json($bookLabels),
+      datasets: [{
+        label: 'Purchases',
+        data: @json($bookQuantities),
+        backgroundColor: '#4e73df'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: 'Top Purchased Books' }
+      }
+    }
+  });
+
+  // Pie chart for Book Categories
+   const genreLabels = @json($genreLabels);
+  const genreCounts = @json($genreCounts);
+
+  const categoryCtx = document.getElementById('categoryPieChart').getContext('2d');
+  const categoryPieChart = new Chart(categoryCtx, {
+    type: 'pie',
+    data: {
+      labels: genreLabels,
+      datasets: [{
+        data: genreCounts,
+        backgroundColor: [
+          '#f6c23e', '#36b9cc', '#e74a3b', '#1cc88a', '#858796',
+          '#5a5c69', '#fd7e14', '#6610f2', '#20c997', '#17a2b8'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Book Categories Breakdown' }
+      }
+    }
+  });
 </script>
 
 @endpush

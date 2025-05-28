@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Genre;
+use App\Models\Book;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends BaseController
 {
@@ -24,7 +27,7 @@ class UserController extends BaseController
         return view('admin.users-list', compact('users'));
     }
 
-    public function userPage($id)
+    public function userPage($id, Request $request)
     {
         $user = User::with('profile')->findOrFail($id);
 
@@ -36,7 +39,62 @@ class UserController extends BaseController
 
         $profile = $user->profile;
 
-        return view('admin.users-page', compact('user', 'profile'));
+        $query = $user->orders()->with('orderItems.book');
+
+
+        // Search by order ID
+        if ($request->filled('search')) {
+            $query->where('id', $request->search);
+        }
+
+        // Filter between dates
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('created_at', [
+                $request->start_date . ' 00:00:00',
+                $request->end_date . ' 23:59:59'
+            ]);
+        }
+
+        // Sorting
+        $sort = $request->input('sort', 'latest'); // Default to latest
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc'); // Default: latest
+        }
+
+        $orders = $query->paginate(5)->withQueryString();
+
+        $topBooks = DB::table('order_items')
+            ->join('orders', 'orders.id', '=', 'order_items.order_id')
+            ->join('books', 'books.id', '=', 'order_items.book_id')
+            ->select('books.title', DB::raw('SUM(order_items.quantity) as total_quantity'))
+            ->where('orders.user_id', $id)
+            ->groupBy('books.title')
+            ->orderByDesc('total_quantity')
+            ->limit(5)
+            ->get();
+
+        $bookLabels = $topBooks->pluck('title');
+        $bookQuantities = $topBooks->pluck('total_quantity');
+
+    
+         // Get genre breakdown
+        $genreData = DB::table('genres')
+            ->join('book_genre', 'genres.id', '=', 'book_genre.genre_id')
+            ->join('books', 'books.id', '=', 'book_genre.book_id')
+            ->join('order_items', 'order_items.book_id', '=', 'books.id')
+            ->join('orders', 'orders.id', '=', 'order_items.order_id')
+            ->where('orders.user_id', $id)
+            ->select('genres.name', DB::raw('COUNT(DISTINCT books.id) as total'))
+            ->groupBy('genres.name')
+            ->get();
+
+        // Separate labels and data
+        $genreLabels = $genreData->pluck('name');
+        $genreCounts = $genreData->pluck('total');
+
+        return view('admin.users-page', compact('user', 'profile', 'orders', 'topBooks', 'genreLabels', 'genreCounts', 'bookLabels', 'bookQuantities'));
     }
 
     public function userProfileUpdate($id, Request $request)
