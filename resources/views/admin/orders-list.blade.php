@@ -49,8 +49,8 @@
           <th>Updated At</th>
           <th>Total Price (RM)</th>
           <th>Status</th>
-          <th>View</th>
           <th>Receipt</th>
+          <th>View</th>
         </tr>
       </thead>
       <tbody>
@@ -71,13 +71,13 @@
             </span>
           </td>
           <td>
-            <a href="{{ url('orders-page/' . $order->id) }}" style="text-decoration: none;">
-              View <i class="bi bi-arrow-right-circle"></i>
+            <a href="{{ route('orders-receipt', $order->id) }}" target="_blank" class="btn btn-outline-dark btn-sm">
+              <i class="bi bi-printer"></i> Print
             </a>
           </td>
           <td>
-            <a href="{{ route('orders-receipt', $order->id) }}" target="_blank" class="btn btn-outline-dark btn-sm">
-              <i class="bi bi-printer"></i> Print
+            <a href="{{ url('orders-page/' . $order->id) }}" style="text-decoration: none;">
+              View <i class="bi bi-arrow-right-circle"></i>
             </a>
           </td>
         </tr>
