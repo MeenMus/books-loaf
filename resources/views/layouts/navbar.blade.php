@@ -2,6 +2,7 @@
 @include('sweetalert::alert')
 <style>
     * {
+ 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -96,90 +97,23 @@
   transition-delay: 0.25s;
 }
 
-.navbar-nav .dropdown-toggle {
-  display: flex !important;
-  align-items: center;
-  justify-content: center; /* Optional: Only if you want to center the icon + title together */
-  gap: 8px; /* space between icon and title */
-  padding: 0;
+#navbar li a {
+    position: absolute;
+    transition: background 0.3s, color 0.3s;
+    padding: 12px 80px;
+    border-radius: 100px;
+    transition: 0.3s;
 }
 
-.navbar-nav .dropdown-toggle .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#navbar li:hover a {
+    background: linear-gradient(to right, var(--i), var(--j));
+    padding: 12px 80px;
+    color: white !important;
 }
 
-
-.navbar-nav .dropdown-toggle::after {
-    display: none !important;
-}
-
-
-.nav-link.dropdown-toggle .dropdown-arrow {
-    transition: transform 0.3s ease;
-}
-
-.nav-link.dropdown-toggle:hover .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-.navbar-nav .dropdown-toggle .title {
-  line-height: 1;
-  display: flex;
-  align-items: center;
-}
-
-#navbar li a.dropdown-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-
-@media (max-width: 768px) {
-  #navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  #navbar li {
-    width: 100% !important;
-    justify-content: flex-start;
-    padding: 10px 15px;
-    position: relative;
-  }
-
-  #navbar li .icon {
-    display: none;
-  }
-
-  #navbar li .title {
-    transform: scale(1);
-    color: #333;
-  }
-
-  /* Hide dropdown menu by default */
-  #navbar .dropdown-menu {
-    display: none;
-    position: static !important;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    margin-top: 5px;
-    padding-left: 25px;
-  }
-
-  /* Show dropdown on hover */
-  #navbar .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-
-  #navbar .dropdown-menu .dropdown-item {
-    padding: 5px 0;
-  }
+#navbar li:hover a .icon ion-icon,
+#navbar li:hover a .title {
+    color: white;
 }
 
     </style>
