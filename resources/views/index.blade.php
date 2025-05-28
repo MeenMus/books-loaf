@@ -513,9 +513,9 @@
             </div>
             <div class="items-lists">
               <div class="item d-flex">
-                <img src="images/product-item2.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/Thariq Ridzuwan.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Thariq Ridzuwan Commando's : His Treasure</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/48">Thariq Ridzuwan Commando's : His Treasure</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Huda Najwa</p>
 
@@ -542,9 +542,9 @@
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
-                <img src="images/product-item1.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/dog-man.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Dog Man #12: The Scarlet Shedder (Paperback)n</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/151">Dog Man: Big Jim Believes</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Pilkey, Dav</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -570,11 +570,11 @@
               </div>
               <hr>
               <div class="item d-flex">
-                <img src="images/product-item3.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/i-hope-this-doesnt-find-you.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Intermezzo</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/31">I Hope This Doesn't Find You</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Rooney, Sally</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Liang, Ann</p>
 
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
@@ -594,7 +594,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 89.95</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 65.90</span>
                 </div>
               </div>
             </div>
@@ -607,9 +607,9 @@
             </div>
             <div class="items-lists">
               <div class="item d-flex">
-                <img src="images/product-item4.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/rumah-untuk-alie.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Rumah Untuk Alie karya Lenn Liu </a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/49">Rumah Untuk Alie karya Lenn Liu </a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Lenn Liu</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -635,9 +635,9 @@
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
-                <img src="images/product-item5.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/seven-husband-of-evelyn-hugo.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="http://127.0.0.1:8000/book/176">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -663,11 +663,11 @@
               </div>
               <hr>
               <div class="item d-flex">
-                <img src="images/product-item6.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/how-was-your-day.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">On Palestine</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/67">How Was Your Day</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Chomsky, Noam; Pappe, Ilanr</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Cheeming Boeyr</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -686,7 +686,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 68.95</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 39.90</span>
                 </div>
               </div>
             </div>
@@ -699,9 +699,9 @@
             </div>
             <div class="items-lists">
               <div class="item d-flex">
-                <img src="images/product-item7.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/watch-me.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Watch Me (Shatter Me: The New Republic #01)</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/30">Watch Me (Shatter Me: The New Republic #01)</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Mafi, Tahereh</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -727,9 +727,9 @@
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
-                <img src="images/product-item8.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/king-of-envy.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">King of Envy</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="http://127.0.0.1:8000/book/177">King of Envy</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Huang, Ana</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -755,11 +755,11 @@
               </div>
               <hr>
               <div class="item d-flex">
-                <img src="images/product-item9.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/girl-woman-other.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Tales of the Enchanted Forest</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/125">Girl, Woman, Other</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Bernardine Evaristo</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -778,7 +778,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 870</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5">RM 56.90</span>
                 </div>
               </div>
             </div>
@@ -791,11 +791,11 @@
             </div>
             <div class="items-lists">
               <div class="item d-flex">
-                <img src="images/product-item10.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/iron-flame.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">The Phoenix Chronicles</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/shop/all?s=thariq&page=4">Iron Flame</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Yarros, Rebecca</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -814,17 +814,17 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 1666</s>
-                    RM 999</span>
+                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM79.90</s>
+                  RM63.92</span>
                 </div>
               </div>
               <hr class="gray-400">
               <div class="item d-flex">
-                <img src="images/product-item11.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/good-girl-bad-blood.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Dreams of Avalon</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/172">	Good Girl, Bad Blood</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Holly Jackson</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -843,17 +843,17 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 500</s>
-                    RM 410</span>
+                   <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM59.90</s>
+                  RM43.92</span>
                 </div>
               </div>
               <hr>
               <div class="item d-flex">
-                <img src="images/product-item12.png" class="img-fluid shadow-sm" alt="product item">
+                <img src="images/the-hunger-games.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="single-product">Legends of the Dragon Isles</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/20">The Hunger Games</a></h6>
                   <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                    <p class="my-2 me-2 fs-6 text-black-50">Suzanne Collins</p>
                     <div class="rating text-warning d-flex align-items-center">
                       <svg class="star star-fill">
                         <use xlink:href="#star-fill"></use>
@@ -872,8 +872,8 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 600</s>
-                    RM 500</span>
+                   <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 14.90</s>
+                  RM10.90</span>
                 </div>
               </div>
             </div>
