@@ -7,6 +7,39 @@
 
   @include('layouts.navbar')
 
+  <style>
+    /* Star Ratings */
+    .average-rating {
+        font-size: 1.1rem;
+    }
+
+    .star {
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+        display: inline-block; /* Ensures stars align horizontally */
+    }
+
+    .star-fill {
+        fill: #ffc107; /* Gold for full stars */
+    }
+
+    .star-empty {
+        fill: #e4e5e9; /* Light gray for empty stars */
+    }
+
+    .star-half {
+        fill: #ffc107; /* Gold for half stars (same as full) */
+        opacity: 0.7;  /* Optional: Makes half-stars slightly lighter */
+    }
+
+    .review-summary {
+        border: 2px solid #eee;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>
+
   <section class="single-product padding-large">
     <div class="container">
       <div class="row">
@@ -131,7 +164,7 @@
             <div class="nav nav-tabs d-flex justify-content-center py-3" id="nav-tab" role="tablist">
               <button class="nav-link text-capitalize active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
               <button class="nav-link text-capitalize" id="nav-shipping-tab" data-bs-toggle="tab" data-bs-target="#nav-shipping" type="button" role="tab" aria-controls="nav-shipping" aria-selected="false">Shipping & Return</button>
-              <button class="nav-link text-capitalize" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews (02)</button>
+              <button class="nav-link text-capitalize" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">  Reviews ({{ $bookReviews->count() }})</button>
             </div>
           </nav>
           <div class="tab-content border-bottom py-4" id="nav-tabContent">
@@ -179,79 +212,85 @@
                 <li>Tracking information will be provided via email once your order is shipped.</li>
               </p>
             </div>
-            <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-              <div class="review-box review-style d-flex gap-3 flex-column">
-                <div class="review-item d-flex">
-                  <div class="review-content">
-                    <div class="rating text-primary">
-                      <svg class="star star-fill">
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                      <svg class="star star-fill">
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                      <svg class="star star-fill">
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                      <svg class="star star-fill">
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                      <svg class="star star-fill">
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                    <div class="review-header">
-                      <span class="author-name fw-medium">Tom Johnson</span>
-                      <span class="review-date">- 07/05/2022</span>
-                    </div>
-                    <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus urna duis convallis convallis</p>
-                  </div>
-                </div>
-              </div>
-              <div class="add-review margin-small">
-                <h3>Add a review</h3>
-                <p>Your email address will not be published. Required fields are marked *</p>
-                <div class="review-rating py-2">
-                  <span class="my-2">Your rating *</span>
-                  <div class="rating text-secondary">
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                  </div>
-                </div>
-                <input type="file" class="jfilestyle py-3 border-0" data-text="Choose your file">
-                <form id="form" class="d-flex gap-3 flex-wrap">
-                  <div class="w-100 d-flex gap-3">
-                    <div class="w-50">
-                      <input type="text" name="name" placeholder="Write your name here *" class="form-control w-100">
-                    </div>
-                    <div class="w-50">
-                      <input type="text" name="email" placeholder="Write your email here *" class="form-control w-100">
-                    </div>
-                  </div>
-                  <div class="w-100">
-                    <textarea placeholder="Write your review here *" class="form-control w-100"></textarea>
-                  </div>
-                  <label class="w-100">
-                    <input type="checkbox" required="" class="d-inline">
-                    <span>Save my name, email, and website in this browser for the next time.</span>
-                  </label>
-                  <button type="submit" name="submit" class="btn my-3">Submit</button>
-                </form>
-              </div>
+          <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+    <!-- ======= AVERAGE RATING & TOTAL REVIEWS SUMMARY ======= -->
+    <div class="review-summary mb-4 p-3 bg-light rounded">
+        <div class="d-flex align-items-center gap-3">
+            <!-- Average Stars -->
+            <div class="average-rating d-flex align-items-center">
+                @if($bookReviews->isNotEmpty())
+                    <span class="fs-4 fw-bold me-2">{{ $averageRating }}</span>
+                    <div class="rating text-warning">
+    @for ($i = 1; $i <= 5; $i++)
+        @if($averageRating >= $i)
+            <!-- Full Star -->
+            <svg class="star star-fill" width="20" height="20">
+                <use xlink:href="#star-fill"></use>
+            </svg>
+        @elseif($averageRating > ($i - 1) && $averageRating < $i)
+            <!-- Half Star -->
+            <svg class="star star-half" width="20" height="20">
+                <use xlink:href="#star-half"></use>
+            </svg>
+        @else
+            <!-- Empty Star -->
+            <svg class="star star-empty" width="20" height="20">
+                <use xlink:href="#star-empty"></use>
+            </svg>
+        @endif
+    @endfor
+</div>
+                @else
+                    <span class="text-muted">No ratings yet</span>
+                @endif
             </div>
+            
+            <!-- Total Reviews Count -->
+            <div class="total-reviews">
+                <span class="text-muted">
+                    {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= INDIVIDUAL USER REVIEWS ======= -->
+    <div class="review-box review-style d-flex gap-3 flex-column">
+        @forelse($bookReviews as $review)
+            <div class="review-item d-flex">
+                <div class="review-content mb-4">
+                    <!-- User's Star Rating -->
+                    <div class="rating text-primary mb-1">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if($i <= $review->rating)
+                                <svg class="star star-fill" width="16" height="16">
+                                    <use xlink:href="#star-fill"></use>
+                                </svg>
+                            @else
+                                <svg class="star star-empty" width="16" height="16">
+                                    <use xlink:href="#star-empty"></use>
+                                </svg>
+                            @endif
+                        @endfor
+                    </div>
+                    
+                    <!-- User Name & Review Date -->
+                    <div class="review-header">
+                        <span class="author-name fw-medium">{{ $review->user->name }}</span>
+                        <span class="review-date">- {{ $review->created_at->format('d/m/Y') }}</span>
+                    </div>
+                    
+                    <!-- User's Review Text -->
+                    <p class="mb-0">{{ $review->review }}</p>
+                </div>
+            </div>
+        @empty
+            <p class="text-muted">No reviews yet. Be the first to review!</p>
+        @endforelse
+    </div>
+</div>
+</div>
+</div>
           </div>
         </div>
       </div>

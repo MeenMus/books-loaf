@@ -122,6 +122,10 @@
                               <a href="{{ url('book', $item->book->id) }}">{{ $item->book->title }}</a>
                             </div>
                             <div class="small">Quantity: {{ $item->quantity }}</div>
+                            <!-- Review Button -->
+                            <button type="button" class="btn btn-sm btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#reviewModal-{{ $item->book->id }}">
+                              Write a Review
+                            </button>
                           </div>
                         </div>
                         <div class="text-end text-primary fw-medium">
@@ -163,6 +167,49 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Review Modal -->
+<div class="modal fade" id="reviewModal-{{ $item->book->id }}" tabindex="-1" aria-labelledby="reviewModalLabel-{{ $item->book->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ route('review-update') }}">
+      @csrf
+      <input type="hidden" name="book_id" value="{{ $item->book->id }}">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reviewModalLabel-{{ $item->book->id }}">Review: {{ $item->book->title }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Your Rating</label>
+            <div class="d-flex gap-1">
+              @for ($i = 1; $i <= 5; $i++)
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="rating" value="{{ $i }}" id="rating{{ $item->book->id }}-{{ $i }}" required>
+                  <label class="form-check-label" for="rating{{ $item->book->id }}-{{ $i }}">
+                    {{ $i }}★
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Your Review</label>
+            <textarea name="review" class="form-control" rows="4" placeholder="Write your thoughts here..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 
   @include('layouts.footer')

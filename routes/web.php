@@ -16,6 +16,7 @@ use App\Http\Controllers\Customer\BuyBookController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\LikeController;
 use App\Http\Controllers\Customer\OrderController;
+use App\Http\Controllers\Customer\BookReviewController;
 use App\Http\Controllers\Customer\ProfileController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,7 +37,6 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 /* CUSTOMER STUFF */
-
 Route::get('/', [HomeController::class, 'showIndex']);
 Route::get('/index-2', [HomeController::class, 'showIndexAlt']);
 Route::get('/single-product', [HomeController::class, 'showBook']);
@@ -64,6 +64,8 @@ Route::post('/profile-update', [ProfileController::class, 'store'])->name('profi
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
 Route::get('/orders-receipt/{order}', [OrderController::class, 'printReceipt'])->name('orders-receipt')->middleware('auth');
+
+Route::post('/orders/review/submit', [BookReviewController::class, 'submitReview'])->name('review-update')->middleware('auth');
 
 Route::post('/checkout-stripe', [PaymentController::class, 'redirectToStripeCheckout'])->name('checkout-stripe')->middleware('auth');
 Route::get('/checkout-success', [PaymentController::class, 'stripeSuccess'])->name('checkout-success')->middleware('auth');

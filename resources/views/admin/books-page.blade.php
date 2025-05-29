@@ -1,7 +1,6 @@
 @extends('admin.layouts.main')
 
 @section('content')
-
 <div class="row">
   <div class="col-md-12 mb-2">
     <div class="row">
@@ -11,6 +10,73 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Reviews Section Styles */
+.review-summary {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.review-item {
+    padding: 1rem 0;
+}
+
+.star {
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
+}
+
+.star-fill {
+    fill: #ffc107; /* Gold */
+}
+
+.star-empty {
+    fill: #e4e5e9; /* Light gray */
+}
+
+.star-half {
+    fill: url(#star-half-gradient);
+}
+
+.rating {
+    display: inline-flex;
+    align-items: center;
+}
+
+ /* Star Ratings */
+    .average-rating {
+        font-size: 1.1rem;
+    }
+
+    .star {
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+        display: inline-block; /* Ensures stars align horizontally */
+    }
+
+    .star-fill {
+        fill: #ffc107; /* Gold for full stars */
+    }
+
+    .star-empty {
+        fill: #e4e5e9; /* Light gray for empty stars */
+    }
+
+    .star-half {
+        fill: #ffc107; /* Gold for half stars (same as full) */
+        opacity: 0.7;  /* Optional: Makes half-stars slightly lighter */
+    }
+
+    .review-summary {
+        border: 2px solid #eee;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>
 
 <div class="row row-cols-1 row-cols-md-5 row-cols-lg-2 g-4">
   <div class="col-12 d-flex">
@@ -110,6 +176,9 @@
     </div>
   </div>
 
+  
+  
+
   <!-- Modal -->
 
   <div class="modal fade" id="coverModal" tabindex="-1" aria-labelledby="coverModalLabel" aria-hidden="true">
@@ -190,6 +259,77 @@
     <h5 class="fw-bold">Monthly Sales Chart (Last 12 Months)</h5>
     <canvas id="salesChart" height="100"></canvas>
   </div>
+
+  <div class="card mt-4">
+  <div class="card-body">
+  <!-- Customer Reviews Section -->
+  <h6 class="fw-bold mb-2">Customer Reviews</h6>
+
+  @if($bookReviews->isNotEmpty())
+    <div class="d-flex align-items-center mb-3">
+      <span class="fs-4 fw-bold me-2">{{ $averageRating }}</span>
+      <div class="rating text-warning d-flex">
+        @for ($i = 1; $i <= 5; $i++)
+          @if($averageRating >= $i)
+            <!-- Full Star -->
+            <svg class="me-1" width="20" height="20">
+              <use xlink:href="#star-fill" />
+            </svg>
+          @elseif($averageRating > ($i - 1) && $averageRating < $i)
+            <!-- Half Star -->
+            <svg class="me-1" width="20" height="20">
+              <use xlink:href="#star-half" />
+            </svg>
+          @else
+            <!-- Empty Star -->
+            <svg class="me-1" width="20" height="20">
+              <use xlink:href="#star-empty" />
+            </svg>
+          @endif
+        @endfor
+      </div>
+    </div>
+  @else
+    <p class="text-muted">No ratings yet</p>
+  @endif
+
+    <div class="review-box review-style d-flex gap-3 flex-column">
+        @forelse($bookReviews as $review)
+            <div class="review-item d-flex">
+                <div class="review-content mb-4">
+                    <!-- User's Star Rating -->
+                    <div class="rating text-primary mb-1">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if($i <= $review->rating)
+                                <svg class="star star-fill" width="16" height="16">
+                                    <use xlink:href="#star-fill"></use>
+                                </svg>
+                            @else
+                                <svg class="star star-empty" width="16" height="16">
+                                    <use xlink:href="#star-empty"></use>
+                                </svg>
+                            @endif
+                        @endfor
+                    </div>
+                    
+                    <!-- User Name & Review Date -->
+                    <div class="review-header">
+                        <span class="author-name fw-medium">{{ $review->user->name }}</span>
+                        <span class="review-date">- {{ $review->created_at->format('d/m/Y') }}</span>
+                    </div>
+                    
+                    <!-- User's Review Text -->
+                    <p class="mb-0">{{ $review->review }}</p>
+                </div>
+            </div>
+        @empty
+            <p class="text-muted">No reviews yet. Be the first to review!</p>
+        @endforelse
+    </div>
+</div>
+
+</div>
+
 </div>
 
 

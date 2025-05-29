@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\User; 
+use App\Models\BookReview; 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -91,14 +93,22 @@ class BookController extends BaseController
 
         $genreNames = $book->genres->pluck('name')->toArray();
 
+         // Get book reviews with average rating
+        $bookReviews = BookReview::where('book_id', $id)
+            ->with('user')
+            ->latest()
+            ->get();
         
+        $averageRating = $bookReviews->avg('rating');
+        $averageRating = round($averageRating, 1);
+
         // Book sales analytics
         $salesData = DB::table('order_items')
             ->where('book_id', $book->id)
             ->selectRaw('SUM(quantity) as total_units_sold, SUM(quantity * price) as total_revenue, MAX(created_at) as last_sold_date')
             ->first();
 
-            // 🆕 Monthly sales chart data (last 12 months)
+        // 🆕 Monthly sales chart data (last 12 months)
         $monthlySales = DB::table('order_items')
             ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SUM(quantity) as total_sold")
             ->where('book_id', $book->id)
@@ -125,7 +135,7 @@ class BookController extends BaseController
     ];
     
     
-        return view('admin.books-page', compact('book', 'genres', 'monthlySales'));
+        return view('admin.books-page', compact('book', 'genres', 'monthlySales', 'bookReviews', 'averageRating'));
     }
 
 
