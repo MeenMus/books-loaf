@@ -123,14 +123,14 @@ class PaymentController extends Controller
                 'total_price' => $total,
                 'status' => 'pending',
                 'name' => $session->metadata->name,
-                'email' => $user->email,
-                'phone' => $user->profile->phone,
-                'country' => $user->profile->country,
-                'state' => $user->profile->state,
-                'city' => $user->profile->city,
-                'postal_code' => $user->profile->postal_code,
-                'address_line_1' => $user->profile->address_line_1,
-                'address_line_2' => $user->profile->address_line_2,
+                'email' => $session->metadata->email,
+                'phone' => $session->metadata->phone,
+                'country' => $session->metadata->country,
+                'state' => $session->metadata->state,
+                'city' => $session->metadata->city,
+                'postal_code' => $session->metadata->postal_code,
+                'address_line_1' => $session->metadata->address_line_1,
+                'address_line_2' => $session->metadata->address_line_2,
             ]);
 
             foreach ($cart->items as $item) {
