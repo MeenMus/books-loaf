@@ -361,7 +361,7 @@
                                     @endif
                                     @endauth
 
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('profile') }}">My Account</a></li>
 
                                     @auth
                                     <li>
