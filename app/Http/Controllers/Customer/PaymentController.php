@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Stripe\PaymentIntent;
 use Stripe\PaymentMethod;
@@ -21,63 +22,83 @@ class PaymentController extends Controller
 
     public function redirectToStripeCheckout(Request $request)
     {
-        $user = auth()->user();
-        $cart = $user->cart()->with('items.book')->first();
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
+                'address_line_1' => 'required|string|max:255',
+                'address_line_2' => 'nullable|string|max:255',
+                'city' => 'nullable|string|max:255',
+                'state' => 'nullable|string|max:255',
+                'postal_code' => 'nullable|string|max:20',
+                'country' => 'required|string|max:255',
+            ]);
 
-        if (!$cart || $cart->items->isEmpty()) {
-            return back()->with('error', 'Your cart is empty.');
-        }
+            $user = auth()->user();
+            $cart = $user->cart()->with('items.book')->first();
 
-        $lineItems = [];
+            if (!$cart || $cart->items->isEmpty()) {
+                return back()->with('error', 'Your cart is empty.');
+            }
 
-        foreach ($cart->items as $item) {
+            $lineItems = [];
+
+            foreach ($cart->items as $item) {
+                $lineItems[] = [
+                    'price_data' => [
+                        'currency' => 'myr',
+                        'product_data' => [
+                            'name' => $item->book->title,
+                        ],
+                        'unit_amount' => $item->book->price * 100, // in cents
+                    ],
+                    'quantity' => $item->quantity,
+                ];
+            }
+
+            // Optional: Add flat shipping
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'myr',
                     'product_data' => [
-                        'name' => $item->book->title,
+                        'name' => 'Shipping Fee',
                     ],
-                    'unit_amount' => $item->book->price * 100, // in cents
+                    'unit_amount' => 1000, // RM10
                 ],
-                'quantity' => $item->quantity,
+                'quantity' => 1,
             ];
-        }
 
-        // Optional: Add flat shipping
-        $lineItems[] = [
-            'price_data' => [
-                'currency' => 'myr',
-                'product_data' => [
-                    'name' => 'Shipping Fee',
+            Stripe::setApiKey(config('services.stripe.secret'));
+
+            $session = Session::create([
+                'payment_method_types' => ['card', 'fpx'],
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'success_url' => route('checkout-success') . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('checkout-cancel'),
+                'metadata' => [
+                    'user_id' => $user->id,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'country' => $request->country,
+                    'state' => $request->state,
+                    'city' => $request->city,
+                    'postal_code' => $request->postal_code,
+                    'address_line_1' => $request->address_line_1,
+                    'address_line_2' => $request->address_line_2,
                 ],
-                'unit_amount' => 1000, // RM10
-            ],
-            'quantity' => 1,
-        ];
+            ]);
 
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $session = Session::create([
-            'payment_method_types' => ['card', 'fpx'],
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('checkout-success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout-cancel'),
-            'metadata' => [
-                'user_id' => $user->id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'country' => $request->country,
-                'state' => $request->state,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code,
-                'address_line_1' => $request->address_line_1,
-                'address_line_2' => $request->address_line_2,
-            ],
-        ]);
-
-        return redirect($session->url);
+            return redirect($session->url);
+        } catch (ValidationException $e) {
+            Alert::error('Submission Error', $e->validator->errors()->first());
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Something went wrong. Please try again.');
+            return redirect()->back();
+        }
     }
 
 
@@ -95,7 +116,7 @@ class PaymentController extends Controller
         $user = User::find($session->metadata->user_id);
         $cart = $user->cart()->with('items.book')->first();
 
-        DB::transaction(function () use (&$order,$session, $user, $cart, $paymentIntent, $paymentMethod) {
+        DB::transaction(function () use (&$order, $session, $user, $cart, $paymentIntent, $paymentMethod) {
             $total = $cart->items->sum(fn($item) => $item->book->price * $item->quantity + 10);
 
             $order = $user->orders()->create([
