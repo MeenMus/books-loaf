@@ -76,7 +76,7 @@ Route::get('/contact', [HomeController::class, 'showContact']);
 Route::get('/blog', [HomeController::class, 'showBlog']);
 Route::get('/about', [HomeController::class, 'showAbout']);
 
-Route::get('/test', [HomeController::class, 'test']);
+Route::post('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
 
 /* ---- */
 

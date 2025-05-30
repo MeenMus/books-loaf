@@ -1,3 +1,57 @@
+<style>
+  .collapse-up:not(.show) {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+  }
+
+  .collapse-up.show {
+    height: auto;
+    transition: height 0.3s ease-in;
+  }
+</style>
+
+<!-- Floating Chat Section -->
+<section style="position: fixed; bottom: 20px; right: 20px; z-index: 1050; width: 360px;">
+
+  <!-- Toggle Button -->
+  <button id="chatToggleBtn" class="btn btn-info btn-lg w-100">
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Chat with us</span>
+      <i class="fas fa-comments"></i>
+    </div>
+  </button>
+
+  <!-- Chat Popup (Initially Hidden) -->
+  <div id="chatPopup" class="collapse collapse-up mt-2">
+    <div class="card" style="max-height: 500px;">
+
+      <!-- Chat Header -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>AI Assistant</strong>
+        <button id="closeChat" class="btn btn-sm btn-light">&times;</button>
+      </div>
+
+      <!-- Chat Messages -->
+      <div class="card-body overflow-auto" id="chat-messages" style="height: 350px;">
+        <!-- Messages will be dynamically appended here -->
+      </div>
+
+      <!-- Chat Footer -->
+      <div class="card-footer d-flex align-items-center gap-2">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+          alt="avatar" style="width: 35px;">
+        <input type="text" id="textAreaExample" class="form-control" placeholder="Type a message...">
+        <button class="btn btn-info" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 <footer id="footer" class="padding-large">
   <div class="container">
     <div class="row">
@@ -75,3 +129,89 @@
 <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
 <script src="{{ asset('js/country-states.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+
+
+<!-- Chat Logic -->
+<script>
+  const toggleBtn = document.getElementById('chatToggleBtn');
+  const chatPopup = document.getElementById('chatPopup');
+  const closeChat = document.getElementById('closeChat');
+  const sendBtn = document.getElementById('send-btn');
+  const input = document.getElementById('textAreaExample');
+  const chatMessages = document.getElementById('chat-messages');
+
+  toggleBtn.addEventListener('click', () => {
+    chatPopup.classList.add('show');
+    input.focus();
+  });
+
+  closeChat.addEventListener('click', () => {
+    chatPopup.classList.remove('show');
+  });
+
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  function sendMessage() {
+    const message = input.value.trim();
+    if (!message) return;
+
+    appendMessage('user', message);
+    input.value = '';
+    input.disabled = true;
+
+    fetch("{{ route('chat') }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        },
+        body: JSON.stringify({ message: message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        appendMessage('bot', data.reply);
+        input.disabled = false;
+        input.focus();
+      })
+      .catch(err => {
+        appendMessage('bot', 'Oops! Something went wrong.');
+        console.error(err);
+        input.disabled = false;
+      });
+  }
+
+  function appendMessage(sender, text) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('d-flex', 'mb-3', sender === 'user' ? 'justify-content-end' : 'justify-content-start');
+
+    const avatar = document.createElement('img');
+    avatar.src = sender === 'user'
+      ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp'
+      : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp';
+    avatar.style.width = '35px';
+    avatar.classList.add(sender === 'user' ? 'ms-2' : 'me-2');
+
+    const bubble = document.createElement('div');
+    bubble.className = 'p-2 small ' + (sender === 'user' ? 'bg-light text-dark' : 'bg-info text-white');
+    bubble.style.borderRadius = '15px';
+    bubble.textContent = text;
+
+    if (sender === 'user') {
+      wrapper.appendChild(bubble);
+      wrapper.appendChild(avatar);
+    } else {
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(bubble);
+    }
+
+    chatMessages.appendChild(wrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script>
