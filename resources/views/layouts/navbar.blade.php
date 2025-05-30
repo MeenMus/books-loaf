@@ -1,123 +1,155 @@
 @include('layouts.header')
 @include('sweetalert::alert')
 <style>
-    * {
- 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    .custom-navbar {
+        display: flex;
+        position: relative;
+        gap: 25px;
+    }
+
+    .custom-navbar li {
+        position: relative;
+        list-style: none;
+        width: 60px;
+        height: 60px;
+        background: white;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-radius: 60px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+    }
+
+    .custom-navbar li::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 60px;
+        background: linear-gradient(45deg, var(--i), var(--j));
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    .custom-navbar li::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        width: 100%;
+        height: 100%;
+        border-radius: 60px;
+        background: linear-gradient(45deg, var(--i), var(--j));
+        transition: 0.5s;
+        filter: blur(15px);
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .custom-navbar li:hover {
+        width: 180px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+    }
+
+    .custom-navbar li:hover::before {
+        opacity: 1;
+    }
+
+    .custom-navbar li:hover::after {
+        opacity: 0.5;
+    }
+
+    .custom-navbar li ion-icon {
+        color: #777;
+        font-size: 1.75em;
+        transition: 0.5s;
+        transition-delay: 0.25s;
+    }
+
+    .custom-navbar li:hover ion-icon {
+        transform: scale(0);
+        color: #fff;
+        transition-delay: 0s;
+    }
+
+    .custom-navbar li span {
+        position: absolute;
+    }
+
+    .custom-navbar li .title {
+        color: #fff;
+        font-size: 1.1em;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: scale(0);
+        transition: 0.5s;
+        transition-delay: 0s;
+    }
+
+    .custom-navbar li:hover .title {
+        transform: scale(1);
+        transition-delay: 0.25s;
+    }
+
+
+    .custom-navbar li a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+    position: relative;
 }
 
-#navbar {
-  display: flex;
-  position: relative;
-  gap: 25px;
-  padding-left: 0;
+/* Dropdown styles */
+.custom-navbar .has-dropdown {
+    position: relative;
 }
 
-#navbar li {
-  position: relative;
-  list-style: none;
-  width: 60px;
-  height: 60px;
-  background: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 60px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-}
-
-#navbar li::before {
-
-  position: absolute;
-  inset: 0;
-  border-radius: 60px;
-  background: linear-gradient(45deg, var(--i), var(--j));
-  opacity: 0;
-  transition: 0.5s;
-  z-index: 0;
-}
-
-#navbar li::after {
-  
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  height: 100%;
-  border-radius: 60px;
-  background: linear-gradient(45deg, var(--i), var(--j));
-  transition: 0.5s;
-  filter: blur(15px);
-  z-index: -1;
-  opacity: 0;
-}
-
-#navbar li:hover {
-  width: 180px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
-}
-
-#navbar li:hover::before {
-  opacity: 1;
-}
-
-#navbar li:hover::after {
-  opacity: 0.5;
-}
-
-#navbar li ion-icon {
-  color: #777;
-  font-size: 1.75em;
-  transition: 0.5s;
-  transition-delay: 0.25s;
-}
-
-#navbar li:hover ion-icon {
-  transform: scale(0);
-  color: #fff;
-  transition-delay: 0s;
-}
-
-#navbar li .title {
-  position: absolute;
-  color: #666;
-  font-size: 1.1em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transform: scale(0);
-  transition: 0.5s;
-  transition-delay: 0s;
-}
-
-#navbar li:hover .title {
-  transform: scale(1);
-  transition-delay: 0.25s;
-}
-
-#navbar li a {
+.custom-navbar .has-dropdown .dropdown {
+    display: none;
     position: absolute;
-    transition: background 0.3s, color 0.3s;
-    padding: 12px 80px;
-    border-radius: 100px;
-    transition: 0.3s;
+    top: 61px;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 10px 0;
+    flex-direction: column;
+    z-index: 10;
+    min-width: 150px;
 }
 
-#navbar li:hover a {
-    background: linear-gradient(to right, var(--i), var(--j));
-    padding: 12px 80px;
-    color: white !important;
+.custom-navbar .has-dropdown .dropdown li {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    height: auto;
+    padding: 5px 20px;
+    transition: background 0.3s;
 }
 
-#navbar li:hover a .icon ion-icon,
-#navbar li:hover a .title {
-    color: white;
+.custom-navbar .has-dropdown .dropdown li:hover {
+    background: #f4f4f4;
 }
 
-    </style>
-    
+.custom-navbar .has-dropdown .dropdown li a {
+    color: #333;
+    font-size: 0.9em;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+
+.custom-navbar .has-dropdown.show-dropdown .dropdown {
+    display: flex;
+}
+
+</style>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="search" xmlns="http://www.w3.org/2000/symbolsvg" viewBox="0 0 24 24">
         <path fill="currentColor" fill-rule="evenodd" d="M11.5 2.75a8.75 8.75 0 1 0 0 17.5a8.75 8.75 0 0 0 0-17.5M1.25 11.5c0-5.66 4.59-10.25 10.25-10.25S21.75 5.84 21.75 11.5c0 2.56-.939 4.902-2.491 6.698l3.271 3.272a.75.75 0 1 1-1.06 1.06l-3.272-3.271A10.21 10.21 0 0 1 11.5 21.75c-5.66 0-10.25-4.59-10.25-10.25" clip-rule="evenodd" />
@@ -292,43 +324,34 @@
                     <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
-                        <li style="--i:#A955ff;--j:#ea51ff">
-                            <a href="{{ url('/') }}" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                    <ul id="navbar" class="custom-navbar navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
+
+                        <li style="--i:#a955ff;--j:#ea51ff">
+                            <a href="/" class="nav-link">
                                 <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                                 <span class="title">Home</span>
                             </a>
-                            </li>
-
-                        <li style="--i:#56CCF2;--j:#2F80ED">
-                        <a href="{{ url('/bestselling') }}" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
-                            <span class="icon"><ion-icon name="star-outline"></ion-icon></span>
-                            <span class="title">Best Selling</span>
-                        </a>
                         </li>
-                          <li class="dropdown" style="--i:#80FF72;--j:#7EE8FA;">
-                            <a href="#" class="dropdown-toggle d-flex align-items-center gap-2 text-decoration-none text-dark" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+
+                        <li class="has-dropdown" style="--i:#FF9966;--j:#FF5E62">
+                            <a href="#" class="nav-link">
                                 <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
                                 <span class="title">Category</span>
                             </a>
-                            <ul class="dropdown-menu animate slide border">
-                                <li><a href="{{ url('shop/all') }}" class="dropdown-item fw-light">Browse Books</a></li>
-                                <li><a href="{{ url('shop/27') }}" class="dropdown-item fw-light">Malay Books</a></li>
-                                <li><a href="{{ url('shop/13') }}" class="dropdown-item fw-light">Chinese Books</a></li>
+                            <ul class="dropdown">
+                                <li><a href="{{ url('shop/all') }}">Browse Books</a></li>
+                                <li><a href="{{ url('shop/all') }}">Best Selling</a></li>
+                                <li><a href="{{ url('shop/27') }}">Malay Books</a></li>
+                                <li><a href="{{ url('shop/13') }}">Chinese Books</a></li>
                             </ul>
-                            </li>
-
-                        <li style="--i:#ffa9c6;--j:#f434e2">
-                            <a href="https://www.booksloaf.com/contact" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
-                                <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                                <span class="title" >Contact Us</span>
-                            </a>
                         </li>
 
-
-                        <!-- <li class="nav-item">
-                            <a class="nav-link me-4" href="https://www.booksloaf.com/contact">Contact Us</a>
-                        </li> -->
+                        <li style="--i:#ffa9c6;--j:#f434e2">
+                            <a href="/contact" class="nav-link">
+                                <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                                <span class="title">Contact Us</span>
+                            </a>
+                        </li>
 
                     </ul>
                     <div class="user-items d-flex">
@@ -423,11 +446,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         let likesLoaded = false;
         let cartLoaded = false;
 
@@ -435,7 +458,7 @@
         const dropdownCartToggle = document.querySelector('.cart-dropdown .dropdown-toggle');
 
         if (dropdownLikesToggle) {
-            dropdownLikesToggle.addEventListener('show.bs.dropdown', function () {
+            dropdownLikesToggle.addEventListener('show.bs.dropdown', function() {
                 if (!likesLoaded) {
                     fetchLikes();
                 }
@@ -443,7 +466,7 @@
         }
 
         if (dropdownCartToggle) {
-            dropdownCartToggle.addEventListener('show.bs.dropdown', function () {
+            dropdownCartToggle.addEventListener('show.bs.dropdown', function() {
                 if (!cartLoaded) {
                     fetchCart();
                 }
@@ -474,4 +497,28 @@
                 });
         }
     });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const categoryItem = document.querySelector(".custom-navbar .has-dropdown");
+    const toggleLink = categoryItem.querySelector("a.nav-link");
+
+    toggleLink.addEventListener("click", function (e) {
+        e.preventDefault(); // prevent jump only for toggle link
+        categoryItem.classList.toggle("show-dropdown");
+    });
+
+    // Close dropdown when mouse leaves the entire dropdown area
+    categoryItem.addEventListener("mouseleave", function () {
+        categoryItem.classList.remove("show-dropdown");
+    });
+
+    // Optional: close dropdown if clicking outside
+    document.addEventListener("click", function (e) {
+        if (!categoryItem.contains(e.target)) {
+            categoryItem.classList.remove("show-dropdown");
+        }
+    });
+});
 </script>
