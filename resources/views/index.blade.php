@@ -59,6 +59,72 @@
     color: #ffc107 !important;
 }
 }
+
+/* Container for the entire swiper */
+#category-swiper-container {
+  position: relative;
+  overflow: visible; /* Allows arrows to extend outside */
+}
+
+/* Specific arrow styling */
+#category-swiper-prev,
+#category-swiper-next {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+#category-swiper-prev:hover,
+#category-swiper-next:hover {
+  opacity: 1;
+}
+
+/* Prevent interference with other elements */
+#category-swiper-prev,
+#category-swiper-next {
+  pointer-events: auto;
+}
+
+/* Card sizing within this specific swiper only */
+#main-category-swiper .swiper-slide {
+  width: auto !important;
+  margin-right: 15px;
+}
+
+#main-category-swiper .card-container {
+  width: 200px;
+  height: 240px;
+}
+
+/* Larger card styling */
+.client-card {
+  padding: 12px; /* Increased padding */
+  height: 100%; /* Fill container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* Enlarged image */
+.client-card img {
+  height: 200px !important; /* Increased from 150px */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Larger text */
+.client-card p {
+   margin-top: 15px; /* Increased spacing */
+  font-size: 1.1rem; /
+}
+
+/* Adjust spacing between cards */
+#main-category-swiper .swiper-slide {
+  margin-right: 10px; /* Slightly increased gap to balance larger cards */
+}
 </style> 
 
 @include('layouts.header')
@@ -898,17 +964,17 @@
     </div>
 
     <!-- Swiper container with padding for arrows -->
-    <div class="position-relative px-5">
-      <!-- Previous Arrow (positioned left outside content) -->
-      <div class="position-absolute top-50 start-0 translate-middle-y z-1 swiper-prev product-slider-button-prev">
-        <svg class="chevron-back-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
-          <use xlink:href="#alt-arrow-left-outline"></use>
-        </svg>
-      </div>
+   <div class="position-relative px-5" id="category-swiper-container">
+  <!-- Previous Arrow with unique ID -->
+  <div id="category-swiper-prev" class="position-absolute top-50 start-0 translate-middle-y z-1 swiper-prev product-slider-button-prev">
+    <svg class="chevron-back-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
+      <use xlink:href="#alt-arrow-left-outline"></use>
+    </svg>
+  </div>
 
-      <!-- Swiper content -->
-      <div class="swiper category-swiper">
-        <div class="swiper-wrapper">
+       <!-- Swiper content -->
+  <div class="swiper category-swiper" id="main-category-swiper">
+    <div class="swiper-wrapper">
           <!-- Category Slides -->
           <div class="swiper-slide">
            <div class="card-container">
@@ -933,15 +999,16 @@
               <div class="client-card">
               <img src="images/self care.png" alt="Self Help" class="img-fluid" style="height:150px; object-fit: contain;" />
               <p class="mt-2">Self Help</p>
-              </div>
+              </div> 
             </div>
           </div>
+          
 
           <div class="swiper-slide">
             <div class="card-container">
               <div class="client-card">
               <img src="images/thriller.png" alt="Crime & Thriller" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Crime & Thriller</p>
+              <p class="mt-2">Crime</p>
               </div>
             </div>
           </div>
@@ -976,12 +1043,12 @@
       </div>
 
       <!-- Next Arrow (positioned right outside content) -->
-      <div class="position-absolute top-50 end-0 translate-middle-y z-1 swiper-next product-slider-button-next">
-        <svg class="chevron-forward-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
-          <use xlink:href="#alt-arrow-right-outline"></use>
-        </svg>
-      </div>
-    </div>
+       <div id="category-swiper-next" class="position-absolute top-50 end-0 translate-middle-y z-1 swiper-next product-slider-button-next">
+    <svg class="chevron-forward-circle bg-white rounded-circle shadow-sm p-2" width="40" height="40">
+      <use xlink:href="#alt-arrow-right-outline"></use>
+    </svg>
+  </div>
+</div>
   </div>
 </section>
 

@@ -9,28 +9,47 @@
     font-family: 'Segoe UI', Roboto, sans-serif;
   } 
 
-  /* Toggle Button */
-  .chat-toggle-btn {
-    background: linear-gradient(135deg, #4361ee, #3a0ca3);
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    transition: all 0.3s ease;
-  }
+  /* Chat Icon Styles */
+.chat-toggle-btn {
+  width: 60px !important;
+  height: 60px !important;
+  padding: 0 !important;
+  border-radius: 50% !important; /* Makes it perfectly round */
+  background: linear-gradient(135deg, #4361ee, #3a0ca3) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+.chat-icon {
+  width: 70%; /* Makes the image take 70% of button space */
+  height: 70%;
+  object-fit: contain; /* Ensures image maintains aspect ratio */
+  border-radius: 50%; /* Makes image itself circular */
+  transition: all 0.3s ease;
+}
 
-  .chat-toggle-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
+
+
+.chat-toggle-btn:hover .chat-icon {
+  transform: scale(1.1);
+}
+
+/* Make the chat window appear from the icon */
+.chat-window {
+  position: absolute;
+  bottom: 70px; /* Position above the icon */
+  right: 0;
+  margin-top: 0;
+}
+
+.chat-toggle-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
 
   /* Chat Window */
   .chat-window {
@@ -216,6 +235,28 @@
   .messages-container::-webkit-scrollbar-thumb:hover {
     background: #aaa;
   }
+
+  .chat-window.show ~ .chat-toggle-btn .chat-icon {
+  transform: rotate(10deg);
+  /* or any other effect you want */
+}
+
+.chat-toggle-btn::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  background: #ff4757;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: none;
+}
+
+.has-new-message::after {
+  display: block;
+}
 </style>
 
 <!-- Floating Chat Section -->
@@ -225,9 +266,8 @@
 <div class="chat-container">
   <!-- Toggle Button -->
   <button id="chatToggleBtn" class="chat-toggle-btn">
-    <span>Chat with us</span>
-    <i class="fas fa-comment-dots"></i>
-  </button>
+  <img src="logo-single.png" alt="Chat Icon" class="chat-icon">
+</button>
 
   <!-- Chat Window -->
   <div id="chatPopup" class="chat-window">
@@ -360,6 +400,9 @@
   const input = document.getElementById('textAreaExample');
   const chatMessages = document.getElementById('chat-messages');
   const typingIndicator = document.getElementById('typingIndicator');
+
+  document.getElementById('chatToggleBtn').classList.add('has-new-message');
+  document.getElementById('chatToggleBtn').classList.remove('has-new-message');
 
   // Toggle chat window
   toggleBtn.addEventListener('click', () => {

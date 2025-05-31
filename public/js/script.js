@@ -201,12 +201,18 @@
   //     1200: { slidesPerView: 5 }
   //   }
   // });
+  
     const categorySwiper = new Swiper('.category-swiper', {
-  slidesPerView: 2,
-  spaceBetween: 20,
+  slidesPerView: 'auto',
+  spaceBetween: 12,
   navigation: {
     nextEl: '.product-slider-button-next',
     prevEl: '.product-slider-button-prev',
+  },
+  breakpoints: {
+    640: { slidesPerView: 4 },
+    768: { slidesPerView: 5 },
+    1024: { slidesPerView: 6 }
   },
   // Add these parameters to prevent z-index issues
   on: {
