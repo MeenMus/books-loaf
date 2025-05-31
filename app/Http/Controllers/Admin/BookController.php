@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Book;
 use App\Models\Genre;
-use App\Models\User; 
-use App\Models\BookReview; 
+use App\Models\User;
+use App\Models\BookReview;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,6 +17,9 @@ use Intervention\Image\Facades\Image;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Services\EmbedBooksToQdrantService;
+use App\Services\QdrantService;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends BaseController
 {
@@ -65,6 +68,8 @@ class BookController extends BaseController
                 Storage::disk('public')->put($coverImagePath, (string) $resizedImage->encode());
             }
 
+            DB::beginTransaction();
+
             $book = Book::create([
                 'title' => $request->title,
                 'author' => $request->author,
@@ -77,10 +82,25 @@ class BookController extends BaseController
 
             $book->genres()->attach($request->genre);
 
+            $result = app(EmbedBooksToQdrantService::class)->upsert($book);
+
+            if (!$result) {
+                DB::rollBack();
+                Alert::error('Qdrant Error', 'Book not created. Failed to sync with vector database.');
+                return redirect()->back();
+            }
+
+            DB::commit();
+
             Alert::success('Success!', 'Book created successfully!');
             return redirect()->back();
         } catch (ValidationException $e) {
             Alert::error('Submission Error', $e->validator->errors()->first());
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Book creation error: " . $e->getMessage());
+            Alert::error('Error', 'Something went wrong while saving the book.');
             return redirect()->back();
         }
     }
@@ -93,12 +113,12 @@ class BookController extends BaseController
 
         $genreNames = $book->genres->pluck('name')->toArray();
 
-         // Get book reviews with average rating
+        // Get book reviews with average rating
         $bookReviews = BookReview::where('book_id', $id)
             ->with('user')
             ->latest()
             ->get();
-        
+
         $averageRating = $bookReviews->avg('rating');
         $averageRating = round($averageRating, 1);
 
@@ -117,24 +137,18 @@ class BookController extends BaseController
             ->orderBy('month')
             ->pluck('total_sold', 'month');
 
-        // $book->fields = [
-        //     'Author' => $book->author,
-        //     'Price' => number_format($book->price, 2),
-        //     'Stock' => $book->stock,
-        //     'Genre' => implode(', ', $genreNames),
-        // ];
 
-         $book->fields = [
-        'Author' => $book->author,
-        'Price' => number_format($book->price, 2),
-        'Stock' => $book->stock,
-        'Genre' => implode(', ', $genreNames),
-        'Total Units Sold' => $salesData->total_units_sold ?? 0,
-        'Total Revenue (RM)' => number_format($salesData->total_revenue ?? 0, 2),
-        'Last Sold Date' => $salesData->last_sold_date ? \Carbon\Carbon::parse($salesData->last_sold_date)->format('d M Y') : 'Never',
-    ];
-    
-    
+        $book->fields = [
+            'Author' => $book->author,
+            'Price' => number_format($book->price, 2),
+            'Stock' => $book->stock,
+            'Genre' => implode(', ', $genreNames),
+            'Total Units Sold' => $salesData->total_units_sold ?? 0,
+            'Total Revenue (RM)' => number_format($salesData->total_revenue ?? 0, 2),
+            'Last Sold Date' => $salesData->last_sold_date ? \Carbon\Carbon::parse($salesData->last_sold_date)->format('d M Y') : 'Never',
+        ];
+
+
         return view('admin.books-page', compact('book', 'genres', 'monthlySales', 'bookReviews', 'averageRating'));
     }
 
@@ -146,7 +160,7 @@ class BookController extends BaseController
                 'field' => 'required|string',
                 'genre' => 'nullable|array',
                 'genre.*' => 'exists:genres,id',
-                'value' => 'nullable|string|max:1000', // for other fields
+                'value' => 'nullable|string|max:1000',
             ]);
 
             $book = Book::findOrFail($id);
@@ -159,7 +173,7 @@ class BookController extends BaseController
                 'Price' => 'price',
                 'Stock' => 'stock',
                 'ISBN' => 'isbn',
-                'Genre' => 'genre', // special case handled below
+                'Genre' => 'genre',
                 'Description' => 'description',
             ];
 
@@ -169,8 +183,9 @@ class BookController extends BaseController
 
             $dbField = $fieldMap[$field];
 
+            DB::beginTransaction();
+
             if ($dbField === 'genre') {
-                // Use pivot table syncing
                 if ($request->has('genre') && count($request->genre) > 0) {
                     $book->genres()->sync($request->genre);
                 }
@@ -179,10 +194,25 @@ class BookController extends BaseController
                 $book->save();
             }
 
+            $result = app(EmbedBooksToQdrantService::class)->upsert($book);
+
+            if (!$result) {
+                DB::rollBack();
+                Alert::error('Qdrant Error', 'Book not updated. Failed to sync with vector database.');
+                return redirect()->back();
+            }
+
+            DB::commit();
+
             Alert::success('Book updated!', "$field updated successfully.");
             return redirect()->back();
         } catch (ValidationException $e) {
             Alert::error('Submission Error', $e->validator->errors()->first());
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Book update error: " . $e->getMessage());
+            Alert::error('Error', 'Something went wrong while updating the book.');
             return redirect()->back();
         }
     }
@@ -223,11 +253,25 @@ class BookController extends BaseController
 
     public function delete($id)
     {
-        $book = Book::findOrFail($id);
-        $book->delete();
+        try {
+            $book = Book::findOrFail($id);
 
-        Alert::success('Deleted!', 'Book has been moved to trash.');
-        return redirect('books-list');
+            $qdrantSuccess = app(QdrantService::class)->deleteVector('books', $book->id);
+
+            if (!$qdrantSuccess) {
+                Alert::error('Qdrant Error', 'Book not deleted. Failed to remove from vector database.');
+                return redirect('books-list');
+            }
+
+            $book->delete();
+
+            Alert::success('Deleted!', 'Book has been moved to trash.');
+            return redirect('books-list');
+        } catch (\Exception $e) {
+            Log::error("Book delete error: " . $e->getMessage());
+            Alert::error('Error', 'Something went wrong while deleting the book.');
+            return redirect('books-list');
+        }
     }
 
 

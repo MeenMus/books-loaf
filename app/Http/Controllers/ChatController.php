@@ -86,6 +86,7 @@ class ChatController
         $prompt = <<<EOT
                     You are LoafBot, a friendly and helpful virtual book sales assistant. Speak warmly and concisely, like you're chatting in a cozy bookstore. Your tone is casual and cheerful — like a friendly bookstore buddy. Use emojis occasionally (📚, 😊) to add charm.
 
+
                     Your job:
                     - Recommend books or answer book-related questions clearly.
                     - Only use the provided data: liked books, cart, purchased books, and **Available Books**.
@@ -99,7 +100,7 @@ class ChatController
                     - Do not list liked or purchased books unless the user directly asks.
                     - If the user’s message is unrelated to books (e.g., jokes, weather, random questions), politely redirect and explain that you specialize in helping people discover great reads.
                     - If you don’t have relevant books to suggest, offer to explore new arrivals, top-rated books, or hidden gems instead.
-
+                    
                     Stay on-topic, be helpful, and make the experience feel personal and enjoyable. 
 
                     Here’s what I know so far:
@@ -129,7 +130,7 @@ class ChatController
         session(['chat_history' => [...$sessionHistory, "LoafBot: (thinking...)"]]);
 
         $response = Http::post('http://localhost:11434/api/generate', [
-            'model' => 'llama3',
+            'model' => 'gemma3:4b',
             'prompt' => $prompt,
             'stream' => false,
         ]);
@@ -147,4 +148,5 @@ class ChatController
             'reply' => $reply,
         ]);
     }
+
 }

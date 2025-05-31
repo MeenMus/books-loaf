@@ -123,25 +123,75 @@
                             </div>
                             <div class="small">Quantity: {{ $item->quantity }}</div>
                             <!-- Review Button -->
-                            <button type="button" class="btn btn-sm btn-outline-primary mt-1" data-bs-toggle="modal" data-bs-target="#reviewModal-{{ $item->book->id }}">
-                              Write a Review
-                            </button>
+                            <!-- Trigger Button -->
+                            <div class="position-relative d-inline-block">
+
+                              @php
+                              $hasReviewed = $item->book->reviews->where('user_id', auth()->id())->isNotEmpty();
+                              @endphp
+
+                              <button
+                                type="button"
+                                onclick="toggleReviewDropdown({{ $item->book->id }})"
+                                class="d-block fw-medium text-capitalize mt-2"
+                                style="background: none; border: none; padding: 0px; color: inherit; font: inherit; cursor: pointer;"
+                                onmouseover="if (!this.disabled) this.style.color = 'var(--primary-color)'"
+                                onmouseout="if (!this.disabled) this.style.color = 'inherit'"
+                                @if($hasReviewed)
+                                disabled
+                                title="You already submitted a review"
+                                @endif>
+                                Review
+                              </button>
+
+                              <!-- Dropdown-style Review Form -->
+                              <div id="reviewDropdown-{{ $item->book->id }}" class="card shadow p-3 position-absolute z-3 " style="top: 110%; right: 0; min-width: 400px; display: none;">
+                                <form method="POST" action="{{ route('review-update') }}">
+                                  @csrf
+                                  <input type="hidden" name="book_id" value="{{ $item->book->id }}">
+
+                                  <div class="mb-2">
+                                    <label class="form-label">Your Rating:</label>
+                                    <div class="d-flex gap-4">
+                                      @for ($i = 1; $i <= 5; $i++)
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" value="{{ $i }}" id="rating{{ $item->book->id }}-{{ $i }}" required>
+                                        <label class="form-check-label" for="rating{{ $item->book->id }}-{{ $i }}">{{ $i }}★</label>
+                                    </div>
+                                    @endfor
+                                  </div>
+                              </div>
+
+                              <hr>
+                              <div class="mb-3">
+                                <label class="form-label">Your Review:</label>
+                                <textarea name="review" class="form-control" rows="3" placeholder="Write your thoughts here..." required></textarea>
+                              </div>
+
+                              <button type="submit" class="btn btn-primary btn-sm float-end px-2 py-2" style="font-size: 0.95rem; line-height: 1;">Submit</button>
+
+                              </form>
+                            </div>
                           </div>
-                        </div>
-                        <div class="text-end text-primary fw-medium">
-                          RM{{ number_format($item->price, 2) }}
+
+
+
                         </div>
                       </div>
-                      @endforeach
+                      <div class="text-end text-primary fw-medium">
+                        RM{{ number_format($item->price, 2) }}
+                      </div>
                     </div>
+                    @endforeach
                   </div>
                 </div>
               </div>
             </div>
-            @endforeach
-            <div class="mt-4">
-              {{ $orders->onEachSide(1)->links('pagination::bootstrap-5') }}
-            </div>
+          </div>
+          @endforeach
+          <div class="mt-4">
+            {{ $orders->onEachSide(1)->links('pagination::bootstrap-5') }}
+          </div>
 
 
         </main>
@@ -168,48 +218,6 @@
     </div>
   </div>
 
-
-  <!-- Review Modal -->
-<div class="modal fade" id="reviewModal-{{ $item->book->id }}" tabindex="-1" aria-labelledby="reviewModalLabel-{{ $item->book->id }}" aria-hidden="true">
-  <div class="modal-dialog">
-    <form method="POST" action="{{ route('review-update') }}">
-      @csrf
-      <input type="hidden" name="book_id" value="{{ $item->book->id }}">
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="reviewModalLabel-{{ $item->book->id }}">Review: {{ $item->book->title }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Your Rating</label>
-            <div class="d-flex gap-1">
-              @for ($i = 1; $i <= 5; $i++)
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="rating" value="{{ $i }}" id="rating{{ $item->book->id }}-{{ $i }}" required>
-                  <label class="form-check-label" for="rating{{ $item->book->id }}-{{ $i }}">
-                    {{ $i }}★
-                  </label>
-                </div>
-              @endfor
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Your Review</label>
-            <textarea name="review" class="form-control" rows="4" placeholder="Write your thoughts here..." required></textarea>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit Review</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 
 
   @include('layouts.footer')
@@ -284,6 +292,31 @@
       }
     });
   </script>
+
+
+  <script>
+    function toggleReviewDropdown(bookId) {
+      const el = document.getElementById(`reviewDropdown-${bookId}`);
+
+      // Hide other open dropdowns (optional)
+      document.querySelectorAll('[id^="reviewDropdown-"]').forEach(dropdown => {
+        if (dropdown.id !== `reviewDropdown-${bookId}`) dropdown.style.display = 'none';
+      });
+
+      // Toggle visibility
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Optional: Close on click outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.position-relative')) {
+        document.querySelectorAll('[id^="reviewDropdown-"]').forEach(dropdown => {
+          dropdown.style.display = 'none';
+        });
+      }
+    });
+  </script>
+
 </body>
 
 

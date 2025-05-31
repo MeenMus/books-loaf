@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Customer\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\Customer\BuyBookController;
 use App\Http\Controllers\Customer\CartController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Customer\ProfileController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -78,7 +80,6 @@ Route::get('/about', [HomeController::class, 'showAbout']);
 
 Route::post('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
 
-/* ---- */
 
 
 

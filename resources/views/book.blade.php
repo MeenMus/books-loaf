@@ -10,35 +10,40 @@
   <style>
     /* Star Ratings */
     .average-rating {
-        font-size: 1.1rem;
+      font-size: 1.1rem;
     }
 
     .star {
-        width: 20px;
-        height: 20px;
-        margin-right: 2px;
-        display: inline-block; /* Ensures stars align horizontally */
+      width: 20px;
+      height: 20px;
+      margin-right: 2px;
+      display: inline-block;
+      /* Ensures stars align horizontally */
     }
 
     .star-fill {
-        fill: #ffc107; /* Gold for full stars */
+      fill: #ffc107;
+      /* Gold for full stars */
     }
 
     .star-empty {
-        fill: #e4e5e9; /* Light gray for empty stars */
+      fill: #e4e5e9;
+      /* Light gray for empty stars */
     }
 
     .star-half {
-        fill: #ffc107; /* Gold for half stars (same as full) */
-        opacity: 0.7;  /* Optional: Makes half-stars slightly lighter */
+      fill: #ffc107;
+      /* Gold for half stars (same as full) */
+      opacity: 0.7;
+      /* Optional: Makes half-stars slightly lighter */
     }
 
     .review-summary {
-        border: 2px solid #eee;
-        padding: 15px;
-        border-radius: 8px;
+      border: 2px solid #eee;
+      padding: 15px;
+      border-radius: 8px;
     }
-</style>
+  </style>
 
   <section class="single-product padding-large">
     <div class="container">
@@ -164,7 +169,7 @@
             <div class="nav nav-tabs d-flex justify-content-center py-3" id="nav-tab" role="tablist">
               <button class="nav-link text-capitalize active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
               <button class="nav-link text-capitalize" id="nav-shipping-tab" data-bs-toggle="tab" data-bs-target="#nav-shipping" type="button" role="tab" aria-controls="nav-shipping" aria-selected="false">Shipping & Return</button>
-              <button class="nav-link text-capitalize" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">  Reviews ({{ $bookReviews->count() }})</button>
+              <button class="nav-link text-capitalize" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false"> Reviews ({{ $bookReviews->count() }})</button>
             </div>
           </nav>
           <div class="tab-content border-bottom py-4" id="nav-tabContent">
@@ -212,88 +217,88 @@
                 <li>Tracking information will be provided via email once your order is shipped.</li>
               </p>
             </div>
-          <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-    <!-- ======= AVERAGE RATING & TOTAL REVIEWS SUMMARY ======= -->
-    <div class="review-summary mb-4 p-3 bg-light rounded">
-        <div class="d-flex align-items-center gap-3">
-            <!-- Average Stars -->
-            <div class="average-rating d-flex align-items-center">
-                @if($bookReviews->isNotEmpty())
+            <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+              <!-- ======= AVERAGE RATING & TOTAL REVIEWS SUMMARY ======= -->
+              <div class="review-summary mb-4 p-3  rounded">
+                <div class="d-flex align-items-center gap-3">
+                  <!-- Average Stars -->
+                  <div class="average-rating d-flex align-items-center">
+                    @if($bookReviews->isNotEmpty())
                     <span class="fs-4 fw-bold me-2">{{ $averageRating }}</span>
                     <div class="rating text-warning">
-    @for ($i = 1; $i <= 5; $i++)
-        @if($averageRating >= $i)
-            <!-- Full Star -->
-            <svg class="star star-fill" width="20" height="20">
-                <use xlink:href="#star-fill"></use>
-            </svg>
-        @elseif($averageRating > ($i - 1) && $averageRating < $i)
-            <!-- Half Star -->
-            <svg class="star star-half" width="20" height="20">
-                <use xlink:href="#star-half"></use>
-            </svg>
-        @else
-            <!-- Empty Star -->
-            <svg class="star star-empty" width="20" height="20">
-                <use xlink:href="#star-empty"></use>
-            </svg>
-        @endif
-    @endfor
-</div>
-                @else
-                    <span class="text-muted">No ratings yet</span>
-                @endif
-            </div>
-            
-            <!-- Total Reviews Count -->
-            <div class="total-reviews">
-                <span class="text-muted">
-                    {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
-                </span>
-            </div>
-        </div>
-    </div>
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if($averageRating>= $i)
+                        <!-- Full Star -->
+                        <svg class="star star-fill" width="20" height="20">
+                          <use xlink:href="#star-fill"></use>
+                        </svg>
+                        @elseif($averageRating > ($i - 1) && $averageRating < $i)
+                          <!-- Half Star -->
+                          <svg class="star star-half" width="20" height="20">
+                            <use xlink:href="#star-half"></use>
+                          </svg>
+                          @else
+                          <!-- Empty Star -->
+                          <svg class="star star-empty" width="20" height="20">
+                            <use xlink:href="#star-empty"></use>
+                          </svg>
+                          @endif
+                          @endfor
+                    </div>
+                    @else
+                    <span class="">No ratings yet</span>
+                    @endif
+                  </div>
 
-    <!-- ======= INDIVIDUAL USER REVIEWS ======= -->
-    <div class="review-box review-style d-flex gap-3 flex-column">
-        @forelse($bookReviews as $review)
-            <div class="review-item d-flex">
-                <div class="review-content mb-4">
+                  <!-- Total Reviews Count -->
+                  <div class="total-reviews">
+                    <span class="">
+                      {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ======= INDIVIDUAL USER REVIEWS ======= -->
+              <div class="review-box review-style d-flex gap-3 flex-column">
+                @forelse($bookReviews as $review)
+                <div class="review-item d-flex">
+                  <div class="review-content mb-4">
                     <!-- User's Star Rating -->
                     <div class="rating text-primary mb-1">
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if($i <= $review->rating)
-                                <svg class="star star-fill" width="16" height="16">
-                                    <use xlink:href="#star-fill"></use>
-                                </svg>
-                            @else
-                                <svg class="star star-empty" width="16" height="16">
-                                    <use xlink:href="#star-empty"></use>
-                                </svg>
-                            @endif
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if($i <=$review->rating)
+                        <svg class="star star-fill" width="16" height="16">
+                          <use xlink:href="#star-fill"></use>
+                        </svg>
+                        @else
+                        <svg class="star star-empty" width="16" height="16">
+                          <use xlink:href="#star-empty"></use>
+                        </svg>
+                        @endif
                         @endfor
                     </div>
-                    
+
                     <!-- User Name & Review Date -->
                     <div class="review-header">
-                        <span class="author-name fw-medium">{{ $review->user->name }}</span>
-                        <span class="review-date">- {{ $review->created_at->format('d/m/Y') }}</span>
+                      <span class="author-name fw-medium">{{ $review->user->name }}</span>
+                      <span class="review-date">- {{ $review->created_at->format('d/m/Y') }}</span>
                     </div>
-                    
+
                     <!-- User's Review Text -->
                     <p class="mb-0">{{ $review->review }}</p>
+                  </div>
                 </div>
+                @empty
+                <p class="">No reviews yet. Be the first to review!</p>
+                @endforelse
+              </div>
             </div>
-        @empty
-            <p class="text-muted">No reviews yet. Be the first to review!</p>
-        @endforelse
-    </div>
-</div>
-</div>
-</div>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   </section>
 
@@ -361,7 +366,7 @@
 
   <script>
     let quantity = 1;
-    const maxStock = {{$book->stock}};
+    const maxStock = {{ $book->stock}};
 
     // Handle both inputs safely
     const displayInput = document.getElementById('quantity') || document.getElementById('quantityDisplay');
