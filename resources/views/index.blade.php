@@ -36,6 +36,28 @@
     background-color: #f8f9fa !important;
     transform: scale(1.05);
   }
+
+  /* Force star colors in all contexts */
+.star-fill {
+    fill: #ffc107 !important; /* Gold - override any other fills */
+    color: #ffc107 !important; /* For currentColor inheritance */
+}
+
+.star-empty {
+    fill: #e4e5e9 !important; /* Light gray */
+    color: #e4e5e9 !important;
+}
+
+.star-half {
+    fill: #ffc107 !important;
+    color: #ffc107 !important;
+    opacity: 0.7;
+}
+
+/* Ensure rating containers force color */
+.rating.text-warning {
+    color: #ffc107 !important;
+}
 }
 </style> 
 
@@ -197,19 +219,19 @@
                 <p class="my-2 me-2 fs-6 text-black-50">Teme Abdullah</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
+                  <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                 </div>
@@ -240,19 +262,19 @@
                 <p class="my-2 me-2 fs-6 text-black-50">Emily Henry</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                 </div>
@@ -284,16 +306,16 @@
                 <p class="my-2 me-2 fs-6 text-black-50">NF Afrina</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                 </div>
@@ -325,16 +347,16 @@
                 <p class="my-2 me-2 fs-6 text-black-50">Violet Fasha</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                 </div>
@@ -366,16 +388,16 @@
                 <p class="my-2 me-2 fs-6 text-black-50">Thomas Erikson</p>
 
                 <div class="rating text-warning d-flex align-items-center d-flex align-items-center">
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                   <br>
@@ -408,19 +430,19 @@
                 <p class="my-2 me-2 fs-6 text-black-50">Matt Haig</p>
 
                 <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
-                  <svg class="star star-fill">
+                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                     <use xlink:href="#star-fill"></use>
                   </svg>
                 </div>
@@ -506,19 +528,19 @@
                     <p class="my-2 me-2 fs-6 text-black-50">Huda Najwa</p>
 
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -534,19 +556,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Pilkey, Dav</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -563,19 +585,19 @@
                     <p class="my-2 me-2 fs-6 text-black-50">Liang, Ann</p>
 
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -599,19 +621,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Lenn Liu</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -627,19 +649,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -655,19 +677,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Cheeming Boeyr</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -691,19 +713,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Mafi, Tahereh</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -719,19 +741,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Huang, Ana</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -747,19 +769,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Bernardine Evaristo</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -783,19 +805,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Yarros, Rebecca</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -812,19 +834,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Holly Jackson</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -841,19 +863,19 @@
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Suzanne Collins</p>
                     <div class="rating text-warning d-flex align-items-center">
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
-                      <svg class="star star-fill">
+                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                         <use xlink:href="#star-fill"></use>
                       </svg>
                     </div>
@@ -985,19 +1007,19 @@
             <div class="card position-relative text-left p-5 border rounded-3">
               <blockquote>"Pengalaman membeli buku di BooksLoaf memang terbaik! Proses pembelian sangat mudah dan penghantaran pun cepat. Buku sampai dalam keadaan sempurna dan dibalut dengan kemas. Saya juga suka pilihan buku yang ditawarkan – dari novel, buku motivasi, hingga bahan rujukan pelajaran. Pasti akan beli lagi lepas ni. Terima kasih BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
@@ -1008,13 +1030,13 @@
             <div class="card position-relative text-left p-5 border rounded-3">
               <blockquote>"Shopping for books at BooksLoaf was an amazing experience! The ordering process was smooth, and delivery was fast. The books arrived in perfect condition and were well-packaged. I also love the variety of books available – from novels and self-help to academic references. Definitely coming back for more. Thank you, BooksLoaf!"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
@@ -1025,16 +1047,16 @@
             <div class="card position-relative text-left p-5 border rounded-3">
               <blockquote>"BooksLoaf 帮我找到很多实惠的教材。送货速度非常快，我在开学前就收到了全部书籍。非常推荐给学生！"</blockquote>
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
@@ -1045,19 +1067,19 @@
             <div class="card position-relative text-left p-5 border rounded-3">
               <blockquote>“我喜欢在 BooksLoaf 浏览最新小说。他们的推荐总是很贴合我的口味，购买流程也很方便”</blockquote>
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>
@@ -1068,19 +1090,19 @@
             <div class="card position-relative text-left p-5 border rounded-3">
               <blockquote>“I love browsing the latest novels on BooksLoaf. The recommendations are always spot-on and the checkout process is simple.”</blockquote>
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
-                <svg class="star star-fill">
+               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
                   <use xlink:href="#star-fill"></use>
                 </svg>
               </div>

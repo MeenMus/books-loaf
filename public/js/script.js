@@ -131,6 +131,15 @@
           nextEl: ".product-slider-button-next",
           prevEl: ".product-slider-button-prev",
         },
+        // Add this to control zIndex of navigation elements
+  navigation: {
+    nextEl: ".product-slider-button-next",
+    prevEl: ".product-slider-button-prev",
+    disabledClass: 'swiper-button-disabled',
+    hiddenClass: 'swiper-button-hidden',
+    lockClass: 'swiper-button-lock',
+    navigationDisabledClass: 'swiper-navigation-disabled'
+  },
         breakpoints: {
           0: {
             slidesPerView: 1,
@@ -174,23 +183,59 @@
       preloader.classList.add("hide-preloader");
     });
 
-  const categorySwiper = new Swiper('.category-swiper', {
-    slidesPerView: 2,
-    spaceBetween: 20,
-    navigation: {
-    nextEl: '.product-slider-button-next', // Fixed
-    prevEl: '.product-slider-button-prev', // Fixed
+  // const categorySwiper = new Swiper('.category-swiper', {
+  //   slidesPerView: 2,
+  //   spaceBetween: 20,
+  //   navigation: {
+  //   nextEl: '.product-slider-button-next', // Fixed
+  //   prevEl: '.product-slider-button-prev', // Fixed
+  // },
+  //   autoplay: {
+  //   delay: 3000, // Slide changes every 3 seconds
+  //   disableOnInteraction: false, // Keeps autoplay after user interaction
+  // },
+  //   breakpoints: {
+  //     576: { slidesPerView: 2 },
+  //     768: { slidesPerView: 3 },
+  //     992: { slidesPerView: 4 },
+  //     1200: { slidesPerView: 5 }
+  //   }
+  // });
+    const categorySwiper = new Swiper('.category-swiper', {
+  slidesPerView: 2,
+  spaceBetween: 20,
+  navigation: {
+    nextEl: '.product-slider-button-next',
+    prevEl: '.product-slider-button-prev',
   },
-    autoplay: {
-    delay: 3000, // Slide changes every 3 seconds
-    disableOnInteraction: false, // Keeps autoplay after user interaction
-  },
-    breakpoints: {
-      576: { slidesPerView: 2 },
-      768: { slidesPerView: 3 },
-      992: { slidesPerView: 4 },
-      1200: { slidesPerView: 5 }
+  // Add these parameters to prevent z-index issues
+  on: {
+    init: function() {
+      // Lower z-index of navigation elements
+      document.querySelectorAll('.product-slider-button-next, .product-slider-button-prev')
+        .forEach(el => el.style.zIndex = '100');
     }
-  });
+  }
+});
 
+const productSwiper = new Swiper(".product-swiper", {
+  spaceBetween: 20,
+  navigation: {
+    nextEl: ".product-slider-button-next",
+    prevEl: ".product-slider-button-prev",
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    660: { slidesPerView: 3 },
+    980: { slidesPerView: 4 },
+    1500: { slidesPerView: 5 }
+  },
+  // Same z-index control
+  on: {
+    init: function() {
+      document.querySelectorAll('.product-slider-button-next, .product-slider-button-prev')
+        .forEach(el => el.style.zIndex = '100');
+    }
+  }
+});
 })(jQuery);
