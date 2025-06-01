@@ -139,6 +139,16 @@ class PaymentController extends Controller
                     'quantity' => $item->quantity,
                     'price' => $item->book->price,
                 ]);
+
+                // Reduce book stock
+                $book = $item->book;
+                if ($book->stock >= $item->quantity) {
+                    $book->stock -= $item->quantity;
+                    $book->save();
+                } else {
+                    throw new \Exception("Insufficient stock for book: {$book->title}");
+                }
+
             }
 
             $order->payment()->create([

@@ -141,7 +141,7 @@
                                 disabled
                                 title="You already submitted a review"
                                 @endif>
-                                Review
+                                Add Review
                               </button>
 
                               <!-- Dropdown-style Review Form -->

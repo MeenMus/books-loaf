@@ -62,7 +62,7 @@
               </div>
             </div>
             @empty
-            <p>No books found in this genre.</p>
+            <p>No books were found!.</p>
             @endforelse
           </div>
           <div class="mt-auto">

@@ -93,61 +93,60 @@
 
 
     .custom-navbar li a {
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: inherit;
-    position: relative;
-}
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: inherit;
+        position: relative;
+    }
 
-/* Dropdown styles */
-.custom-navbar .has-dropdown {
-    position: relative;
-}
+    /* Dropdown styles */
+    .custom-navbar .has-dropdown {
+        position: relative;
+    }
 
-.custom-navbar .has-dropdown .dropdown {
-    display: none;
-    position: absolute;
-    top: 61px;
-    left: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    padding: 10px 0;
-    flex-direction: column;
-    z-index: 10;
-    min-width: 150px;
-}
+    .custom-navbar .has-dropdown .dropdown {
+        display: none;
+        position: absolute;
+        top: 61px;
+        left: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        flex-direction: column;
+        z-index: 10;
+        min-width: 150px;
+    }
 
-.custom-navbar .has-dropdown .dropdown li {
-    background: none;
-    border-radius: 0;
-    box-shadow: none;
-    width: 100%;
-    height: auto;
-    padding: 5px 20px;
-    transition: background 0.3s;
-}
+    .custom-navbar .has-dropdown .dropdown li {
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        width: 100%;
+        height: auto;
+        padding: 5px 20px;
+        transition: background 0.3s;
+    }
 
-.custom-navbar .has-dropdown .dropdown li:hover {
-    background: #f4f4f4;
-}
+    .custom-navbar .has-dropdown .dropdown li:hover {
+        background: #f4f4f4;
+    }
 
-.custom-navbar .has-dropdown .dropdown li a {
-    color: #333;
-    font-size: 0.9em;
-    text-align: left;
-    justify-content: flex-start;
-}
+    .custom-navbar .has-dropdown .dropdown li a {
+        color: #333;
+        font-size: 0.9em;
+        text-align: left;
+        justify-content: flex-start;
+    }
 
 
-.custom-navbar .has-dropdown.show-dropdown .dropdown {
-    display: flex;
-}
-
+    .custom-navbar .has-dropdown.show-dropdown .dropdown {
+        display: flex;
+    }
 </style>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -258,37 +257,18 @@
 <div class="search-popup">
     <div class="search-popup-container">
 
-        <form role="search" method="get" class="search-form" action="#">
-            <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="s" />
-            <button type="submit" class="search-submit"><svg class="search">
-                    <use xlink:href="#search"></use>
-                </svg></button>
+        <form method="GET" action="{{ route('shop', ['id' => $genre->id ?? 'all']) }}" class="search-form">
+            <input type="search" name="search" id="search-form" class="search-field"
+                placeholder="Search books..." value="{{ request('search') }}">
+            <button type="submit" class="search-submit">
+                <svg class="search"><use xlink:href="#search"></use></svg>
+            </button>
         </form>
 
         <h5 class="cat-list-title">Browse Categories</h5>
 
-        <ul class="cat-list">
-            <li class="cat-list-item">
-                <a href="#" title="Romance">Romance</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Thriller">Thriller</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Sci-fi">Sci-fi</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Cooking">Cooking</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Health">Health</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Lifestyle">Lifestyle</a>
-            </li>
-            <li class="cat-list-item">
-                <a href="#" title="Fiction">Fiction</a>
-            </li>
+        <ul class="cat-list" id="random-genre-list">
+            
         </ul>
 
     </div>
@@ -500,25 +480,28 @@
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const categoryItem = document.querySelector(".custom-navbar .has-dropdown");
-    const toggleLink = categoryItem.querySelector("a.nav-link");
+    document.addEventListener("DOMContentLoaded", function() {
+        const categoryItem = document.querySelector(".custom-navbar .has-dropdown");
+        const toggleLink = categoryItem.querySelector("a.nav-link");
 
-    toggleLink.addEventListener("click", function (e) {
-        e.preventDefault(); // prevent jump only for toggle link
-        categoryItem.classList.toggle("show-dropdown");
-    });
+        toggleLink.addEventListener("click", function(e) {
+            e.preventDefault(); // prevent jump only for toggle link
+            categoryItem.classList.toggle("show-dropdown");
+        });
 
-    // Close dropdown when mouse leaves the entire dropdown area
-    categoryItem.addEventListener("mouseleave", function () {
-        categoryItem.classList.remove("show-dropdown");
-    });
-
-    // Optional: close dropdown if clicking outside
-    document.addEventListener("click", function (e) {
-        if (!categoryItem.contains(e.target)) {
+        // Close dropdown when mouse leaves the entire dropdown area
+        categoryItem.addEventListener("mouseleave", function() {
             categoryItem.classList.remove("show-dropdown");
-        }
+        });
+
+        // Optional: close dropdown if clicking outside
+        document.addEventListener("click", function(e) {
+            if (!categoryItem.contains(e.target)) {
+                categoryItem.classList.remove("show-dropdown");
+            }
+        });
     });
-});
 </script>
+
+
+
