@@ -1,4 +1,12 @@
 <style>
+
+  #chatToggleBtn {
+  position: fixed;       /* fix it relative to viewport */
+  bottom: 20px;          /* 20px from bottom */
+  right: 20px;           /* 20px from right */
+  z-index: 1000;         /* make sure it’s on top */
+}
+
     /* Your existing chat container styles */
   .chat-container {
     position: fixed;
@@ -15,7 +23,7 @@
   height: 60px !important;
   padding: 0 !important;
   border-radius: 50% !important; /* Makes it perfectly round */
-  background: linear-gradient(135deg, #4361ee, #3a0ca3) !important;
+  background: 	#e6b07e;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +78,7 @@
 
   /* Chat Header */
   .chat-header {
-    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    background: linear-gradient(135deg, #f5cba7, #f8d3b0);
     color: white;
     padding: 16px;
     display: flex;
@@ -131,12 +139,12 @@
     border-radius: 18px;
     font-size: 14px;
     line-height: 1.4;
-    word-wrap: break-word;
+    word-wrap: break-word; 
   }
 
   .user-message .message-bubble {
-    background: #4361ee;
-    color: white;
+    background: #f5cba7;
+    color: black;
     border-bottom-right-radius: 4px;
   }
 
@@ -167,11 +175,11 @@
   }
 
   .message-input:focus {
-    border-color: #4361ee;
+    border-color: 	#e6b07e;
   }
 
   .send-btn {
-    background: #4361ee;
+    background: 	#e6b07e;
     color: white;
     border: none;
     border-radius: 50%;
@@ -186,7 +194,7 @@
   }
 
   .send-btn:hover {
-    background: #3a0ca3;
+    background: #d99a64;
   }
 
   /* Typing Indicator */
@@ -266,14 +274,14 @@
 <div class="chat-container">
   <!-- Toggle Button -->
   <button id="chatToggleBtn" class="chat-toggle-btn">
-  <img src="logo-single.png" alt="Chat Icon" class="chat-icon">
+  <img src="{{ asset('logo-single.png') }}" alt="Chat Icon" class="chat-icon">
 </button>
 
   <!-- Chat Window -->
   <div id="chatPopup" class="chat-window">
     <!-- Chat Header -->
     <div class="chat-header">
-      <div class="chat-title">AI Assistant</div>
+      <div class="chat-title text-dark">LoafBot Assistant</div>
       <button id="closeChat" class="close-btn">&times;</button>
     </div>
 
@@ -284,7 +292,7 @@
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" 
              alt="AI Assistant" class="message-avatar">
         <div class="message-bubble">
-          Hello! I'm your AI assistant. How can I help you today?
+          Hello! I'm LoafBot. How can I help you today?
         </div>
       </div>
       
@@ -491,3 +499,4 @@
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 </script>
+

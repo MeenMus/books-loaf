@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Customer\PaymentController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Customer\ChatController;
 use App\Http\Controllers\Customer\ShopController;
 use App\Http\Controllers\Customer\BuyBookController;
 use App\Http\Controllers\Customer\CartController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\Customer\LikeController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\BookReviewController;
 use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\Customer\SearchController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -45,9 +46,9 @@ Route::get('/single-product', [HomeController::class, 'showBook']);
 Route::get('/single-post', [HomeController::class, 'showPost']);
 
 
-Route::get('/shop/{id}', [ShopController::class, 'index']);
+Route::get('/shop/{id}', [ShopController::class, 'index'])->name('shop');
 
-Route::get('/book/{id}', [BuyBookController::class, 'index']);
+Route::get('/book/{id}', [BuyBookController::class, 'index'])->name('book');
 
 Route::post('/cart-add/{id}', [CartController::class, 'addCart'])->name('cart-add')->middleware('auth');
 Route::post('/like/{book}', [LikeController::class, 'toggleLike'])->name('like')->middleware('auth');
@@ -80,7 +81,8 @@ Route::get('/about', [HomeController::class, 'showAbout']);
 
 Route::post('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
 
-
+Route::get('/random-genres', [ShopController::class, 'randomGenres'])->name('random-genres');
+Route::get('/search-books', [ShopController::class, 'searchBooks'])->name('search-books');
 
 
 
