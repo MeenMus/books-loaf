@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\SupportTicketController;
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,7 @@ Route::get('/checkout-cancel', [PaymentController::class, 'stripeCancel'])->name
 
 
 Route::get('/contact', [HomeController::class, 'showContact']);
+Route::post('/support-ticket', [HomeController::class, 'store'])->name('support.store');
 Route::get('/blog', [HomeController::class, 'showBlog']);
 Route::get('/about', [HomeController::class, 'showAbout']);
 
@@ -113,10 +115,12 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/orders-update/{order}', [AdminOrderController::class, 'orderUpdate'])->name('orders-update');
     Route::get('/orders-receipt/{order}', [AdminOrderController::class, 'printReceipt'])->name('orders-receipt');
 
-
+    /* MANAGE TICKETS */
+    Route::get('/admin/support-tickets', [SupportTicketController::class, 'index'])->name('support_tickets');
+    Route::get('/admin/showSupport-tickets/{id}', [SupportTicketController::class, 'showSupportTickets'])->name('support_tickets_show');
+    Route::post('/admin/support-tickets/{id}', [SupportTicketController::class, 'update'])->name('supportTickets.update');
 
     /* MANAGE USERS */
-
     Route::get('/users-list', [UserController::class, 'userList'])->name('users-list');
     Route::get('/users-page/{id}', [UserController::class, 'userPage'])->name('users-page');
     Route::post('/users-profile-update/{id}', [UserController::class, 'userProfileUpdate'])->name('users-profile-update');

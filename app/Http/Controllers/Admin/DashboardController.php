@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\BookReview;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Payment;
@@ -43,11 +44,12 @@ class DashboardController extends BaseController
         $totalGenres = Genre::count();
         $totalOrders = Order::count();
         $totalUsers = User::count();
+        $totalReviews = BookReview::count();
         $totalUnitsSold = OrderItem::count();
         $totalRevenue = OrderItem::sum('price');
         $totalOrdersPrice = Order::sum('total_price');
         $unreadAlerts = SupportTicket::where('status', 'open')->count();
-
+           
         
          // Johor Bahru coordinates
             $latitude = 1.4927;
@@ -122,8 +124,6 @@ class DashboardController extends BaseController
         ->orderBy('date')
         ->get();
 
-
-
         // Extract unique dates sorted
         $dates = $salesData->pluck('date')->unique()->values()->all();
             
@@ -139,11 +139,9 @@ class DashboardController extends BaseController
             $offlineSales[] = $offline ? (float) $offline->total : 0;
         }
 
-
         $monthlyLabels = [];
         $monthlyOnlineSales = [];
         $monthlyOfflineSales = [];
-
 
         $monthlyData = Order::selectRaw("
             DATE_FORMAT(created_at, '%Y-%m') as month,
@@ -208,6 +206,18 @@ class DashboardController extends BaseController
         ->limit(10)
         ->get();
 
+         // or top-rated books
+        Book::withAvg('reviews', 'rating')->take(5)->get();    
+
+        //Rating Books
+        $averageRating = BookReview::avg('rating');
+            
+        // Get top 5 rated books
+        $booksWithRatings = Book::withAvg('reviews', 'rating')
+            ->orderByDesc('reviews_avg_rating')
+            ->take(5)
+            ->get();
+
         return view('admin.dashboard', compact(
             'adminName',
             'totalBooks',
@@ -244,7 +254,11 @@ class DashboardController extends BaseController
             'cartConversionRate',
             'completedOrders',
 
-            'topOrders'
+            'topOrders',
+
+            'totalReviews',
+            'averageRating',
+            'booksWithRatings'    
         ));
     }
 }

@@ -43,5 +43,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="/admin/support-tickets" class="nav-link {{ request()->is('admin/support-tickets') ? 'active' : '' }}">
+             <i class="icon-paper menu-icon"></i> 
+                <span class="menu-title"> Tickets</span>
+            </a>
+        </li>
+
+
     </ul>
 </nav>

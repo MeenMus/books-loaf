@@ -20,19 +20,20 @@
 
   /* Color coding based on percentage */
   .progress-bar-low {
-    background-color: #e74c3c; /* red */
+    background-color: #e74c3c;
+    /* red */
   }
 
   .progress-bar-medium {
-    background-color: #f1c40f; /* yellow */
+    background-color: #f1c40f;
+    /* yellow */
     color: black;
   }
 
   .progress-bar-high {
-    background-color: #2ecc71; /* green */
+    background-color: #2ecc71;
+    /* green */
   }
-
-  
 </style>
 
 
@@ -41,23 +42,23 @@
     <div class="row">
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h3>
-       <h6 class="font-weight-normal mb-0">
-    All systems are running smoothly! You have 
-    <span class="text-primary">{{ $unreadAlerts }} unread alert{{ $unreadAlerts != 1 ? 's' : '' }}!</span>
-</h6>
+        <h6 class="font-weight-normal mb-0">
+          All systems are running smoothly! You have
+          <span class="text-primary">{{ $unreadAlerts }} unread alert{{ $unreadAlerts != 1 ? 's' : '' }}!</span>
+        </h6>
 
       </div>
       <div class="col-12 col-xl-4">
         <div class="justify-content-end d-flex">
           <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
             <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-             <i class="mdi mdi-calendar"></i> Today ({{ \Carbon\Carbon::now()->format('d M Y') }})
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-              <a class="dropdown-item" href="#">January - March</a>
-              <a class="dropdown-item" href="#">March - June</a>
-              <a class="dropdown-item" href="#">June - August</a>
-              <a class="dropdown-item" href="#">August - November</a>
-            </div>
+              <i class="mdi mdi-calendar"></i> Today ({{ \Carbon\Carbon::now()->format('d M Y') }})
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                <a class="dropdown-item" href="#">January - March</a>
+                <a class="dropdown-item" href="#">March - June</a>
+                <a class="dropdown-item" href="#">June - August</a>
+                <a class="dropdown-item" href="#">August - November</a>
+              </div>
           </div>
         </div>
       </div>
@@ -73,14 +74,14 @@
           <div class="d-flex">
             @if(isset($weatherData['current_weather']))
             <div class="weather-card">
-                  <h3>Current Weather in Johor Bharu</h3>
-                  <p>Temperature: {{ $weatherData['current_weather']['temperature'] }}°C</p>
-                  <p>Wind Speed: {{ $weatherData['current_weather']['windspeed'] }} km/h</p>
-                  <p>Weather Code: {{ $weatherData['current_weather']['weathercode'] }}</p>
-              </div>
-          @else
-              <p>Weather data is currently unavailable.</p>
-          @endif
+              <h3>Current Weather in Johor Bharu</h3>
+              <p>Temperature: {{ $weatherData['current_weather']['temperature'] }}°C</p>
+              <p>Wind Speed: {{ $weatherData['current_weather']['windspeed'] }} km/h</p>
+              <p>Weather Code: {{ $weatherData['current_weather']['weathercode'] }}</p>
+            </div>
+            @else
+            <p>Weather data is currently unavailable.</p>
+            @endif
             <!-- <div>
               <h2 class="mb-0 font-weight-normal"><i class="icon-sun me-2"></i>31<sup>C</sup></h2>
             </div>
@@ -134,6 +135,21 @@
         </div>
       </div>
     </div>
+    </br>
+    <div class="col-md-6 mb-4 stretch-card transparent">
+      <div class="card card-light-success">
+        <div class="card-body">
+          <p class="mb-4">🌟 Book Reviews</p>
+          <p class="fs-30 mb-2">{{ $totalReviews }} Reviews</p>
+          <p>Average Rating:
+            @for ($i = 1; $i <= 5; $i++)
+              <i class="mdi {{ $i <= round($averageRating) ? 'mdi-star text-warning' : 'mdi-star-outline' }}"></i>
+              @endfor
+              ({{ round($averageRating, 1) }}/5)
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -148,8 +164,8 @@
           This chart shows a comparison of Online (Completed) and Offline (Pending) sales per month.
         </p>
         <div id="custom-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
-       <div style="height: 350px;">
-            <canvas id="custom-sales-chart"></canvas>
+        <div style="height: 350px;">
+          <canvas id="custom-sales-chart"></canvas>
         </div>
       </div>
     </div>
@@ -169,7 +185,7 @@
             <div class="carousel-item active">
               <div class="row">
                 <div class="col-md-6">
-                 <!-- Chart Wrapper with Controlled Height -->
+                  <!-- Chart Wrapper with Controlled Height -->
                   <div class="chart-wrapper" style="height: 300px;">
                     <canvas id="books-pie-chart"></canvas>
                   </div>
@@ -178,27 +194,27 @@
                 <div class="col-md-6">
                   <h5>Books Sold by Genre</h5>
                   @php $totalSold = $booksSoldByGenre->sum('total_sold'); @endphp
-                 @foreach ($booksSoldByGenre as $genreData)
+                  @foreach ($booksSoldByGenre as $genreData)
                   @php
-                    $percentage = $totalSold > 0 ? round(($genreData->total_sold / $totalSold) * 100, 2) : 0;
-                    $barClass = 'progress-bar-low';
-                    if ($percentage >= 70) {
-                      $barClass = 'progress-bar-high';
-                    } elseif ($percentage >= 40) {
-                      $barClass = 'progress-bar-medium';
-                    }
+                  $percentage = $totalSold > 0 ? round(($genreData->total_sold / $totalSold) * 100, 2) : 0;
+                  $barClass = 'progress-bar-low';
+                  if ($percentage >= 70) {
+                  $barClass = 'progress-bar-high';
+                  } elseif ($percentage >= 40) {
+                  $barClass = 'progress-bar-medium';
+                  }
                   @endphp
                   <div class="mb-2">
                     <strong>{{ $genreData->genre }} ({{ $genreData->total_sold }} books)</strong>
                     <div class="progress">
                       <div class="progress-bar {{ $barClass }}" role="progressbar"
-                          style="width: {{ $percentage }}%;"
-                          aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
+                        style="width: {{ $percentage }}%;"
+                        aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
                         {{ $percentage }}%
                       </div>
                     </div>
                   </div>
-                @endforeach
+                  @endforeach
                 </div>
               </div>
             </div>
@@ -207,9 +223,9 @@
             <div class="carousel-item">
               <div class="row">
                 <div class="col-md-6">
-                 <div class="chart-wrapper" style="height: 300px;">
-                  <canvas id="metrics-pie-chart"></canvas>
-                </div>
+                  <div class="chart-wrapper" style="height: 300px;">
+                    <canvas id="metrics-pie-chart"></canvas>
+                  </div>
 
                 </div>
                 <div class="col-md-6">
@@ -240,43 +256,57 @@
   </div>
 </div>
 
-<div class="row mt-4">
+<div class="row">
   <div class="col-md-12 grid-margin stretch-card">
-    <div class="card">
-  <div class="card-body">
-    <h4 class="card-title">Top Orders</h4>
-
-    <!-- Table -->
-    <div class="table-responsive">
-      <table id="top-orders-table" class="table table-striped">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price (RM)</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($topOrders as $order)
-            <tr>
-              <td>{{ $order->product }}</td>
-              <td>{{ number_format($order->total_price, 2) }}</td>
-              <td>{{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}</td>
-              <td>
-                @if ($order->order_status === 'completed')
-                  <span class="badge bg-success">Completed</span>
-                @else
-                  <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
-                @endif
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
+    <div class="card position-relative">
+      <div class="card-body">
+        <h4 class="card-title">Average Book Ratings</h4>
+       <div style="height: 700px;">
+  <canvas id="rating-chart"></canvas>
+</div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<div class="row mt-4">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Top Orders</h4>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table id="top-orders-table" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price (RM)</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($topOrders as $order)
+              <tr>
+                <td>{{ $order->product }}</td>
+                <td>{{ number_format($order->total_price, 2) }}</td>
+                <td>{{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}</td>
+                <td>
+                  @if ($order->order_status === 'completed')
+                  <span class="badge bg-success">Completed</span>
+                  @else
+                  <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
+                  @endif
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -572,7 +602,7 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 @endpush
 
 @push('scripts')
@@ -585,22 +615,20 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-
-   $(document).ready(function () {
+  $(document).ready(function () {
     $('#top-orders-table').DataTable({
-      pageLength: 10, // how many rows per page
-      lengthChange: false, // hide "Show X entries"
-      ordering: true, // enable sorting
+      pageLength: 10,
+      lengthChange: false,
+      ordering: true,
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Search product..."
       }
     });
   });
-  
-   // Existing Bar Chart - DO NOT TOUCH
-  const ctxBar = document.getElementById('custom-sales-chart').getContext('2d');
 
+  // Existing Bar Chart - DO NOT TOUCH
+  const ctxBar = document.getElementById('custom-sales-chart').getContext('2d');
   const customSalesChart = new Chart(ctxBar, {
     type: 'bar',
     data: {
@@ -610,13 +638,13 @@
           label: 'Offline Sales',
           data: {!! json_encode($monthlyOfflineSales) !!},
           backgroundColor: '#98BDFF',
-          borderRadius: 5,
+          borderRadius: 5
         },
         {
           label: 'Online Sales',
           data: {!! json_encode($monthlyOnlineSales) !!},
           backgroundColor: '#4B49AC',
-          borderRadius: 5,
+          borderRadius: 5
         }
       ]
     },
@@ -633,7 +661,7 @@
           ticks: {
             color: '#6C7383',
             beginAtZero: true,
-            callback: function(value) {
+            callback: function (value) {
               return value + '$';
             }
           }
@@ -643,16 +671,13 @@
         legend: {
           display: true,
           position: 'top',
-          labels: {
-            color: '#333'
-          }
+          labels: { color: '#333' }
         }
       }
     }
   });
 
-  // NEW: Pie Chart for Books Sold by Genre
-    // Books Sold by Genre Pie
+  // Pie Chart: Books Sold by Genre
   const ctxBooks = document.getElementById('books-pie-chart').getContext('2d');
   new Chart(ctxBooks, {
     type: 'pie',
@@ -668,9 +693,7 @@
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: 'bottom'
-        }
+        legend: { position: 'bottom' }
       }
     }
   });
@@ -683,11 +706,7 @@
       labels: ['New Customers', 'Total Carts', 'Completed Orders'],
       datasets: [{
         label: 'Metrics',
-        data: [
-          {{ $newCustomersThisMonth }},
-          {{ $totalCarts }},
-          {{ $completedOrders }}
-        ],
+        data: [{{ $newCustomersThisMonth }}, {{ $totalCarts }}, {{ $completedOrders }}],
         backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
         hoverOffset: 4
       }]
@@ -695,18 +714,54 @@
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: 'bottom'
+        legend: { position: 'bottom' }
+      }
+    }
+  });
+
+  // Bar Chart: Average Rating per Book
+  const ctxRating = document.getElementById('rating-chart').getContext('2d');
+  new Chart(ctxRating, {
+    type: 'bar',
+    data: {
+      labels: {!! json_encode($booksWithRatings->pluck('title')) !!},
+      datasets: [{
+        label: 'Average Rating',
+        data: {!! json_encode($booksWithRatings->pluck('reviews_avg_rating')) !!},
+        backgroundColor: '#f39c12',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 5,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return context.raw + ' ⭐';
+            }
+          }
         }
       }
     }
   });
 </script>
+
 @endpush
 
 
 <!-- OLD DAHSBOARD HAKIM ONE DO -->
- 
+
 <!--   <div class="main-content p-4 sm:p-6">
     <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
