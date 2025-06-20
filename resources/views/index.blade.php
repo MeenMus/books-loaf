@@ -454,45 +454,6 @@
     </div>
   </section>
 
-  <section id="limited-offer" class="padding-large"
-    style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 800px;">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-md-6 text-center">
-          <div class="image-holder">
-            <img src="images/banner-image3.png" class="img-fluid" alt="banner">
-          </div>
-        </div>
-        <div class="col-md-5 offset-md-1 mt-5 mt-md-0 text-center text-md-start">
-          <h2>30% Discount on all items. Hurry Up !!!</h2>
-          <div id="countdown-clock" class="text-dark d-flex align-items-center my-3">
-            <div class="time d-grid pe-3">
-              <span class="days fs-1 fw-noRM al"></span>
-              <small>Days</small>
-            </div>
-            <span class="fs-1 text-primary">:</span>
-            <div class="time d-grid pe-3 ps-3">
-              <span class="hours fs-1 fw-noRM al"></span>
-              <small>Hrs</small>
-            </div>
-            <span class="fs-1 text-primary">:</span>
-            <div class="time d-grid pe-3 ps-3">
-              <span class="minutes fs-1 fw-noRM al"></span>
-              <small>Min</small>
-            </div>
-            <span class="fs-1 text-primary">:</span>
-            <div class="time d-grid ps-3">
-              <span class="seconds fs-1 fw-noRM al"></span>
-              <small>Sec</small>
-            </div>
-          </div>
-          <a href="shop" class="btn mt-3">Shop Collection</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
-
 <section id="items-listing" class="padding-large">
     <div class="container">
       <div class="row">
@@ -505,7 +466,7 @@
               <div class="item d-flex">
                 <img src="images/Thariq Ridzuwan.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/48">Thariq Ridzuwan Commando's : His Treasure</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/48">Thariq Ridzuwan : His Treasure</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Huda Najwa</p>
 
@@ -627,7 +588,7 @@
               <div class="item d-flex">
                 <img src="images/seven-husband-of-evelyn-hugo.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/176">The Seven Husbands Of Evelyn Hugo (UK)</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/176">Seven Husbands Of Evelyn Hugo</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -691,7 +652,7 @@
               <div class="item d-flex">
                 <img src="images/watch-me.jpg" class="img-fluid shadow-sm" alt="product item">
                 <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/30">Watch Me (Shatter Me: The New Republic #01)</a></h6>
+                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/30">Watch Me (The New Republic #01)</a></h6>
                   <div class="review-content d-flex">
                     <p class="my-2 me-2 fs-6 text-black-50">Mafi, Tahereh</p>
                     <div class="rating text-warning d-flex align-items-center">
@@ -777,7 +738,7 @@
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="on-sale border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">On sale</h3>
+              <h3 class="d-flex flex-column mb-0">New Arrival</h3>
             </div>
             <div class="items-lists">
               <div class="item d-flex">
@@ -804,7 +765,7 @@
                       </svg>
                     </div>
                   </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM79.90</s>
+                  <span class="price text-primary fw-bold mb-2 fs-5">
                   RM63.92</span>
                 </div>
               </div>
@@ -833,7 +794,7 @@
                       </svg>
                     </div>
                   </div>
-                   <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM59.90</s>
+                   <span class="price text-primary fw-bold mb-2 fs-5">
                   RM43.92</span>
                 </div>
               </div>
@@ -862,7 +823,7 @@
                       </svg>
                     </div>
                   </div>
-                   <span class="price text-primary fw-bold mb-2 fs-5"><s class="text-black-50">RM 14.90</s>
+                   <span class="price text-primary fw-bold mb-2 fs-5">
                   RM10.90</span>
                 </div>
               </div>
