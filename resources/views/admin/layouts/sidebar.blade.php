@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="/admin/support-tickets" class="nav-link {{ request()->is('admin/support-tickets') ? 'active' : '' }}">
+            <a href="/tickets-list" class="nav-link {{ request()->is('tickets-list') || request()->is('tickets-page*') ? 'active' : '' }}">
              <i class="icon-paper menu-icon"></i> 
                 <span class="menu-title"> Tickets</span>
             </a>

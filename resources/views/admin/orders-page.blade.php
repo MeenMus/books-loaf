@@ -4,7 +4,12 @@
 
 <div class="row mb-3">
   <div class="col-12">
-    <h3 class="font-weight-bold">Manage Order #{{ $order->id }}</h3>
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="fw-bold mb-0">Manage Order #{{ $order->id }}</h3>
+      <span class="badge p-2 fs-6 fw-semibold bg-{{ $order->status === 'completed' ? 'success' : ($order->status === 'cancelled' ? 'danger' : ($order->status === 'shipped' ? 'warning' : 'info')) }}">
+        {{ ucfirst($order->status) }}
+      </span>
+    </div>
   </div>
 </div>
 
@@ -44,9 +49,6 @@
     <div class="admin-card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="fw-semibold">Customer Details</h5>
-        <span class="badge p-2 fw-semibold bg-{{ $order->status === 'completed' ? 'success' : ($order->status === 'cancelled' ? 'danger' : ($order->status === 'shipped' ? 'warning' : 'info')) }}">
-          {{ ucfirst($order->status) }}
-        </span>
       </div>
       <hr>
       <div class="card-body">

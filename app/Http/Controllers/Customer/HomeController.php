@@ -11,7 +11,6 @@ use App\Models\BookReview;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Payment;
-use App\Models\SupportTicket;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -34,11 +33,6 @@ class HomeController extends BaseController
         return view('single-product');
     }
 
-    public function showPost()
-    {
-        return view('single-post');
-    }
-
     public function showShop()
     {
 
@@ -57,23 +51,6 @@ class HomeController extends BaseController
         return view('contact');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'phone' => 'required|string|max:20',
-            'subject' => 'required|string',
-            'message' => 'required|string',
-        ]);
-
-        SupportTicket::create([
-            'user_id' => auth()->id(),
-            'subject' => $request->subject,
-            'message' => $request->message,
-            'status' => 'open', // default status
-        ]);
-        Alert::success('success!', 'Your support ticket has been received. We’ll get back to you shortly!');
-        return redirect()->back()->with('ticket_submitted', true);
-    }
 
     public function showCart()
     {

@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-3 d-flex gap-1">
             <button type="submit" class="btn btn-primary btn-sm px-3">Filter</button>
-            <a href="{{ route('support_tickets') }}" class="btn btn-dark btn-sm">Reset</a>
+            <a href="{{ route('tickets-list') }}" class="btn btn-dark btn-sm">Reset</a>
         </div>
     </form>
 
@@ -61,13 +61,13 @@
                     <td>{{ ucfirst($ticket->subject) }}</td>
                     <td>{{ Str::limit($ticket->message, 100) }}</td>
                     <td>
-                        <span class="badge bg-{{ $ticket->status === 'resolved' ? 'success' : ($ticket->status === 'closed' ? 'secondary' : 'warning') }}">
+                        <span class="badge p-2 fw-semibold bg-{{ $ticket->status === 'resolved' ? 'warning' : ($ticket->status === 'closed' ? 'success' : 'info') }}">
                             {{ ucfirst($ticket->status) }}
                         </span>
                     </td>
                     <td>{{ $ticket->created_at->format('Y-m-d H:i') }}</td>
                     <td>
-                       <a href="{{ route('support_tickets_show', $ticket->id) }}" style="text-decoration: none;">
+                       <a href="{{ route('tickets-page', $ticket->id) }}" style="text-decoration: none;">
 
                             View <i class="bi bi-arrow-right-circle"></i>
                         </a>

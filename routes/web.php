@@ -4,7 +4,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\SupportTicketController;
+use App\Http\Controllers\Admin\SupportTicketController as AdminSupportTicketController;
+use App\Http\Controllers\Customer\SupportTicketController ;
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -44,8 +45,6 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', [HomeController::class, 'showIndex']);
 Route::get('/index-2', [HomeController::class, 'showIndexAlt']);
 Route::get('/single-product', [HomeController::class, 'showBook']);
-Route::get('/single-post', [HomeController::class, 'showPost']);
-
 
 Route::get('/shop/{id}', [ShopController::class, 'index'])->name('shop');
 
@@ -77,14 +76,17 @@ Route::get('/checkout-cancel', [PaymentController::class, 'stripeCancel'])->name
 
 
 Route::get('/contact', [HomeController::class, 'showContact']);
-Route::post('/support-ticket', [HomeController::class, 'store'])->name('support.store');
-Route::get('/blog', [HomeController::class, 'showBlog']);
-Route::get('/about', [HomeController::class, 'showAbout']);
 
 Route::post('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
 
 Route::get('/random-genres', [ShopController::class, 'randomGenres'])->name('random-genres');
 Route::get('/search-books', [ShopController::class, 'searchBooks'])->name('search-books');
+
+
+Route::get('/support', [SupportTicketController::class, 'index'])->name('support')->middleware('auth');
+Route::post('/support-ticket', [SupportTicketController::class, 'store'])->name('support-store')->middleware('auth');;
+Route::get('/support-reply/{ticket}', [SupportTicketController::class, 'showReplyForm'])->name('support-reply-form')->middleware('auth');;
+Route::post('/support-reply/{ticket}', [SupportTicketController::class, 'submitReply'])->name('support-reply-submit')->middleware('auth');;
 
 
 
@@ -116,9 +118,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/orders-receipt/{order}', [AdminOrderController::class, 'printReceipt'])->name('orders-receipt');
 
     /* MANAGE TICKETS */
-    Route::get('/admin/support-tickets', [SupportTicketController::class, 'index'])->name('support_tickets');
-    Route::get('/admin/showSupport-tickets/{id}', [SupportTicketController::class, 'showSupportTickets'])->name('support_tickets_show');
-    Route::post('/admin/support-tickets/{id}', [SupportTicketController::class, 'update'])->name('supportTickets.update');
+    Route::get('/tickets-list', [AdminSupportTicketController::class, 'ticketList'])->name('tickets-list');
+    Route::get('/tickets-page/{id}', [AdminSupportTicketController::class, 'ticketPage'])->name('tickets-page');
+    Route::post('/tickets-update/{id}', [AdminSupportTicketController::class, 'ticketUpdate'])->name('tickets-update');
+    Route::post('/ticket-reply/{ticket}', [AdminSupportTicketController::class, 'ticketReply'])->name('ticket-reply');
 
     /* MANAGE USERS */
     Route::get('/users-list', [UserController::class, 'userList'])->name('users-list');
@@ -127,6 +130,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
     Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
     Route::delete('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
+
+
 });
 
 /* ---- */

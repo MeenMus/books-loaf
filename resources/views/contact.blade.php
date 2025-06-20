@@ -54,7 +54,7 @@
           <h3>Submit a Support Ticket</h3>
           <p class="mb-5">We're here to help. Submit your issue or inquiry below.</p>
 
-          <form method="POST" action="{{ route('support.store') }}" class="d-flex gap-3 flex-wrap">
+          <form method="POST" action="{{ route('support-store') }}" class="d-flex gap-3 flex-wrap">
             @csrf
 
             <div class="w-100 d-flex gap-3">

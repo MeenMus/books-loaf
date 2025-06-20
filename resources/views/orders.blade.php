@@ -207,8 +207,11 @@
                 <li class="cat-item mb-2">
                   <a href="{{url('profile')}}">Profile Details</a>
                 </li>
-                <li class="cat-item">
+                <li class="cat-item mb-2">
                   <a href="{{url('orders')}}">Orders</a>
+                </li>
+                <li class="cat-item">
+                  <a href="{{url('support')}}">Support Tickets</a>
                 </li>
               </ul>
             </div>

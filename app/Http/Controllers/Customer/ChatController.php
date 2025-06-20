@@ -84,15 +84,12 @@ class ChatController
         // 🧵 Maintain a simple 4-line history for context
         $sessionHistory = session('chat_history', []);
         $sessionHistory[] = "User: $userMessage";
-        $sessionHistory = array_slice($sessionHistory, -4); // Keep only last 4
+        $sessionHistory = array_slice($sessionHistory, -10); // Keep only last 4
         $chatHistory = implode("\n", $sessionHistory);
 
         $trimmedAvailableBooks = $availableBooks->take(5); // Only take top 5 
         $availableContext = $formatBooks($trimmedAvailableBooks);
 
-        /*         $recommendationNote = $availableBooks->count() > 5
-            ? "I’ve picked a few you might like — want more options? 😊"
-            : ""; */
 
         // 🤖 Here’s LoafBot’s full prompt
         $prompt = <<<EOT
@@ -104,6 +101,8 @@ class ChatController
                 - Keep each response to under 3 short sentences.
                 - NEVER repeat book titles or prices more than once.
                 - Use emojis occasionally (📚, 😊, 💖) to add charm — but don’t overdo it.
+                - Always reply in the same language the user is using (e.g., reply in Malay if the user speaks Malay, reply in Chinese if the user speaks Chinese).
+                - If the user's message is not related to books or book preferences, gently guide them back to book-related topics with a warm, friendly tone.
 
                 📦 Source Rules:
                 - ONLY mention books from the provided "Available Books" list.

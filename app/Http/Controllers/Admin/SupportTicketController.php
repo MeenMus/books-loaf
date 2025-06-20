@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SupportReplyMail;
 use App\Models\SupportTicket;
 use App\Models\Book;
 use App\Models\Genre;
@@ -13,51 +14,72 @@ use App\Models\BookReview;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Payment;
+use App\Models\SupportTicketReply;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SupportTicketController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(Request $request)
-{
-    $query = SupportTicket::with('user');
+    public function ticketList(Request $request)
+    {
+        $query = SupportTicket::with('user');
 
-    if ($request->filled('status')) {
-        $query->where('status', $request->status);
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+
+        $tickets = $query->latest()->get();
+
+        return view('admin.tickets-list', compact('tickets'));
     }
 
-    if ($request->filled('start_date')) {
-        $query->whereDate('created_at', '>=', $request->start_date);
+    public function ticketPage($id)
+    {
+        $ticket = SupportTicket::with('user')->findOrFail($id);
+        return view('admin.tickets-page', compact('ticket'));
     }
 
-    if ($request->filled('end_date')) {
-        $query->whereDate('created_at', '<=', $request->end_date);
+    public function ticketUpdate(Request $request, $id)
+    {
+        $ticket = SupportTicket::findOrFail($id);
+        $ticket->status = $request->status;
+        $ticket->save();
+
+        Alert::success('Success!', 'Support ticket status updated!');
+
+        return redirect()->back()->with('success', 'Ticket status updated successfully.');
     }
 
-    $tickets = $query->latest()->get();
+    public function ticketReply(Request $request, $id)
+    {
+        $ticket = SupportTicket::findOrFail($id);
 
-    return view('admin.support_tickets', compact('tickets'));
-}
+        $reply = SupportTicketReply::create([
+            'support_ticket_id' => $ticket->id,
+            'user_id' => null,
+            'message' => $request->message,
+        ]);
 
-public function showSupportTickets($id)
-{
-    $ticket = SupportTicket::with('user')->findOrFail($id);
-    return view('admin.support_tickets_show', compact('ticket'));
-}
+        // Send email to user
+        Mail::to($ticket->user->email)->send(new SupportReplyMail($ticket, $reply));
 
-public function update(Request $request, $id)
-{
-    $ticket = SupportTicket::findOrFail($id);
-    $ticket->status = $request->status;
-    $ticket->save();
+        Alert::success('Success!', 'Reply has been sent!');
 
-    return redirect()->back()->with('success', 'Ticket status updated successfully.');
-}
-
-
+        return back()->with('success', 'Reply sent.');
+    }
 }

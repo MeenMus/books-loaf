@@ -9,7 +9,7 @@ class SupportTicket extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
+    protected $fillable = [
         'user_id',
         'subject',
         'message',
@@ -19,5 +19,11 @@ class SupportTicket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    public function replies()
+    {
+        return $this->hasMany(SupportTicketReply::class)->orderBy('created_at');
     }
 }

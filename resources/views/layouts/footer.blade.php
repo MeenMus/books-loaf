@@ -500,3 +500,26 @@
   }
 </script>
 
+<script>
+  $(document).on('click', '.search-button', function () {
+    // Delay slightly to ensure popup is visible before trying to load
+    setTimeout(() => {
+      // Only load if it's currently empty
+      if ($('#random-genre-list').children().length === 0) {
+        $.get("{{ route('random-genres') }}", function (genres) {
+          let html = '';
+          genres.forEach(genre => {
+            html += `
+                        <li class="cat-list-item">
+                            <a href="/shop/${genre.id}" title="${genre.name}">${genre.name}</a>
+                        </li>`;
+          });
+          $('#random-genre-list').html(html);
+        }).fail(function () {
+          console.error('Failed to fetch random genres');
+        });
+      }
+    }, 300);
+  });
+</script>
+
