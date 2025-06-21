@@ -16,8 +16,6 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 - [Usage](#-usage)
 - [Deployment](#-deployment)
 - [AI Integration](#-ai-integration)
-- [Screenshots](#-screenshots)
-- [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
 
@@ -25,7 +23,7 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 
 ## 🚀 Features
 
-- 🔍 AI-powered book recommendations (via DeepSeek API)
+- 🔍 AI-powered book recommendations (via Groq API)
 - 🛒 Shopping cart and smooth checkout flow
 - 📦 Real-time stock updates
 - 📬 Auto alerts for new arrivals and discounts
@@ -41,7 +39,7 @@ BooksLoaf is a smart, user-friendly online bookstore system designed to make boo
 - **Framework:** Laravel (PHP)
 - **Database:** MySQL
 - **Frontend:** Blade, HTML5, Bootstrap
-- **AI:** DeepSeek API
+- **AI:** Groq API
 - **Environment:** XAMPP (for local dev)
 - **Hosting Ready:** Works with Exabytes or any domain provider
 
@@ -132,34 +130,13 @@ To go live:
 
 ## 🤖 AI Integration
 
-BooksLoaf uses the **DeepSeek API** to offer smart book suggestions based on:
+BooksLoaf uses the **Groq API** to offer smart book suggestions based on:
 
 - Search keywords
 - Reading history
 - Genre preferences
 
 Integration is handled via a Laravel service and can be easily extended or replaced.
-
----
-
-## 📸 Screenshots
-
-- 🖼️ Homepage
-- 🛒 Cart & Checkout
-- 📚 Recommendation Results
-- ⚙️ Admin Dashboard
-
----
-
-## 🤝 Contributing
-
-Want to contribute? Awesome! Here's how:
-
-1. Fork the repo
-2. Create your feature branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -m 'Add your feature'`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Open a pull request
 
 ---
 
@@ -174,4 +151,4 @@ This project is licensed under the **MIT License**. See [`LICENSE`](LICENSE) for
 Built with ❤️ by the BooksLoaf team.
 
 - 🌐 Website: [https://booksloaf.com](https://booksloaf.com)
-- ✉️ Email: admin@booksloaf.com
+- ✉️ Email: booksloaf@gmail.com
