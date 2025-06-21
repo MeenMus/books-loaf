@@ -53,12 +53,11 @@ class ChatController
             ->flatMap(fn($order) => $order->orderItems->pluck('book'))
             ->unique('id');
 
-        $formatBooks = fn($books) => $books->take(3)->map(
+        $formatBooks = fn($books) => $books->take(5)->map(
             fn($b) =>
-            "- *{$b->title}* – " .
-                Str::of($b->description)->words(300, '...') .
-                " (RM " . number_format($b->price, 2) . ", In stock: {$b->stock})"
+            "- *{$b->title}* – RM " . number_format($b->price, 2) . " (Stock: {$b->stock})"
         )->implode("\n");
+
 
         $likesContext = $formatBooks($likedBooks);
         $cartContext = $formatBooks($cartBooks);
@@ -73,6 +72,11 @@ class ChatController
             $matchedIds = collect($qdrantResults['result'] ?? [])->pluck('id')->toArray();
         }
 
+        if (!$embedding || count($embedding) !== 768) {
+            // fallback: just recommend recent or bestsellers
+            $availableBooks = Book::where('stock', '>', 0)->latest()->limit(20)->get();
+        }
+
         $availableBooks = Book::with('genres')
             ->when(!empty($matchedIds), fn($q) => $q->whereIn('id', $matchedIds), fn($q) => $q->limit(50))
             ->whereNotIn('id', $purchasedBooks->pluck('id'))
@@ -81,7 +85,7 @@ class ChatController
             ->when($priceFilter, fn($q) => $q->where('price', '<=', $priceFilter))
             ->get();
 
-        $trimmedAvailableBooks = $availableBooks->take(5);
+        $trimmedAvailableBooks = $availableBooks->take(40);
         $availableContext = $formatBooks($trimmedAvailableBooks);
 
         // ✅ Pull last 10 messages from DB (user and bot)
@@ -101,12 +105,12 @@ class ChatController
                 You are LoafBot, a friendly and concise virtual book assistant in a cozy bookstore. Your job is to help users find books based only on what’s available and what they’ve liked, carted, or purchased.
 
                 Behavior Rules:
+                - Always reply in the same language the user is using (e.g., reply in Malay if the user speaks Malay, reply in Chinese if the user speaks Chinese).
                 - Respond warmly, like a friendly bookstore buddy.
                 - Avoid repeating greetings like “Hello” more than once.
                 - Keep each response to under 3 short sentences.
                 - NEVER repeat book titles or prices more than once.
                 - Use emojis occasionally (📚, 😊, 💖) to add charm — but don’t overdo it.
-                - Always reply in the same language the user is using (e.g., reply in Malay if the user speaks Malay, reply in Chinese if the user speaks Chinese).
                 - If the user's message is not related to books or book preferences, gently guide them back to book-related topics with a warm, friendly tone.
                 – If the user requests a list of books, show only the title,price and stock. Do not include descriptions.  
 
@@ -148,22 +152,29 @@ class ChatController
                 EOT;
 
         // Send to LLM
-        $response = Http::post('http://localhost:11434/api/generate', [
-            'model' => 'gemma3:4b',
-            'prompt' => $prompt,
-            'stream' => false,
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.groq.com/openai/v1/chat/completions', [
+            'model' => 'llama3-70b-8192',
+            'messages' => [
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'temperature' => 0.7,
         ]);
 
-        $responseText = $response->successful() ? $response->json()['response'] ?? null : null;
-
-        $reply = trim($responseText ?? '') ?: "Oops! I couldn't find any good reads for that. Want to explore some bestsellers or cozy picks instead? 📚";
+        $responseText = $response->successful()
+            ? $response->json('choices.0.message.content') ?? null
+            : null;
 
         // Save bot reply
         ChatMessage::create([
             'user_id' => $user->id,
             'sender' => 'bot',
-            'message' => $reply,
+            'message' => $responseText,
         ]);
+
+        $reply = trim($responseText ?? '') ?: "Oops! I couldn't find any good reads for that. Want to explore some bestsellers or cozy picks instead? 📚";
 
         return response()->json([
             'reply' => $reply,
@@ -174,15 +185,14 @@ class ChatController
     {
         $user = Auth::user();
         $offset = $request->input('offset', 0);
-        $limit = 15; // messages per scroll
+        $limit = 15;
 
         $messages = ChatMessage::where('user_id', $user->id)
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc') // ⬅️ Ascending = oldest first
             ->skip($offset)
             ->take($limit)
             ->get()
-            ->reverse() // so oldest shows first
-            ->values()
+            ->values() // Optional but safe
             ->map(fn($msg) => [
                 'sender' => $msg->sender,
                 'text' => $msg->message,
