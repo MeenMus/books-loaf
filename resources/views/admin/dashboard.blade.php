@@ -44,7 +44,9 @@
         <h3 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h3>
         <h6 class="font-weight-normal mb-0">
           All systems are running smoothly! You have
-          <span class="text-primary">{{ $unreadAlerts }} unread alert{{ $unreadAlerts != 1 ? 's' : '' }}!</span>
+          <a href="{{ route('tickets-list') }}" class="text-primary text-decoration-none">
+            {{ $unreadAlerts }} open support ticket{{ $unreadAlerts != 1 ? 's' : '' }}
+          </a>.
         </h6>
 
       </div>
@@ -95,13 +97,13 @@
     </div>
   </div>
   <div class="col-md-6 grid-margin transparent">
+    <!-- Row 1 -->
     <div class="row">
       <div class="col-md-6 mb-4 stretch-card transparent">
         <div class="card card-tale">
           <div class="card-body">
             <p class="mb-4">📚 Total Books</p>
             <p class="fs-30 mb-2">{{ $totalBooks }} Books</p>
-            <!-- <p>10.00% (30 days)</p> -->
           </div>
         </div>
       </div>
@@ -110,43 +112,54 @@
           <div class="card-body">
             <p class="mb-4">📂 Total Genres</p>
             <p class="fs-30 mb-2">{{ $totalGenres }} Genres</p>
-            <!-- <p>22.00% (30 days)</p> -->
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Row 2 -->
     <div class="row">
-      <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+      <div class="col-md-6 mb-4 stretch-card transparent">
         <div class="card card-light-blue">
           <div class="card-body">
             <p class="mb-4">🛒 Orders</p>
             <p class="fs-30 mb-2">{{ $totalOrders }} Total Orders</p>
-            <!-- <p>2.00% (30 days)</p> -->
           </div>
         </div>
       </div>
-      <div class="col-md-6 stretch-card transparent">
+      <div class="col-md-6 mb-4 stretch-card transparent">
         <div class="card card-light-danger">
           <div class="card-body">
             <p class="mb-4">📈 Units Sold</p>
             <p class="fs-30 mb-2">{{ $totalUnitsSold }} Total Units Sold</p>
-            <!-- <p>0.22% (30 days)</p> -->
           </div>
         </div>
       </div>
     </div>
-    </br>
-    <div class="col-md-6 mb-4 stretch-card transparent">
-      <div class="card card-light-success">
-        <div class="card-body">
-          <p class="mb-4">🌟 Book Reviews</p>
-          <p class="fs-30 mb-2">{{ $totalReviews }} Reviews</p>
-          <p>Average Rating:
-            @for ($i = 1; $i <= 5; $i++)
-              <i class="mdi {{ $i <= round($averageRating) ? 'mdi-star text-warning' : 'mdi-star-outline' }}"></i>
+
+    <!-- Row 3: Book Reviews + Total Users side-by-side -->
+    <div class="row">
+      <div class="col-md-6 mb-4 stretch-card transparent">
+        <div class="card card-light-success h-100">
+          <div class="card-body">
+            <p class="mb-4">🌟 Book Reviews</p>
+            <p class="fs-30 mb-2">{{ $totalReviews }} Reviews</p>
+            <p>Average Rating:
+              @for ($i = 1; $i <= 5; $i++)
+                <i class="mdi {{ $i <= round($averageRating) ? 'mdi-star text-warning' : 'mdi-star-outline' }}"></i>
               @endfor
               ({{ round($averageRating, 1) }}/5)
-          </p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4 stretch-card transparent">
+        <div class="card card-light-info h-100">
+          <div class="card-body">
+            <p class="mb-4">👥 Total Users</p>
+            <p class="fs-30 mb-2">{{ $totalUsers }} Users</p>
+            <p>Active members on your platform</p>
+          </div>
         </div>
       </div>
     </div>
@@ -186,13 +199,13 @@
               <div class="row">
                 <div class="col-md-6">
                   <!-- Chart Wrapper with Controlled Height -->
-                  <div class="chart-wrapper" style="height: 300px;">
+                  <div class="chart-wrapper" style="max-width: 600px; height: 500px; margin: auto;">
                     <canvas id="books-pie-chart"></canvas>
                   </div>
 
                 </div>
                 <div class="col-md-6">
-                  <h5>Books Sold by Genre</h5>
+                  <h4 class="fw-bold">Books Sold by Genre</h4>
                   @php $totalSold = $booksSoldByGenre->sum('total_sold'); @endphp
                   @foreach ($booksSoldByGenre as $genreData)
                   @php
@@ -205,8 +218,8 @@
                   }
                   @endphp
                   <div class="mb-2">
-                    <strong>{{ $genreData->genre }} ({{ $genreData->total_sold }} books)</strong>
-                    <div class="progress">
+                    {{ $genreData->genre }} ({{ $genreData->total_sold }} books)
+                    <div class="progress mt-1">
                       <div class="progress-bar {{ $barClass }}" role="progressbar"
                         style="width: {{ $percentage }}%;"
                         aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">
@@ -223,13 +236,13 @@
             <div class="carousel-item">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="chart-wrapper" style="height: 300px;">
+                  <div class="chart-wrapper" style="max-width: 500px; height: 400px; margin: auto;">
                     <canvas id="metrics-pie-chart"></canvas>
                   </div>
 
                 </div>
                 <div class="col-md-6">
-                  <h5>Key Metrics This Month</h5>
+                  <h4 class = "fw-bold">Key Metrics This Month</h4>
                   <ul class="list-group">
                     <li class="list-group-item">New Customers: <strong>{{ $newCustomersThisMonth }}</strong></li>
                     <li class="list-group-item">Total Carts: <strong>{{ $totalCarts }}</strong></li>
@@ -260,10 +273,14 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card position-relative">
       <div class="card-body">
-        <h4 class="card-title">Average Book Ratings</h4>
-       <div style="height: 700px;">
-  <canvas id="rating-chart"></canvas>
-</div>
+        <h4 class="card-title mb-4">Average Book Ratings</h4>
+
+        <div class="d-flex justify-content-center">
+          <div style="height: 400px; width: 100%; max-width: 900px; margin: auto;">
+            <canvas id="rating-chart"></canvas>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -294,11 +311,13 @@
                 <td>{{ number_format($order->total_price, 2) }}</td>
                 <td>{{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}</td>
                 <td>
-                  @if ($order->order_status === 'completed')
-                  <span class="badge bg-success">Completed</span>
-                  @else
-                  <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
-                  @endif
+                  <span class="badge p-2 fw-semibold bg-{{ 
+                    $order->order_status === 'completed' ? 'success' : 
+                    ($order->order_status === 'cancelled' ? 'danger' : 
+                    ($order->order_status === 'shipped' ? 'warning text-dark' : 'info')) 
+                  }}">
+                    {{ ucfirst($order->order_status) }}
+                  </span>
                 </td>
               </tr>
               @endforeach
@@ -311,293 +330,6 @@
   </div>
 </div>
 
-<!-- container from template -->
-<!-- <div class="row">
-  <div class="col-md-12 grid-margin stretch-card">
-    <div class="card position-relative">
-      <div class="card-body">
-        <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="row">
-                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                  <div class="ml-xl-4 mt-3">
-                    <p class="card-title">Detailed Reports</p>
-                    <h1 class="text-primary">$34040</h1>
-                    <h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>
-                    <p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                  </div>
-                </div>
-                <div class="col-md-12 col-xl-9">
-                  <div class="row">
-                    <div class="col-md-6 border-right">
-                      <div class="table-responsive mb-3 mb-md-0 mt-3">
-                        <table class="table table-borderless report-table">
-                          <tr>
-                            <td class="text-muted">Illinois</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">713</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Washington</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">583</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Mississippi</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">924</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">California</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">664</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Maryland</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">560</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Alaska</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">793</h5>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                      <div class="daoughnutchart-wrapper">
-                        <canvas id="north-america-chart"></canvas>
-                      </div>
-                      <div id="north-america-chart-legend">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                  <div class="ml-xl-4 mt-3">
-                    <p class="card-title">Detailed Reports</p>
-                    <h1 class="text-primary">$34040</h1>
-                    <h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>
-                    <p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                  </div>
-                </div>
-                <div class="col-md-12 col-xl-9">
-                  <div class="row">
-                    <div class="col-md-6 border-right">
-                      <div class="table-responsive mb-3 mb-md-0 mt-3">
-                        <table class="table table-borderless report-table">
-                          <tr>
-                            <td class="text-muted">Illinois</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">713</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Washington</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">583</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Mississippi</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">924</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">California</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">664</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Maryland</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">560</h5>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-muted">Alaska</td>
-                            <td class="w-100 px-0">
-                              <div class="progress progress-md mx-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              <h5 class="font-weight-bold mb-0">793</h5>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                      <div class="daoughnutchart-wrapper">
-                        <canvas id="south-america-chart"></canvas>
-                      </div>
-                      <div id="south-america-chart-legend"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#detailedReports" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-          <a class="carousel-control-next" href="#detailedReports" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- <div class="row">
-  <div class="col-md-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <p class="card-title mb-0">Top Products</p>
-        <div class="table-responsive">
-          <table class="table table-striped table-borderless">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Search Engine Marketing</td>
-                <td class="font-weight-bold">$362</td>
-                <td>21 Sep 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-success">Completed</div>
-                </td>
-              </tr>
-              <tr>
-                <td>Search Engine Optimization</td>
-                <td class="font-weight-bold">$116</td>
-                <td>13 Jun 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-success">Completed</div>
-                </td>
-              </tr>
-              <tr>
-                <td>Display Advertising</td>
-                <td class="font-weight-bold">$551</td>
-                <td>28 Sep 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-warning">Pending</div>
-                </td>
-              </tr>
-              <tr>
-                <td>Pay Per Click Advertising</td>
-                <td class="font-weight-bold">$523</td>
-                <td>30 Jun 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-warning">Pending</div>
-                </td>
-              </tr>
-              <tr>
-                <td>E-Mail Marketing</td>
-                <td class="font-weight-bold">$781</td>
-                <td>01 Nov 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-danger">Cancelled</div>
-                </td>
-              </tr>
-              <tr>
-                <td>Referral Marketing</td>
-                <td class="font-weight-bold">$283</td>
-                <td>20 Mar 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-warning">Pending</div>
-                </td>
-              </tr>
-              <tr>
-                <td>Social media marketing</td>
-                <td class="font-weight-bold">$897</td>
-                <td>26 Oct 2018</td>
-                <td class="font-weight-medium">
-                  <div class="badge badge-success">Completed</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 @endsection
 
@@ -734,13 +466,22 @@
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       scales: {
+        x: {
+          ticks: {
+            callback: function(value, index, values) {
+              const label = this.getLabelForValue(value);
+              return label.length > 15 ? label.slice(0, 15) + '…' : label;
+            },
+            maxRotation: 0,
+            minRotation: 0
+          }
+        },
         y: {
           beginAtZero: true,
           max: 5,
-          ticks: {
-            stepSize: 1
-          }
+          ticks: { stepSize: 1 }
         }
       },
       plugins: {

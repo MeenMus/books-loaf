@@ -63,7 +63,7 @@ class UserController extends BaseController
             $query->orderBy('created_at', 'desc'); // Default: latest
         }
 
-        $orders = $query->paginate(5)->withQueryString();
+        $orders = $query->paginate(1)->withQueryString();
 
         $topBooks = DB::table('order_items')
             ->join('orders', 'orders.id', '=', 'order_items.order_id')

@@ -52,7 +52,7 @@
 
 <div class="col-6 mt-0">
   <div class="admin-card bg-white p-4 rounded shadow">
-    <h5 class="mb-3">Top 5 Genres by Total Quantity Sold</h5>
+    <h5 class="mb-3 fw-bold">Top 5 Genres by Total Quantity Sold</h5>
     <canvas id="genreChart"></canvas>
   </div>
 </div>
