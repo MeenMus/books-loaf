@@ -30,7 +30,7 @@ class SupportReplyMail extends Mailable
     public function build()
     {
         return $this->subject('Support Reply: ' . $this->ticket->subject)
-            ->view('emails.support.reply')
+            ->markdown('emails.support.reply')
             ->with([
                 'ticket' => $this->ticket,
                 'reply' => $this->reply,

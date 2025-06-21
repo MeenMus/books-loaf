@@ -137,14 +137,14 @@
   <section id="billboard" class="position-relative d-flex align-items-center py-5 bg-white" style="height: 500px;">
   
   <!-- Right Arrow -->
-  <div class="position-absolute end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next main-slider-button-next">
+  <div class="position-absolute end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next main-slider-button-next" style="z-index: 100;">
     <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
       <use xlink:href="#alt-arrow-right-outline"></use>
     </svg>
   </div>
 
   <!-- Left Arrow -->
-  <div class="position-absolute start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev main-slider-button-prev">
+  <div class="position-absolute start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev main-slider-button-prev" style="z-index: 100;">
     <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
       <use xlink:href="#alt-arrow-left-outline"></use>
     </svg>
@@ -153,49 +153,21 @@
   <!-- Swiper Main -->
   <div class="swiper main-swiper">
       <div class="swiper-wrapper d-flex align-items-center">
-        <div class="swiper-slide">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-11 p-0">
-                <div class="image-holder">
-                  <img src="images/1.png" class="img-fluid w-100" alt="banner">
+        @for ($i = 1; $i <= 3; $i++)
+          <div class="swiper-slide">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-11 p-0">
+                  <div class="image-holder">
+                    <img src="{{ asset('banners/banner-' . $i . '.png') }}?v={{ time() }}" class="img-fluid w-100" alt="banner {{ $i }}">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-11 p-0">
-                <div class="image-holder">
-                  <img src="images/2.png" class="img-fluid w-100" alt="banner">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="swiper-slide">
-          <div class="container">
-            <div class="row d-flex flex-column-reverse flex-md-row align-items-center">
-              <div class="col-md-5 offset-md-1 mt-5 mt-md-0 text-center text-md-start">
-                <div class="banner-content">
-                  <h2>Your Heart is the Sea</h2>
-                  <p>Limited stocks available. Grab it now!</p>
-                  <a href="shop" class="btn mt-3">Shop Collection</a>
-                </div>
-              </div>
-              <div class="col-md-6 text-center">
-                <div class="image-holder">
-                  <img src="images/banner-image.png" class="img-fluid" alt="banner">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        @endfor
       </div>
     </div>
-
 </section>
 
 

@@ -45,11 +45,17 @@
 
         <li class="nav-item">
             <a href="/tickets-list" class="nav-link {{ request()->is('tickets-list') || request()->is('tickets-page*') ? 'active' : '' }}">
-             <i class="icon-paper menu-icon"></i> 
+                <i class="icon-paper menu-icon"></i>
                 <span class="menu-title"> Tickets</span>
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="/banners-create" class="nav-link {{ request()->is('banners-create') || request()->is('banners-create') ? 'active' : '' }}">
+                <i class="icon-image menu-icon"></i>
+                <span class="menu-title"> Banner</span>
+            </a>
+        </li>
 
     </ul>
 </nav>

@@ -1,19 +1,22 @@
-<p>Hi {{ $ticket->user->name }},</p>
+@component('mail::message')
 
-<p>{!! nl2br(e($reply->message)) !!}</p>
+# Support Ticket #{{ $ticket->id }}
 
-<p>You can reply to this message by clicking the button below:</p>
+**Subject:** {{ $ticket->subject }}  
+**Last Updated:** {{ $reply->created_at->format('Y-m-d H:i') }}
 
-<a href="{{ url('/support-reply/' . $ticket->id) }}" style="
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4f46e5;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-">
-    Reply to this Ticket
-</a>
+---
 
-<p style="margin-top: 30px;">Thanks,<br>The BooksLoaf Team</p>
+Hi {{ $ticket->user->name }},
+
+{!! nl2br(e($reply->message)) !!}
+
+---
+
+@component('mail::button', ['url' => url('/support-reply/' . $ticket->id)])
+Reply to this Ticket
+@endcomponent
+
+Thanks,  
+BooksLoaf Team  
+@endcomponent

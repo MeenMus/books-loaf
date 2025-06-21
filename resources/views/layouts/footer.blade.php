@@ -1,63 +1,73 @@
 <style>
-
   #chatToggleBtn {
-  position: fixed;       /* fix it relative to viewport */
-  bottom: 20px;          /* 20px from bottom */
-  right: 20px;           /* 20px from right */
-  z-index: 1000;         /* make sure it’s on top */
-}
+    position: fixed;
+    /* fix it relative to viewport */
+    bottom: 20px;
+    /* 20px from bottom */
+    right: 20px;
+    /* 20px from right */
+    z-index: 1000;
+    /* make sure it’s on top */
+  }
 
-    /* Your existing chat container styles */
+  /* Your existing chat container styles */
   .chat-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 380px;
-    z-index: 9999; /* Increased from 1000 */
+    z-index: 9999;
+    /* Increased from 1000 */
     font-family: 'Segoe UI', Roboto, sans-serif;
-  } 
+  }
 
   /* Chat Icon Styles */
-.chat-toggle-btn {
-  width: 60px !important;
-  height: 60px !important;
-  padding: 0 !important;
-  border-radius: 50% !important; /* Makes it perfectly round */
-  background: 	#e6b07e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-}
-.chat-icon {
-  width: 70%; /* Makes the image take 70% of button space */
-  height: 70%;
-  object-fit: contain; /* Ensures image maintains aspect ratio */
-  border-radius: 50%; /* Makes image itself circular */
-  transition: all 0.3s ease;
-}
+  .chat-toggle-btn {
+    width: 60px !important;
+    height: 60px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    /* Makes it perfectly round */
+    background: #e6b07e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .chat-icon {
+    width: 70%;
+    /* Makes the image take 70% of button space */
+    height: 70%;
+    object-fit: contain;
+    /* Ensures image maintains aspect ratio */
+    border-radius: 50%;
+    /* Makes image itself circular */
+    transition: all 0.3s ease;
+  }
 
 
 
-.chat-toggle-btn:hover .chat-icon {
-  transform: scale(1.1);
-}
+  .chat-toggle-btn:hover .chat-icon {
+    transform: scale(1.1);
+  }
 
-/* Make the chat window appear from the icon */
-.chat-window {
-  position: absolute;
-  bottom: 70px; /* Position above the icon */
-  right: 0;
-  margin-top: 0;
-}
+  /* Make the chat window appear from the icon */
+  .chat-window {
+    position: absolute;
+    bottom: 70px;
+    /* Position above the icon */
+    right: 0;
+    margin-top: 0;
+  }
 
-.chat-toggle-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
+  .chat-toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
 
   /* Chat Window */
   .chat-window {
@@ -139,20 +149,20 @@
     border-radius: 18px;
     font-size: 14px;
     line-height: 1.4;
-    word-wrap: break-word; 
+    word-wrap: break-word;
   }
 
   .user-message .message-bubble {
     background: #f5cba7;
     color: black;
-    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
   }
 
   .bot-message .message-bubble {
     background: white;
     color: #333;
     border: 1px solid #e0e0e0;
-    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
@@ -175,11 +185,11 @@
   }
 
   .message-input:focus {
-    border-color: 	#e6b07e;
+    border-color: #e6b07e;
   }
 
   .send-btn {
-    background: 	#e6b07e;
+    background: #e6b07e;
     color: white;
     border: none;
     border-radius: 50%;
@@ -217,13 +227,30 @@
     animation: typingAnimation 1.4s infinite ease-in-out;
   }
 
-  .typing-dot:nth-child(1) { animation-delay: 0s; }
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  .typing-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
 
   @keyframes typingAnimation {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-5px); background: #666; }
+
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+    }
+
+    30% {
+      transform: translateY(-5px);
+      background: #666;
+    }
   }
 
   /* Scrollbar */
@@ -244,75 +271,75 @@
     background: #aaa;
   }
 
-  .chat-window.show ~ .chat-toggle-btn .chat-icon {
-  transform: rotate(10deg);
-  /* or any other effect you want */
-}
+  .chat-window.show~.chat-toggle-btn .chat-icon {
+    transform: rotate(10deg);
+    /* or any other effect you want */
+  }
 
-.chat-toggle-btn::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 12px;
-  height: 12px;
-  background: #ff4757;
-  border-radius: 50%;
-  border: 2px solid white;
-  display: none;
-}
+  .chat-toggle-btn::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background: #ff4757;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: none;
+  }
 
-.has-new-message::after {
-  display: block;
-}
+  .has-new-message::after {
+    display: block;
+  }
 </style>
 
 <!-- Floating Chat Section -->
 <section style="position: fixed; bottom: 20px; right: 20px; z-index: 1050; width: 360px;">
 
   <!-- Floating Chat Section -->
-<div class="chat-container">
-  <!-- Toggle Button -->
-  <button id="chatToggleBtn" class="chat-toggle-btn">
-  <img src="{{ asset('logo-single.png') }}" alt="Chat Icon" class="chat-icon">
-</button>
+  <div class="chat-container">
+    <!-- Toggle Button -->
+    <button id="chatToggleBtn" class="chat-toggle-btn">
+      <img src="{{ asset('logo-single.png') }}" alt="Chat Icon" class="chat-icon">
+    </button>
 
-  <!-- Chat Window -->
-  <div id="chatPopup" class="chat-window">
-    <!-- Chat Header -->
-    <div class="chat-header">
-      <div class="chat-title text-dark">LoafBot Assistant</div>
-      <button id="closeChat" class="close-btn">&times;</button>
-    </div>
+    <!-- Chat Window -->
+    <div id="chatPopup" class="chat-window">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-title text-dark">LoafBot Assistant</div>
+        <button id="closeChat" class="close-btn">&times;</button>
+      </div>
 
-    <!-- Messages Container -->
-    <div class="messages-container" id="chat-messages">
-      <!-- Welcome Message -->
-      <div class="message bot-message">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" 
-             alt="AI Assistant" class="message-avatar">
-        <div class="message-bubble">
-          Hello! I'm LoafBot. How can I help you today?
+      <!-- Messages Container -->
+      <div class="messages-container" id="chat-messages">
+        <!-- Welcome Message -->
+        <div class="message bot-message">
+          <img src="{{ asset('logo-single.png') }}"
+            alt="AI Assistant" class="message-avatar">
+          <div class="message-bubble">
+            Hello! I'm LoafBot. How can I help you today?
+          </div>
+        </div>
+
+        <!-- Typing Indicator (hidden by default) -->
+        <div id="typingIndicator" class="typing-indicator" style="display: none;">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
         </div>
       </div>
-      
-      <!-- Typing Indicator (hidden by default) -->
-      <div id="typingIndicator" class="typing-indicator" style="display: none;">
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <input type="text" id="textAreaExample" class="message-input" placeholder="Type your message...">
+        <button class="send-btn" id="send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
       </div>
     </div>
-
-    <!-- Input Area -->
-    <div class="input-area">
-      <input type="text" id="textAreaExample" class="message-input" placeholder="Type your message...">
-      <button class="send-btn" id="send-btn">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-    </div>
   </div>
-</div>
 </section>
 
 
@@ -400,7 +427,7 @@
 
 <!-- Chat Logic -->
 <script>
-   // Chat Logic (updated for new UI)
+  // Chat Logic (updated for new UI)
   const toggleBtn = document.getElementById('chatToggleBtn');
   const chatPopup = document.getElementById('chatPopup');
   const closeChat = document.getElementById('closeChat');
@@ -412,6 +439,17 @@
   document.getElementById('chatToggleBtn').classList.add('has-new-message');
   document.getElementById('chatToggleBtn').classList.remove('has-new-message');
 
+  window.addEventListener('DOMContentLoaded', () => {
+    loadChatHistory();
+  });
+
+  function loadChatHistory() {
+    const messages = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    messages.forEach(msg => {
+      appendMessage(msg.sender, msg.text, true); // true = skip save
+    });
+  }
+
   // Toggle chat window
   toggleBtn.addEventListener('click', () => {
     chatPopup.classList.toggle('show');
@@ -419,6 +457,7 @@
       input.focus();
     }
   });
+
 
   // Close chat
   closeChat.addEventListener('click', () => {
@@ -441,7 +480,7 @@
     appendMessage('user', message);
     input.value = '';
     input.disabled = true;
-    
+
     // Show typing indicator
     typingIndicator.style.display = 'flex';
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -454,7 +493,9 @@
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': '{{ csrf_token() }}',
           },
-          body: JSON.stringify({ message: message })
+          body: JSON.stringify({
+            message: message
+          })
         })
         .then(res => res.json())
         .then(data => {
@@ -472,21 +513,21 @@
     }, 1000); // 1 second delay to simulate typing
   }
 
-  function appendMessage(sender, text) {
+  function appendMessage(sender, text, skipSave = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}-message`;
-    
+
     const avatar = document.createElement('img');
     avatar.src = sender === 'user'
-      ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp'
-      : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp';
+      ? '{{ asset('user.png') }}'
+      : '{{ asset('logo-single.png') }}';
     avatar.className = 'message-avatar';
     avatar.alt = sender === 'user' ? 'You' : 'AI Assistant';
-    
+
     const bubble = document.createElement('div');
     bubble.className = 'message-bubble';
     bubble.textContent = text;
-    
+
     if (sender === 'user') {
       messageDiv.appendChild(bubble);
       messageDiv.appendChild(avatar);
@@ -494,19 +535,32 @@
       messageDiv.appendChild(avatar);
       messageDiv.appendChild(bubble);
     }
-    
+
     chatMessages.insertBefore(messageDiv, typingIndicator);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    if (!skipSave) {
+      saveMessageToLocalStorage(sender, text);
+    }
+  }
+
+  function saveMessageToLocalStorage(sender, text) {
+    const messages = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    messages.push({
+      sender,
+      text
+    });
+    localStorage.setItem('chatHistory', JSON.stringify(messages));
   }
 </script>
 
 <script>
-  $(document).on('click', '.search-button', function () {
+  $(document).on('click', '.search-button', function() {
     // Delay slightly to ensure popup is visible before trying to load
     setTimeout(() => {
       // Only load if it's currently empty
       if ($('#random-genre-list').children().length === 0) {
-        $.get("{{ route('random-genres') }}", function (genres) {
+        $.get("{{ route('random-genres') }}", function(genres) {
           let html = '';
           genres.forEach(genre => {
             html += `
@@ -515,11 +569,10 @@
                         </li>`;
           });
           $('#random-genre-list').html(html);
-        }).fail(function () {
+        }).fail(function() {
           console.error('Failed to fetch random genres');
         });
       }
     }, 300);
   });
 </script>
-

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
@@ -153,6 +154,12 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
     Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
     Route::delete('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
+
+    /* MANAGE BANNER */
+
+    Route::get('/banners-create', [BannerController::class, 'create'])->name('banners-create');
+    Route::post('/banners-store', [BannerController::class, 'store'])->name('banners-store');
+
 });
 
 /* ---- */
