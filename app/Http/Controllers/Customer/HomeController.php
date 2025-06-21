@@ -30,125 +30,146 @@ class HomeController extends BaseController
     {
 
         //For showing the reviews from the users
-    $reviews = DB::table('book_reviews')
-    ->join('users', 'book_reviews.user_id', '=', 'users.id')
-    ->join('books', 'book_reviews.book_id', '=', 'books.id')
-    ->select(
-        'book_reviews.rating',
-        'book_reviews.review',
-        'users.name as user_name',
-        'books.id as book_id',
-        'books.title as book_title',
-        'books.author',
-        'books.cover_image', // optional column if you have it
-        'books.price'        // optional column if you have it
-    )
-    ->latest('book_reviews.created_at')
-    ->take(6)
-    ->get();
+        $reviews = DB::table('book_reviews')
+            ->join('users', 'book_reviews.user_id', '=', 'users.id')
+            ->join('books', 'book_reviews.book_id', '=', 'books.id')
+            ->select(
+                'book_reviews.rating',
+                'book_reviews.review',
+                'users.name as user_name',
+                'books.id as book_id',
+                'books.title as book_title',
+                'books.author',
+                'books.cover_image', // optional column if you have it
+                'books.price'        // optional column if you have it
+            )
+            ->latest('book_reviews.created_at')
+            ->take(6)
+            ->get();
 
-    $homepageGenres = Genre::whereIn('name', [
-    'Fiction', 'Children', 'Self Help', 'Crime', 'Romance', 'Non-Fiction', 'Cooking'
-    ])->get();
+        $homepageGenres = Genre::whereIn('name', [
+            'Fiction',
+            'Children',
+            'Self Help',
+            'Crime',
+            'Romance',
+            'Non-Fiction',
+            'Cooking'
+        ])->get();
 
-    $genreImages = [
-        'Fiction' => 'public.png',
-        'Children' => 'children.png',
-        'Self Help' => 'self care.png',
-        'Crime' => 'thriller.png',
-        'Romance' => 'romance.png',
-        'Non-Fiction' => 'fiction.png',
-        'Cooking' => 'cooking.png',
-    ];
+        $genreImages = [
+            'Fiction' => 'public.png',
+            'Children' => 'children.png',
+            'Self Help' => 'self care.png',
+            'Crime' => 'thriller.png',
+            'Romance' => 'romance.png',
+            'Non-Fiction' => 'fiction.png',
+            'Cooking' => 'cooking.png',
+        ];
 
-    $currentYear = Carbon::now()->year;
+        $currentYear = Carbon::now()->year;
 
-    // Trending Now: Books with most reviews in current month
-    $startOfMonth = Carbon::now()->startOfMonth();
-    $endOfMonth = Carbon::now()->endOfMonth();
+        // Trending Now: Books with most reviews in current month
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
-    $trendingBooks = Book::whereHas('reviews', function ($query) use ($startOfMonth, $endOfMonth) {
-            $query->where('rating', 5)
-                ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-        })
-        ->withCount(['reviews as five_star_reviews_count' => function ($query) use ($startOfMonth, $endOfMonth) {
-            $query->where('rating', 5)
-                ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-        }])
-        ->orderByDesc('five_star_reviews_count')
-        ->take(3)
-        ->get();
 
-    // Get IDs of trending books already shown
-    $trendingBookIds = $trendingBooks->pluck('id')->toArray();
+        // 1. Trending Books (5-star reviews this month)
+        $trendingBooks = Book::withAvg('reviews', 'rating')
+            ->withCount(['reviews as five_star_reviews_count' => function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->where('rating', 5)
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            }])
+            ->whereHas('reviews', function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->where('rating', 5)
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            })
+            ->orderByDesc('five_star_reviews_count')
+            ->take(3)
+            ->get();
 
-    // Top 3 most reviewed books this year, excluding trending ones
-    $topBooks = DB::table('book_reviews')
-        ->select('book_id', DB::raw('COUNT(*) as review_count'))
-        ->whereYear('created_at', $currentYear)
-        ->whereNotIn('book_id', $trendingBookIds) // 👈 exclude trending books
-        ->groupBy('book_id')
-        ->orderByDesc('review_count')
-        ->take(3)
-        ->pluck('book_id');
+        $trendingBookIds = $trendingBooks->pluck('id')->toArray();
 
-    $topBookDetails = Book::whereIn('id', $topBooks)->get();
+        // 2. Top 3 Most Reviewed Books (excluding trending ones)
+        $topBooks = DB::table('book_reviews')
+            ->select('book_id', DB::raw('COUNT(*) as review_count'))
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('book_id')
+            ->orderByDesc('review_count')
+            ->take(3)
+            ->pluck('book_id');
 
-    // Retrieve full book details with average rating
-    $booksOfTheYear = \App\Models\Book::withAvg('reviews', 'rating')
-        ->whereIn('id', $topBooks)
-        ->get();
+        $topBookDetails = Book::whereIn('id', $topBooks)->get();
+
+        $booksOfTheYear = Book::withAvg('reviews', 'rating')
+            ->whereIn('id', $topBooks)
+            ->get();
 
         $excludedBookIds = array_merge(
-        $trendingBooks->pluck('id')->toArray(),
-        $topBookDetails->pluck('id')->toArray()
+            $trendingBooks->pluck('id')->toArray(),
+            $topBookDetails->pluck('id')->toArray()
         );
 
-    $gottaHaveIt = Book::withAvg('reviews', 'rating')
-    ->withCount('reviews')
-    ->whereHas('reviews', function ($query) {
-        $query->where('rating', '>=', 4);
-    })
-    // 🔴 Removed: ->whereNotIn('id', $excludedBookIds)
-    ->having('reviews_avg_rating', '>=', 4.5)
-    ->having('reviews_avg_rating', '<=', 5)
-    ->having('reviews_count', '>=', 10)
-    ->orderByDesc('reviews_avg_rating')
-    ->take(3)
-    ->get();
+        // 3. Gotta Have It (Highly Rated Books, Excluding Others)
+        $excludedBookIds = array_merge(
+            $trendingBooks->pluck('id')->toArray(),
+            $topBookDetails->pluck('id')->toArray()
+        );
 
-    $newArrivals = Book::orderByDesc('created_at')
-    ->take(3)
-    ->get();
+        $gottaHaveIt = Book::withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->whereHas('reviews', function ($query) {
+                $query->where('rating', '>=', 4);
+            })
+            ->whereNotIn('id', $excludedBookIds) // ✅ Important: exclude already featured
+            ->having('reviews_avg_rating', '>=', 4.5)
+            ->orderByDesc('reviews_count')
+            ->take(3)
+            ->get();
 
-   $bestSellingBooks = DB::table('order_items')
-    ->join('orders', 'order_items.order_id', '=', 'orders.id')
-    ->join('books', 'order_items.book_id', '=', 'books.id')
-    ->select('books.id', 'books.title', 'books.author', 'books.cover_image', 'books.price', DB::raw('SUM(order_items.quantity) as total_sold'))
-    ->where('orders.status', 'completed') // adjust to your actual status
-    ->groupBy('books.id', 'books.title', 'books.author', 'books.cover_image', 'books.price')
-    ->orderByDesc('total_sold')
-    ->take(6) // or however many best-sellers you want
-    ->get();
-    
+        // 4. New Arrivals
+        $newArrivals = Book::withAvg('reviews', 'rating')
+            ->orderByDesc('created_at')
+            ->take(3)
+            ->get();
 
-        return view('index', compact('reviews', 
-        'homepageGenres',
-        'genreImages',
-        'currentYear',
-        'topBooks',
-        'booksOfTheYear',
-        'startOfMonth',
-        'endOfMonth',
-        'trendingBooks',
-        'trendingBookIds',
-        'excludedBookIds',
-        'trendingBooks',
-        'topBookDetails',
-        'gottaHaveIt',
-        'newArrivals',
-        'bestSellingBooks'
-    ));
+        $rawBestSellers = DB::table('order_items')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->join('books', 'order_items.book_id', '=', 'books.id')
+            ->where('orders.status', 'completed')
+            ->select('books.id', DB::raw('SUM(order_items.quantity) as total_sold'))
+            ->groupBy('books.id')
+            ->orderByDesc('total_sold')
+            ->take(6)
+            ->get()
+            ->keyBy('id');
+
+        $bestSellingBooks = Book::withAvg('reviews', 'rating')
+            ->whereIn('id', $rawBestSellers->keys())
+            ->get()
+            ->map(function ($book) use ($rawBestSellers) {
+                $book->total_sold = $rawBestSellers[$book->id]->total_sold;
+                return $book;
+            });
+
+        return view('index', compact(
+            'reviews',
+            'homepageGenres',
+            'genreImages',
+            'currentYear',
+            'topBooks',
+            'booksOfTheYear',
+            'startOfMonth',
+            'endOfMonth',
+            'trendingBooks',
+            'trendingBookIds',
+            'excludedBookIds',
+            'trendingBooks',
+            'topBookDetails',
+            'gottaHaveIt',
+            'newArrivals',
+            'bestSellingBooks'
+        ));
     }
 
     public function showBook()
@@ -173,22 +194,22 @@ class HomeController extends BaseController
     {
 
         //For showing the reviews from the users
-    $reviews = DB::table('book_reviews')
-    ->join('users', 'book_reviews.user_id', '=', 'users.id')
-    ->join('books', 'book_reviews.book_id', '=', 'books.id')
-    ->select(
-        'book_reviews.rating',
-        'book_reviews.review',
-        'users.name as user_name',
-        'books.id as book_id',
-        'books.title as book_title',
-        'books.author',
-        'books.cover_image', // optional column if you have it
-        'books.price'        // optional column if you have it
-    )
-    ->latest('book_reviews.created_at')
-    ->take(6)
-    ->get();
+        $reviews = DB::table('book_reviews')
+            ->join('users', 'book_reviews.user_id', '=', 'users.id')
+            ->join('books', 'book_reviews.book_id', '=', 'books.id')
+            ->select(
+                'book_reviews.rating',
+                'book_reviews.review',
+                'users.name as user_name',
+                'books.id as book_id',
+                'books.title as book_title',
+                'books.author',
+                'books.cover_image', // optional column if you have it
+                'books.price'        // optional column if you have it
+            )
+            ->latest('book_reviews.created_at')
+            ->take(6)
+            ->get();
         return view('contact', compact('reviews'));
     }
 

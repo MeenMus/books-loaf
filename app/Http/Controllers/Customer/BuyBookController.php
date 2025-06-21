@@ -31,13 +31,13 @@ class BuyBookController extends BaseController
         $genreIds = $book->genres->pluck('id');
 
         // Get up to 10 related books from any of those genres, excluding the current book
-        $relatedBooks = Book::whereHas('genres', function ($query) use ($genreIds) {
-            $query->whereIn('genres.id', $genreIds);
-        })
+        $relatedBooks = Book::withAvg('reviews', 'rating')
+            ->whereHas('genres', function ($query) use ($genreIds) {
+                $query->whereIn('genres.id', $genreIds);
+            })
             ->where('books.id', '!=', $book->id)
             ->limit(10)
             ->get();
-
 
         return view('book', compact('book', 'relatedBooks', 'bookReviews', 'averageRating'));
     }

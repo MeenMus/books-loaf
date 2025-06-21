@@ -59,7 +59,7 @@
                         <small>{{ $ticket->user->email }}</small>
                     </td>
                     <td>{{ ucfirst($ticket->subject) }}</td>
-                    <td>{{ Str::limit($ticket->message, 100) }}</td>
+                    <td style="white-space: pre-line;">{{ Str::limit($ticket->message, 100) }}</td>
                     <td>
                         <span class="badge p-2 fw-semibold bg-{{ $ticket->status === 'resolved' ? 'warning' : ($ticket->status === 'closed' ? 'success' : 'info') }}">
                             {{ ucfirst($ticket->status) }}
@@ -67,7 +67,7 @@
                     </td>
                     <td>{{ $ticket->created_at->format('Y-m-d H:i') }}</td>
                     <td>
-                       <a href="{{ route('tickets-page', $ticket->id) }}" style="text-decoration: none;">
+                        <a href="{{ route('tickets-page', $ticket->id) }}" style="text-decoration: none;">
 
                             View <i class="bi bi-arrow-right-circle"></i>
                         </a>

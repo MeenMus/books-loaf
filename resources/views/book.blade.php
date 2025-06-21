@@ -7,44 +7,6 @@
 
   @include('layouts.navbar')
 
-  <style>
-    /* Star Ratings */
-    .average-rating {
-      font-size: 1.1rem;
-    }
-
-    .star {
-      width: 20px;
-      height: 20px;
-      margin-right: 2px;
-      display: inline-block;
-      /* Ensures stars align horizontally */
-    }
-
-    .star-fill {
-      fill: #ffc107;
-      /* Gold for full stars */
-    }
-
-    .star-empty {
-      fill: #e4e5e9;
-      /* Light gray for empty stars */
-    }
-
-    .star-half {
-      fill: #ffc107;
-      /* Gold for half stars (same as full) */
-      opacity: 0.7;
-      /* Optional: Makes half-stars slightly lighter */
-    }
-
-    .review-summary {
-      border: 2px solid #eee;
-      padding: 15px;
-      border-radius: 8px;
-    }
-  </style>
-
   <section class="single-product padding-large">
     <div class="container">
       <div class="row">
@@ -62,62 +24,39 @@
               <h3 class="product-title">{{ $book->title }}</h3>
               <div class="product-price d-flex align-items-center mt-2">
                 <span class="fs-2 fw-light text-primary me-2">RM {{ $book->price }}</span>
-                
-              </div>
- @if($bookReviews->isNotEmpty())
-                    <!-- <span class="fs-4 fw-bold me-2">{{ $averageRating }}</span> -->
-                    <div class="rating text-warning">
-                      @for ($i = 1; $i <= 5; $i++)
-                        @if($averageRating>= $i)
-                        <!-- Full Star -->
-                        <svg class="star star-fill" width="20" height="20">
-                          <use xlink:href="#star-fill"></use>
-                        </svg>
-                        @elseif($averageRating > ($i - 1) && $averageRating < $i)
-                          <!-- Half Star -->
-                          <svg class="star star-half" width="20" height="20">
-                            <use xlink:href="#star-half"></use>
-                          </svg>
-                          @else
-                          <!-- Empty Star -->
-                          <svg class="star star-empty" width="20" height="20">
-                            <use xlink:href="#star-empty"></use>
-                          </svg>
-                          @endif
-                          @endfor
-                    </div>
-                    @else
-    <div class="rating d-flex align-items-center mt-2">
-        @for ($i = 0; $i < 5; $i++)
-            <svg class="star star-empty" width="20" height="20" style="fill: none; stroke: #ffc107; stroke-width: 1.5;">
-                <use xlink:href="#star" />
-            </svg>
-            
-             
-        @endfor
-    </div>
-    
-@endif
 
-                 {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
-              <!-- RATING PLEASE -->
-              <!-- <div class="rating text-warning d-flex align-items-center mb-2">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div> -->
+              </div>
+              <div class="rating text-warning">
+                @if($bookReviews->isNotEmpty())
+                @for ($i = 1; $i <= 5; $i++)
+                  @if($averageRating>= $i)
+                  <!-- Full Star -->
+                  <svg class="star star-fill" width="20" height="20">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                  @elseif($averageRating > ($i - 1) && $averageRating < $i)
+                    <!-- Half Star -->
+                    <svg class="star star-half" width="20" height="20">
+                      <use xlink:href="#star-half"></use>
+                    </svg>
+                    @else
+                    <!-- Empty Star -->
+                    <svg class="star star-empty" width="20" height="20">
+                      <use xlink:href="#star-empty"></use>
+                    </svg>
+                    @endif
+                    @endfor
+                    @else
+                    {{-- No ratings: show 5 empty stars --}}
+                    @for ($i = 1; $i <= 5; $i++)
+                      <svg class="star star-empty" width="20" height="20">
+                      <use xlink:href="#star-empty"></use>
+                      </svg>
+                      @endfor
+                      @endif
+              </div>
+
+              {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
 
             </div>
             <hr>
@@ -362,32 +301,71 @@
               @if(isset($related->cover_image))
               <img src="{{ url($related->cover_image) }}" class="img-fluid shadow-sm" alt="{{ $related->title }}">
               @endif
+
               <h6 class="mt-4 mb-0 fw-bold">
                 <a href="{{ url('book/' . $related->id) }}">{{ $related->title }}</a>
               </h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">{{ $related->author }}</p>
 
-                <div class="rating text-warning d-flex align-items-center">
-                  @for ($i = 0; $i < 5; $i++)
-                    <svg class="star star-fill">
+              <p class="fs-6 text-black-50 mb-1">{{ $related->author }}</p>
+
+              @php
+              $averageRating = round($related->reviews_avg_rating ?? 0, 1);
+              @endphp
+
+              <div class="rating d-flex align-items-center mb-2">
+                @if ($averageRating > 0)
+                @for ($i = 1; $i <= 5; $i++)
+                  @if($averageRating>= $i)
+                  <svg class="star star-fill me-1" width="16" height="16" style="fill: #ffc107;">
                     <use xlink:href="#star-fill"></use>
+                  </svg>
+                  @elseif($averageRating > ($i - 1) && $averageRating < $i)
+                    <svg class="star star-half me-1" width="16" height="16" style="fill: #ffc107;">
+                    <use xlink:href="#star-half"></use>
                     </svg>
+                    @else
+                    <svg class="star star-empty me-1" width="16" height="16" style="fill: #e4e5e9;">
+                      <use xlink:href="#star-empty"></use>
+                    </svg>
+                    @endif
                     @endfor
-                </div>
+                    @else
+                    {{-- No ratings: show 5 empty stars --}}
+                    @for ($i = 1; $i <= 5; $i++)
+                      <svg class="star star-empty me-1" width="16" height="16" style="fill: #e4e5e9;">
+                      <use xlink:href="#star-empty"></use>
+                      </svg>
+                      @endfor
+                      @endif
               </div>
-              <span class="price text-primary fw-bold mb-2 fs-5">RM{{ $related->price }}</span>
+
+              <span class="price text-primary fw-bold mb-2 fs-5">RM{{ number_format($related->price, 2) }}</span>
+
               <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                <button type="button" class="btn btn-dark">
-                  <svg class="cart">
-                    <use xlink:href="#cart"></use>
-                  </svg>
-                </button>
-                <a href="#" class="btn btn-dark">
-                  <svg class="wishlist">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
+
+
+                {{-- Add to cart form --}}
+                <form method="POST" action="{{ route('cart-add', $related->id) }}">
+                  @csrf
+                  <input type="hidden" name="quantity" value="1" id="cartQuantityInput">
+                  <button type="submit" class="btn btn-dark" title="Add to cart">
+                    <svg class="cart" width="20" height="20">
+                      <use xlink:href="#cart"></use>
+                    </svg>
+                  </button>
+                </form>
+
+                {{-- Like form --}}
+                <form method="POST" action="{{ route('like', $related->id) }}">
+                  @csrf
+                  <button type="submit" class="btn {{ $related->isLikedBy(Auth::user()) ? 'btn' : 'btn-dark' }}" title="Add to wishlist">
+                    <svg class="wishlist" width="20" height="20">
+                      <use xlink:href="#heart"></use>
+                    </svg>
+                  </button>
+                </form>
+
+
               </div>
             </div>
           </div>
@@ -402,7 +380,11 @@
 
   <script>
     let quantity = 1;
-    const maxStock = {{ $book->stock}};
+    const maxStock = {
+      {
+        $book - > stock
+      }
+    };
 
     // Handle both inputs safely
     const displayInput = document.getElementById('quantity') || document.getElementById('quantityDisplay');
@@ -421,26 +403,26 @@
     }
   </script>
   <svg style="display: none;">
-  <symbol id="star-fill" viewBox="0 0 16 16">
-    <path d="M3.612 15.443c-.396.198-.824-.149-.746-.592l.83-4.73L.173 
+    <symbol id="star-fill" viewBox="0 0 16 16">
+      <path d="M3.612 15.443c-.396.198-.824-.149-.746-.592l.83-4.73L.173 
     6.765c-.329-.32-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 
     0l2.184 4.327 4.898.696c.441.062.612.63.282.95l-3.522 
     3.356.83 4.73c.078.443-.35.79-.746.592L8 
-    13.187l-4.389 2.256z"/>
-  </symbol>
-  <symbol id="star-half" viewBox="0 0 16 16">
-    <path d="M5.354 5.119l-.83 4.73L.998 6.765l4.898-.696L7.538.792v12.395l-4.389 
+    13.187l-4.389 2.256z" />
+    </symbol>
+    <symbol id="star-half" viewBox="0 0 16 16">
+      <path d="M5.354 5.119l-.83 4.73L.998 6.765l4.898-.696L7.538.792v12.395l-4.389 
     2.256c-.396.198-.824-.149-.746-.592l.83-4.73L.173 
-    6.765c-.329-.32-.158-.888.283-.95l4.898-.696z"/>
-  </symbol>
-  <symbol id="star" viewBox="0 0 16 16">
-    <path d="M2.866 14.85c-.078.444.36.791.746.593L8 
+    6.765c-.329-.32-.158-.888.283-.95l4.898-.696z" />
+    </symbol>
+    <symbol id="star" viewBox="0 0 16 16">
+      <path d="M2.866 14.85c-.078.444.36.791.746.593L8 
     13.187l4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 
     3.522-3.356c.33-.32.16-.888-.282-.95l-4.898-.696L8 
     .792 5.816 5.12l-4.898.696c-.441.062-.612.63-.283.95l3.522 
-    3.356-.83 4.73z"/>
-  </symbol>
-</svg>
+    3.356-.83 4.73z" />
+    </symbol>
+  </svg>
 </body>
 
 
