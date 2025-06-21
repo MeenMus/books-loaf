@@ -11,6 +11,7 @@ use App\Models\BookReview;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -25,7 +26,41 @@ class HomeController extends BaseController
 
     public function showIndex()
     {
-        return view('index');
+
+        //For showing the reviews from the users
+    $reviews = DB::table('book_reviews')
+    ->join('users', 'book_reviews.user_id', '=', 'users.id')
+    ->join('books', 'book_reviews.book_id', '=', 'books.id')
+    ->select(
+        'book_reviews.rating',
+        'book_reviews.review',
+        'users.name as user_name',
+        'books.id as book_id',
+        'books.title as book_title',
+        'books.author',
+        'books.cover_image', // optional column if you have it
+        'books.price'        // optional column if you have it
+    )
+    ->latest('book_reviews.created_at')
+    ->take(6)
+    ->get();
+
+    $homepageGenres = Genre::whereIn('name', [
+    'Fiction', 'Children', 'Self Help', 'Crime', 'Romance', 'Non-Fiction', 'Cooking'
+])->get();
+
+ $genreImages = [
+    'Fiction' => 'public.png',
+    'Children' => 'children.png',
+    'Self Help' => 'self care.png',
+    'Crime' => 'thriller.png',
+    'Romance' => 'romance.png',
+    'Non-Fiction' => 'fiction.png',
+    'Cooking' => 'cooking.png',
+  ];
+
+
+        return view('index', compact('reviews', 'homepageGenres','genreImages'));
     }
 
     public function showBook()
@@ -48,7 +83,25 @@ class HomeController extends BaseController
 
     public function showContact()
     {
-        return view('contact');
+
+        //For showing the reviews from the users
+    $reviews = DB::table('book_reviews')
+    ->join('users', 'book_reviews.user_id', '=', 'users.id')
+    ->join('books', 'book_reviews.book_id', '=', 'books.id')
+    ->select(
+        'book_reviews.rating',
+        'book_reviews.review',
+        'users.name as user_name',
+        'books.id as book_id',
+        'books.title as book_title',
+        'books.author',
+        'books.cover_image', // optional column if you have it
+        'books.price'        // optional column if you have it
+    )
+    ->latest('book_reviews.created_at')
+    ->take(6)
+    ->get();
+        return view('contact', compact('reviews'));
     }
 
 

@@ -93,7 +93,7 @@
 
 #main-category-swiper .card-container {
   width: 200px;
-  height: 240px;
+  height: 280px;
 }
 
 /* Larger card styling */
@@ -109,7 +109,7 @@
 
 /* Enlarged image */
 .client-card img {
-  height: 200px !important; /* Increased from 150px */
+  height: 90px !important; /* Increased from 150px */
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -849,20 +849,28 @@
     </svg>
   </div>
 
-       <!-- Swiper content -->
+      <!-- Swiper content -->
   <div class="swiper category-swiper" id="main-category-swiper">
     <div class="swiper-wrapper">
           <!-- Category Slides -->
+        @foreach ($homepageGenres as $genre)
           <div class="swiper-slide">
-           <div class="card-container">
-              <div class="client-card">
-              <img src="images/public.png" alt="Fiction" class="img-fluid" style="height:150px; object-fit: contain;" />
-              <p class="mt-2">Fiction</p>
+            <div class="card-container">
+              <a href="{{ url('shop/' . $genre->id) }}">
+                <div class="client-card text-center">
+                  <img src="{{ asset('images/' . ($genreImages[$genre->name] ?? 'default.png')) }}"
+                      alt="{{ $genre->name }}"
+                      class="img-fluid"
+                      style="height:100px; object-fit: contain;" />
+                  <p class="mt-2">{{ $genre->name }}</p>
                 </div>
+              </a>
             </div>
           </div>
+        @endforeach
 
-          <div class="swiper-slide">
+          <!-- HardCode Categories swiper  -->
+          <!-- <div class="swiper-slide">
             <div class="card-container">
               <div class="client-card">
               <img src="images/children.png" alt="Children's Books" class="img-fluid" style="height:150px; object-fit: contain;" />
@@ -915,7 +923,7 @@
               <p class="mt-2">Cooking</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -947,112 +955,30 @@
       </div>
       <div class="swiper testimonial-swiper ">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"Pengalaman membeli buku di BooksLoaf memang terbaik! Proses pembelian sangat mudah dan penghantaran pun cepat. Buku sampai dalam keadaan sempurna dan dibalut dengan kemas. Saya juga suka pilihan buku yang ditawarkan – dari novel, buku motivasi, hingga bahan rujukan pelajaran. Pasti akan beli lagi lepas ni. Terima kasih BooksLoaf!"</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
+         @forelse ($reviews as $review)
+            <div class="swiper-slide">
+              <div class="card position-relative text-left p-5 border rounded-3">
+                <blockquote>"{{ $review->review }}"</blockquote>
+
+                <div class="rating text-warning d-flex align-items-center">
+                  @for ($i = 0; $i < $review->rating; $i++)
+                    <svg class="star star-fill" style="fill: #ffc107;">
+                      <use xlink:href="#star-fill"></use>
+                    </svg>
+                  @endfor
+                </div>
+
+                <h5 class="mt-1 fw-normal">{{ $review->user_name }}</h5>
+                <p>{{ $review->book_title }}</p>
               </div>
-              <h5 class="mt-1 fw-noRM al">Nurul Aina, Kelantan</h5>
             </div>
-          </div>
+          @empty
           <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"Shopping for books at BooksLoaf was an amazing experience! The ordering process was smooth, and delivery was fast. The books arrived in perfect condition and were well-packaged. I also love the variety of books available – from novels and self-help to academic references. Definitely coming back for more. Thank you, BooksLoaf!"</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Nadhir Nasar, Perak</h5>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"BooksLoaf 帮我找到很多实惠的教材。送货速度非常快，我在开学前就收到了全部书籍。非常推荐给学生！"</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Kevin Tan</h5>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“我喜欢在 BooksLoaf 浏览最新小说。他们的推荐总是很贴合我的口味，购买流程也很方便”</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Joyce Ang</h5>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“I love browsing the latest novels on BooksLoaf. The recommendations are always spot-on and the checkout process is simple.”</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-               <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Jennifer Huh</h5>
-            </div>
-          </div>
+            <div class="card text-center p-5 border rounded-3">
+        <p>No reviews available yet.</p>
+      </div>
+    </div>
+  @endforelse
         </div>
       </div>
     </div>

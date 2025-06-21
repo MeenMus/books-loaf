@@ -59,8 +59,8 @@
 
             <div class="w-100 d-flex gap-3">
               <div class="w-50">
-                <input type="text" name="name" class="form-control w-100"
-                  value="{{ auth()->user()->name }}" readonly>
+              <input type="text" name="name" class="form-control w-100"
+              value="{{ optional(auth()->user())->name }}" readonly>
               </div>
               <div class="w-50">
                 <input type="number" name="phone" placeholder="PHONE NUMBER *"
@@ -69,8 +69,9 @@
             </div>
 
             <div class="w-100">
-              <input type="email" name="email" class="form-control w-100"
-                value="{{ auth()->user()->email }}" readonly>
+              
+            <input type="email" name="email" class="form-control w-100"
+              value="{{ optional(auth()->user())->email }}" readonly>
             </div>
 
             <div class="w-100">
@@ -114,112 +115,30 @@
       </div>
       <div class="swiper testimonial-swiper ">
         <div class="swiper-wrapper">
+          @forelse ($reviews as $review)
           <div class="swiper-slide">
             <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"Pengalaman membeli buku di BooksLoaf memang terbaik! Proses pembelian sangat mudah dan penghantaran pun cepat. Buku sampai dalam keadaan sempurna dan dibalut dengan kemas. Saya juga suka pilihan buku yang ditawarkan – dari novel, buku motivasi, hingga bahan rujukan pelajaran. Pasti akan beli lagi lepas ni. Terima kasih BooksLoaf!"</blockquote>
+              <blockquote>"{{ $review->review }}"</blockquote>
+
               <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
+                @for ($i = 0; $i < $review->rating; $i++)
+                  <svg class="star star-fill" style="fill: #ffc107;">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                @endfor
               </div>
-              <h5 class="mt-1 fw-noRM al">Nurul Aina, Kelantan</h5>
+
+              <h5 class="mt-1 fw-normal">{{ $review->user_name }}</h5>
+              <p>{{ $review->book_title }}</p>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"Shopping for books at BooksLoaf was an amazing experience! The ordering process was smooth, and delivery was fast. The books arrived in perfect condition and were well-packaged. I also love the variety of books available – from novels and self-help to academic references. Definitely coming back for more. Thank you, BooksLoaf!"</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Nadhir Nasar, Perak</h5>
+        @empty
+        <div class="swiper-slide">
+            <div class="card text-center p-5 border rounded-3">
+              <p>No reviews available yet.</p>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>"BooksLoaf 帮我找到很多实惠的教材。送货速度非常快，我在开学前就收到了全部书籍。非常推荐给学生！"</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Kevin Tan</h5>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“我喜欢在 BooksLoaf 浏览最新小说。他们的推荐总是很贴合我的口味，购买流程也很方便”</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Joyce Ang</h5>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative text-left p-5 border rounded-3">
-              <blockquote>“I love browsing the latest novels on BooksLoaf. The recommendations are always spot-on and the checkout process is simple.”</blockquote>
-              <div class="rating text-warning d-flex align-items-center">
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-                <svg class="star star-fill">
-                  <use xlink:href="#star-fill"></use>
-                </svg>
-              </div>
-              <h5 class="mt-1 fw-noRM al">Jennifer Huh</h5>
-            </div>
-          </div>
+        @endforelse
         </div>
       </div>
     </div>
