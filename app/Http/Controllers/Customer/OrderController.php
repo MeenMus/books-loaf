@@ -46,6 +46,10 @@ class OrderController extends BaseController
 
     public function printReceipt(Order $order)
     {
+        if ($order->user_id !== auth()->id()) {
+            return redirect()->route('orders');
+        }
+
         $order->load('orderItems.book');
         return view('components.orders-receipt', compact('order'));
     }

@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\SupportTicketController as AdminSupportTicketController;
-use App\Http\Controllers\Customer\SupportTicketController ;
+use App\Http\Controllers\Customer\SupportTicketController;
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -41,53 +41,76 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-/* CUSTOMER STUFF */
+/* CUSTOMER ROUTES */
+
 Route::get('/', [HomeController::class, 'showIndex']);
 Route::get('/index-2', [HomeController::class, 'showIndexAlt']);
 Route::get('/single-product', [HomeController::class, 'showBook']);
-
 Route::get('/shop/{id}', [ShopController::class, 'index'])->name('shop');
-
 Route::get('/book/{id}', [BuyBookController::class, 'index'])->name('book');
-
-Route::post('/cart-add/{id}', [CartController::class, 'addCart'])->name('cart-add')->middleware('auth');
-Route::post('/like/{book}', [LikeController::class, 'toggleLike'])->name('like')->middleware('auth');
-Route::post('/cart-add-all-liked', [CartController::class, 'addAllLiked'])->name('cart-add-all-liked')->middleware('auth');
-Route::get('/user-likes', [LikeController::class, 'fetchLikes'])->name('user-likes')->middleware('auth');
-Route::get('/user-cart', [CartController::class, 'fetchCart'])->name('user-cart')->middleware('auth');
-Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
-Route::delete('/cart-remove/{id}', [CartController::class, 'removeCart'])->name('cart-remove')->middleware('auth');
-Route::post('/cart-update', [CartController::class, 'updateCart'])->name('cart-update')->middleware('auth');
-
-Route::get('/checkout', [CartController::class, 'showCheckout'])->name('checkout')->middleware('auth');
-Route::post('/order-now/{id}', [CartController::class, 'orderNow'])->name('order-now')->middleware('auth');
-
-Route::get('/profile', [ProfileController::class, 'create'])->name('profile')->middleware('auth');
-Route::post('/profile-update', [ProfileController::class, 'store'])->name('profile-update')->middleware('auth');
-
-Route::get('/orders', [OrderController::class, 'index'])->name('orders')->middleware('auth');
-Route::get('/orders-receipt/{order}', [OrderController::class, 'printReceipt'])->name('orders-receipt')->middleware('auth');
-
-Route::post('/orders/review/submit', [BookReviewController::class, 'submitReview'])->name('review-update')->middleware('auth');
-
-Route::post('/checkout-stripe', [PaymentController::class, 'redirectToStripeCheckout'])->name('checkout-stripe')->middleware('auth');
-Route::get('/checkout-success', [PaymentController::class, 'stripeSuccess'])->name('checkout-success')->middleware('auth');
-Route::get('/checkout-cancel', [PaymentController::class, 'stripeCancel'])->name('checkout-cancel')->middleware('auth');
-
-
 Route::get('/contact', [HomeController::class, 'showContact']);
-
-Route::post('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
-
 Route::get('/random-genres', [ShopController::class, 'randomGenres'])->name('random-genres');
 Route::get('/search-books', [ShopController::class, 'searchBooks'])->name('search-books');
 
+/* AUTHENTICATED CUSTOMER ROUTES */
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/support', [SupportTicketController::class, 'index'])->name('support')->middleware('auth');
-Route::post('/support-ticket', [SupportTicketController::class, 'store'])->name('support-store')->middleware('auth');;
-Route::get('/support-reply/{ticket}', [SupportTicketController::class, 'showReplyForm'])->name('support-reply-form')->middleware('auth');;
-Route::post('/support-reply/{ticket}', [SupportTicketController::class, 'submitReply'])->name('support-reply-submit')->middleware('auth');;
+    // ====================
+    // Cart Management
+    // ====================
+    Route::post('/cart-add/{id}', [CartController::class, 'addCart'])->name('cart-add');
+    Route::post('/cart-add-all-liked', [CartController::class, 'addAllLiked'])->name('cart-add-all-liked');
+    Route::get('/user-cart', [CartController::class, 'fetchCart'])->name('user-cart');
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::delete('/cart-remove/{id}', [CartController::class, 'removeCart'])->name('cart-remove');
+    Route::post('/cart-update', [CartController::class, 'updateCart'])->name('cart-update');
 
+    // ====================
+    //  Likes
+    // ====================
+    Route::post('/like/{book}', [LikeController::class, 'toggleLike'])->name('like');
+    Route::get('/user-likes', [LikeController::class, 'fetchLikes'])->name('user-likes');
+
+    // ====================
+    //  Checkout & Orders
+    // ====================
+    Route::get('/checkout', [CartController::class, 'showCheckout'])->name('checkout');
+    Route::post('/order-now/{id}', [CartController::class, 'orderNow'])->name('order-now');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/orders-receipt-customer/{order}', [OrderController::class, 'printReceipt'])->name('orders-receipt-customer');
+
+    // ====================
+    //  Reviews
+    // ====================
+    Route::post('/orders-review-submit', [BookReviewController::class, 'submitReview'])->name('review-update');
+
+    // ====================
+    //  Stripe Payments
+    // ====================
+    Route::post('/checkout-stripe', [PaymentController::class, 'redirectToStripeCheckout'])->name('checkout-stripe');
+    Route::get('/checkout-success', [PaymentController::class, 'stripeSuccess'])->name('checkout-success');
+    Route::get('/checkout-cancel', [PaymentController::class, 'stripeCancel'])->name('checkout-cancel');
+
+    // ====================
+    //  Profile
+    // ====================
+    Route::get('/profile', [ProfileController::class, 'create'])->name('profile');
+    Route::post('/profile-update', [ProfileController::class, 'store'])->name('profile-update');
+
+    // ====================
+    //  Chatbot
+    // ====================
+    Route::post('/chat', [ChatController::class, 'chat'])->name('chat');
+
+    // ====================
+    //  Support Tickets
+    // ====================
+    Route::get('/support', [SupportTicketController::class, 'index'])->name('support');
+    Route::post('/support-ticket', [SupportTicketController::class, 'store'])->name('support-store');
+    Route::get('/support-reply/{ticket}', [SupportTicketController::class, 'showReplyForm'])->name('support-reply-form');
+    Route::post('/support-reply/{ticket}', [SupportTicketController::class, 'submitReply'])->name('support-reply-submit');
+});
 
 
 /* ADMIN STUFF */
@@ -130,19 +153,13 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users-role-update/{id}', [UserController::class, 'userRoleUpdate'])->name('users-role-update');
     Route::post('/users-update/{id}', [UserController::class, 'userUpdate'])->name('users-update');
     Route::delete('/users-delete', [GenreController::class, 'delete'])->name('users-delete');
-
-
 });
 
 /* ---- */
 
 
 
-
-
-
-
-/* AUTH STUFF */
+/* AUTH LOGIN ROUTES */
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -182,12 +199,7 @@ Route::get('/login/facebook/callback', [AuthController::class, 'handleFacebookCa
 /* ---- */
 
 
-
-
-
 /* STORAGE ROUTES */
-
-
 Route::get('/covers/{filename}', function ($filename) {
     // Build the full path to the image file in storage
     $path = storage_path('app/public/covers/' . $filename);

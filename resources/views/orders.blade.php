@@ -96,7 +96,7 @@
                   <div class="mb-3">
                     <div class="d-flex justify-content-between align-items-start">
                       <strong class="fw-semibold">Shipping to:</strong>
-                      <a href="{{ route('orders-receipt', $order->id) }}" target="_blank"
+                      <a href="{{ route('orders-receipt-customer', $order->id) }}" target="_blank"
                         class="btn btn-outline-dark px-2 py-2"
                         style="font-size: 0.85rem; line-height: 1;">
                         <i class="bi bi-printer"></i> Receipt

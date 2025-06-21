@@ -40,13 +40,20 @@ class SupportTicketController extends BaseController
     {
         $ticket = SupportTicket::with('replies')->findOrFail($id);
 
-        // Optionally check if the logged-in user owns the ticket
+        if ($ticket->user_id !== auth()->id()) {
+            return redirect()->route('support');
+        }
+
         return view('support-reply', compact('ticket'));
     }
 
     public function submitReply(Request $request, $id)
     {
         $ticket = SupportTicket::findOrFail($id);
+
+        if ($ticket->user_id !== auth()->id()) {
+            return redirect()->route('support');
+        }
 
         // Optionally validate that user owns this ticket
         SupportTicketReply::create([
