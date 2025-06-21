@@ -276,6 +276,7 @@
 
 <header id="header" class="site-header">
 
+    @guest
     <div class="row g-0 justify-content-center" style="background-color: #f5cba7;">
         <div class="col-md-8 text-center">
             <p class="fs-6 my-2">
@@ -285,6 +286,7 @@
             </p>
         </div>
     </div>
+    @endguest
 
     <nav id="header-nav" class="navbar navbar-expand-lg py-3">
         <div class="container">
