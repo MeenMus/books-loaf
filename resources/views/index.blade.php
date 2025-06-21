@@ -231,574 +231,212 @@
     </div>
   </section>
 
-  <section id="best-selling-items" class="position-relative padding-large ">
-    <div class="container">
-      <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
-        <h3 class="d-flex align-items-center">Best selling items</h3>
-        <a href="shop" class="btn">View All</a>
-      </div>
-      <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
-        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
-          <use xlink:href="#alt-arrow-right-outline"></use>
-        </svg>
-      </div>
-      <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
-        <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
-          <use xlink:href="#alt-arrow-left-outline"></use>
-        </svg>
-      </div>
-      <div class="swiper product-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/bayang-sofea.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/60">Bayang Sofea</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Teme Abdullah</p>
+  <section id="best-selling-items" class="position-relative padding-large">
+  <div class="container">
+    <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
+      <h3 class="d-flex align-items-center">Best selling items</h3>
+      <a href="{{ url('shop') }}" class="btn">View All</a>
+    </div>
 
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 34.00</span>
+    <!-- Swiper Controls -->
+    <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
+      <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+        <use xlink:href="#alt-arrow-right-outline"></use>
+      </svg>
+    </div>
+    <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
+      <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
+        <use xlink:href="#alt-arrow-left-outline"></use>
+      </svg>
+    </div>
 
+    <!-- Swiper Wrapper -->
+    <div class="swiper product-swiper">
+      <div class="swiper-wrapper">
+
+        @foreach($bestSellingBooks as $book)
+        <div class="swiper-slide">
+          <div class="card position-relative p-4 border rounded-3">
+            <img src="{{ asset($book->cover_image) }}" class="img-fluid shadow-sm" alt="{{ $book->title }}">
+            <h6 class="mt-4 mb-0 fw-bold">
+              <a href="{{ url('book/' . $book->id) }}">{{ $book->title }}</a>
+            </h6>
+            <div class="review-content d-flex">
+              <p class="my-2 me-2 fs-6 text-black-50">{{ $book->author }}</p>
+              {{-- Optionally show rating stars --}}
             </div>
+            <span class="price text-primary fw-bold mb-2 fs-5">RM {{ number_format($book->price, 2) }}</span>
           </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/great-big-beautiful-life.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/164">Great Big Beautiful Life</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Emily Henry</p>
-
-                <div class="rating text-warning d-flex align-items-center">
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 80.00</span>
-
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/library-of-lost-hearts.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/27">Library of Lost Hearts</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">NF Afrina</p>
-
-                <div class="rating text-warning d-flex align-items-center">
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 39.00</span>
-
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/siapa-sangka-terjatuh-cinta.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/62">Siapa Sangka Terjatuh Cinta</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Violet Fasha</p>
-
-                <div class="rating text-warning d-flex align-items-center">
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 32.00</span>
-
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/surrounded-by-idiots.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/174">Surrounded by Idiots</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Thomas Erikson</p>
-
-                <div class="rating text-warning d-flex align-items-center d-flex align-items-center">
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <br>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 62.90</span>
-
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="card position-relative p-4 border rounded-3">
-              <img src="images/the-midnight-library.jpg" class="img-fluid shadow-sm" alt="product item">
-              <h6 class="mt-4 mb-0 fw-bold"><a href="https://booksloaf.com/book/119">The Midnight Library</a></h6>
-              <div class="review-content d-flex">
-                <p class="my-2 me-2 fs-6 text-black-50">Matt Haig</p>
-
-                <div class="rating text-warning d-flex align-items-center">
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                 <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-              </div>
-
-              <span class="price text-primary fw-bold mb-2 fs-5">RM 42.00</span>
-
-            </div>
-          </div>
-
         </div>
+        @endforeach
+
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
 <section id="items-listing" class="padding-large">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="featured border rounded-3 p-4">
-            <div class="section-title overflow-hidden mb-5 mt-2">
-              <h4 class="d-flex flex-column mb-0">Book Of The Year</h4>
-            </div>
-            <div class="items-lists">
-              <div class="item d-flex">
-                <img src="images/Thariq Ridzuwan.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/48">Thariq Ridzuwan : His Treasure</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Huda Najwa</p>
+  <div class="section-title overflow-hidden mb-5 mt-2">
+    <h4 class="d-flex flex-column mb-0">Book Of The Year</h4>
+  </div>
 
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 35.00</span>
-                </div>
-              </div>
-              <hr class="gray-400">
-              <div class="item d-flex">
-                <img src="images/dog-man.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/151">Dog Man: Big Jim Believes</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Pilkey, Dav</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 34.90</span>
-                </div>
-              </div>
-              <hr>
-              <div class="item d-flex">
-                <img src="images/i-hope-this-doesnt-find-you.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/31">I Hope This Doesn't Find You</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Liang, Ann</p>
+  <div class="items-lists">
+    @forelse ($booksOfTheYear as $book)
+      <div class="item d-flex mb-4">
+        @if(isset($book->cover_image))
+                <img src="{{ url($book->cover_image) }}" class="img-fluid shadow-sm"  alt="{{ $book->title }}">
+                @endif
+        <div class="item-content ms-3">
+          <h6 class="mb-0 fw-bold">
+            <a href="{{ url('book/' . $book->id) }}">{{ $book->title }}</a>
+          </h6>
 
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 65.90</span>
-                </div>
-              </div>
+          <div class="review-content d-flex align-items-center">
+            <p class="my-2 me-2 fs-6 text-black-50">{{ $book->author }}</p>
+
+            <div class="rating text-warning d-flex align-items-center">
+              @for ($i = 0; $i < round($book->reviews_avg_rating ?? 0); $i++)
+                <svg class="star star-fill" style="fill: #ffc107;">
+                  <use xlink:href="#star-fill"></use>
+                </svg>
+              @endfor
             </div>
           </div>
+
+          <span class="price text-primary fw-bold mb-2 fs-5">RM {{ number_format($book->price, 2) }}</span>
+        </div>
+      </div>
+      @if (!$loop->last)
+        <hr class="gray-400">
+      @endif
+    @empty
+      <p>No top books available yet.</p>
+    @endforelse
+  </div>
+</div>
+
         </div>
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
-          <div class="latest-items border rounded-3 p-4">
-            <div class="section-title overflow-hidden mb-5 mt-2">
-              <h4 class="d-flex flex-column mb-0">#Trending Now</h4>
-            </div>
-            <div class="items-lists">
-              <div class="item d-flex">
-                <img src="images/rumah-untuk-alie.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/49">Rumah Untuk Alie karya Lenn Liu </a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Lenn Liu</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 35.00</span>
-                </div>
-              </div>
-              <hr class="gray-400">
-              <div class="item d-flex">
-                <img src="images/seven-husband-of-evelyn-hugo.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/176">Seven Husbands Of Evelyn Hugo</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Reid,Taylor Jenkins</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 65.90</span>
-                </div>
-              </div>
-              <hr>
-              <div class="item d-flex">
-                <img src="images/how-was-your-day.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/67">How Was Your Day</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Cheeming Boeyr</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 39.90</span>
-                </div>
-              </div>
+       <div class="latest-items border rounded-3 p-4">
+  <div class="section-title overflow-hidden mb-5 mt-2">
+    <h4 class="d-flex flex-column mb-0">#Trending Now</h4>
+  </div>
+
+  <div class="items-lists">
+    @forelse ($trendingBooks as $book)
+      <div class="item d-flex mb-4">
+        @if(isset($book->cover_image))
+                <img src="{{ url($book->cover_image) }}" class="img-fluid shadow-sm"  alt="{{ $book->title }}">
+                @endif
+
+        <div class="item-content ms-3">
+          <h6 class="mb-0 fw-bold">
+            <a href="{{ url('book/' . $book->id) }}">{{ $book->title }}</a>
+          </h6>
+
+          <div class="review-content d-flex align-items-center">
+            <p class="my-2 me-2 fs-6 text-black-50">{{ $book->author }}</p>
+            <div class="rating text-warning d-flex align-items-center">
+              @for ($i = 0; $i < round($book->reviews_avg_rating ?? 0); $i++)
+                <svg class="star star-fill" style="fill: #ffc107;">
+                  <use xlink:href="#star-fill"></use>
+                </svg>
+              @endfor
             </div>
           </div>
+
+          <span class="price text-primary fw-bold mb-2 fs-5">RM {{ number_format($book->price, 2) }}</span>
         </div>
+      </div>
+
+      @if (!$loop->last)
+        <hr class="gray-400">
+      @endif
+    @empty
+      <p>No trending books this month yet.</p>
+    @endforelse
+  </div>
+</div>
+        </div>
+
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="best-reviewed border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">Gotta Have It!</h3>
+              <h4 class="d-flex flex-column mb-0">Gotta Have It!</h3>
             </div>
             <div class="items-lists">
-              <div class="item d-flex">
-                <img src="images/watch-me.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/30">Watch Me (The New Republic #01)</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Mafi, Tahereh</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 69.95</span>
-                </div>
-              </div>
-              <hr class="gray-400">
-              <div class="item d-flex">
-                <img src="images/king-of-envy.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/175">King of Envy</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Huang, Ana</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 69.90</span>
-                </div>
-              </div>
-              <hr>
-              <div class="item d-flex">
-                <img src="images/girl-woman-other.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/125">Girl, Woman, Other</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Bernardine Evaristo</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">RM 56.90</span>
-                </div>
-              </div>
+            
+             @forelse ($gottaHaveIt as $book)
+  <div class="item d-flex mb-4">
+    @if(isset($book->cover_image))
+                <img src="{{ url($book->cover_image) }}" class="img-fluid shadow-sm"  alt="{{ $book->title }}">
+                @endif
+    <div class="item-content ms-3">
+      <h6 class="mb-0 fw-bold">
+        <a href="{{ url('book/' . $book->id) }}">{{ $book->title }}</a>
+      </h6>
+      <div class="review-content d-flex align-items-center">
+        <p class="my-2 me-2 fs-6 text-black-50">{{ $book->author }}</p>
+        <div class="rating text-warning d-flex align-items-center">
+          @for ($i = 0; $i < round($book->reviews_avg_rating); $i++)
+            <svg class="star star-fill" style="fill: #ffc107;">
+              <use xlink:href="#star-fill"></use>
+            </svg>
+          @endfor
+        </div>
+      </div>
+      <span class="price text-primary fw-bold mb-2 fs-5">RM {{ number_format($book->price, 2) }}</span>
+    </div>
+  </div>
+@if (!$loop->last)
+        <hr class="gray-400">
+      @endif
+    @empty
+      <p>No trending books this month yet.</p>
+    @endforelse
             </div>
           </div>
         </div>
+
         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
           <div class="on-sale border rounded-3 p-4">
             <div class="section-title overflow-hidden mb-5 mt-2">
-              <h3 class="d-flex flex-column mb-0">New Arrival</h3>
+              <h4 class="d-flex flex-column mb-0">New Arrival</h3>
             </div>
             <div class="items-lists">
-              <div class="item d-flex">
-                <img src="images/iron-flame.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/shop/all?s=thariq&page=4">Iron Flame</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Yarros, Rebecca</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                  <span class="price text-primary fw-bold mb-2 fs-5">
-                  RM63.92</span>
-                </div>
-              </div>
-              <hr class="gray-400">
-              <div class="item d-flex">
-                <img src="images/good-girl-bad-blood.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/172">	Good Girl, Bad Blood</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Holly Jackson</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                   <span class="price text-primary fw-bold mb-2 fs-5">
-                  RM43.92</span>
-                </div>
-              </div>
-              <hr>
-              <div class="item d-flex">
-                <img src="images/the-hunger-games.jpg" class="img-fluid shadow-sm" alt="product item">
-                <div class="item-content ms-3">
-                  <h6 class="mb-0 fw-bold"><a href="https://booksloaf.com/book/20">The Hunger Games</a></h6>
-                  <div class="review-content d-flex">
-                    <p class="my-2 me-2 fs-6 text-black-50">Suzanne Collins</p>
-                    <div class="rating text-warning d-flex align-items-center">
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                     <svg class="star star-fill" style="fill: #ffc107; color: #ffc107;">>
-                        <use xlink:href="#star-fill"></use>
-                      </svg>
-                    </div>
-                  </div>
-                   <span class="price text-primary fw-bold mb-2 fs-5">
-                  RM10.90</span>
-                </div>
-              </div>
+              @foreach ($newArrivals as $book)
+  <div class="item d-flex">
+    @if(isset($book->cover_image))
+                <img src="{{ url($book->cover_image) }}" class="img-fluid shadow-sm" alt="{{ $book->title }}">
+                @endif
+    <div class="item-content ms-3">
+      <h6 class="mb-0 fw-bold">
+        <a href="{{ url('book/' . $book->id) }}">{{ $book->title }}</a>
+      </h6>
+      <div class="review-content d-flex">
+        <p class="my-2 me-2 fs-6 text-black-50">{{ $book->author }}</p>
+        <div class="rating text-warning d-flex align-items-center">
+          @for ($i = 1; $i <= 5; $i++)
+            <svg class="star star-fill" style="fill: #ffc107;">
+              <use xlink:href="#star-fill"></use>
+            </svg>
+          @endfor
+        </div>
+      </div>
+      <span class="price text-primary fw-bold mb-2 fs-5">RM {{ number_format($book->price, 2) }}</span>
+    </div>
+  </div>
+  @if (!$loop->last)
+    <hr class="gray-400">
+  @endif
+@endforeach
+
+              
             </div>
           </div>
         </div>

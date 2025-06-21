@@ -62,10 +62,46 @@
               <h3 class="product-title">{{ $book->title }}</h3>
               <div class="product-price d-flex align-items-center mt-2">
                 <span class="fs-2 fw-light text-primary me-2">RM {{ $book->price }}</span>
+                
               </div>
+ @if($bookReviews->isNotEmpty())
+                    <!-- <span class="fs-4 fw-bold me-2">{{ $averageRating }}</span> -->
+                    <div class="rating text-warning">
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if($averageRating>= $i)
+                        <!-- Full Star -->
+                        <svg class="star star-fill" width="20" height="20">
+                          <use xlink:href="#star-fill"></use>
+                        </svg>
+                        @elseif($averageRating > ($i - 1) && $averageRating < $i)
+                          <!-- Half Star -->
+                          <svg class="star star-half" width="20" height="20">
+                            <use xlink:href="#star-half"></use>
+                          </svg>
+                          @else
+                          <!-- Empty Star -->
+                          <svg class="star star-empty" width="20" height="20">
+                            <use xlink:href="#star-empty"></use>
+                          </svg>
+                          @endif
+                          @endfor
+                    </div>
+                    @else
+    <div class="rating d-flex align-items-center mt-2">
+        @for ($i = 0; $i < 5; $i++)
+            <svg class="star star-empty" width="20" height="20" style="fill: none; stroke: #ffc107; stroke-width: 1.5;">
+                <use xlink:href="#star" />
+            </svg>
+            
+             
+        @endfor
+    </div>
+    
+@endif
 
+                 {{ $bookReviews->count() }} {{ Str::plural('review', $bookReviews->count()) }}
               <!-- RATING PLEASE -->
-              <div class="rating text-warning d-flex align-items-center mb-2">
+              <!-- <div class="rating text-warning d-flex align-items-center mb-2">
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
                 </svg>
@@ -81,7 +117,7 @@
                 <svg class="star star-fill">
                   <use xlink:href="#star-fill"></use>
                 </svg>
-              </div>
+              </div> -->
 
             </div>
             <hr>
@@ -384,6 +420,27 @@
       if (hiddenInput) hiddenInput.value = quantity;
     }
   </script>
+  <svg style="display: none;">
+  <symbol id="star-fill" viewBox="0 0 16 16">
+    <path d="M3.612 15.443c-.396.198-.824-.149-.746-.592l.83-4.73L.173 
+    6.765c-.329-.32-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 
+    0l2.184 4.327 4.898.696c.441.062.612.63.282.95l-3.522 
+    3.356.83 4.73c.078.443-.35.79-.746.592L8 
+    13.187l-4.389 2.256z"/>
+  </symbol>
+  <symbol id="star-half" viewBox="0 0 16 16">
+    <path d="M5.354 5.119l-.83 4.73L.998 6.765l4.898-.696L7.538.792v12.395l-4.389 
+    2.256c-.396.198-.824-.149-.746-.592l.83-4.73L.173 
+    6.765c-.329-.32-.158-.888.283-.95l4.898-.696z"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 16 16">
+    <path d="M2.866 14.85c-.078.444.36.791.746.593L8 
+    13.187l4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 
+    3.522-3.356c.33-.32.16-.888-.282-.95l-4.898-.696L8 
+    .792 5.816 5.12l-4.898.696c-.441.062-.612.63-.283.95l3.522 
+    3.356-.83 4.73z"/>
+  </symbol>
+</svg>
 </body>
 
 
