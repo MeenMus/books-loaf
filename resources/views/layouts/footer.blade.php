@@ -292,6 +292,16 @@
   .has-new-message::after {
     display: block;
   }
+
+  .input-area input:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+  }
+  .send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
 </style>
 
 <!-- Floating Chat Section -->
@@ -314,14 +324,25 @@
 
       <!-- Messages Container -->
       <div class="messages-container" id="chat-messages">
-        <!-- Welcome Message -->
-        <div class="message bot-message">
-          <img src="{{ asset('logo-single.png') }}"
-            alt="AI Assistant" class="message-avatar">
-          <div class="message-bubble">
-            Hello! I'm LoafBot. How can I help you today?
+        @auth
+          @if (!App\Models\ChatMessage::where('user_id', auth()->id())->exists())
+            <!-- Initial Welcome Message -->
+            <div class="message bot-message">
+              <img src="{{ asset('logo-single.png') }}" alt="AI Assistant" class="message-avatar">
+              <div class="message-bubble">
+                Hello! I'm LoafBot. How can I help you today?
+              </div>
+            </div>
+          @endif
+        @else
+          <!-- Not Logged In Message -->
+          <div class="message bot-message">
+            <img src="{{ asset('logo-single.png') }}" alt="AI Assistant" class="message-avatar">
+            <div class="message-bubble">
+              Please log in to chat with LoafBot
+            </div>
           </div>
-        </div>
+        @endauth
 
         <!-- Typing Indicator (hidden by default) -->
         <div id="typingIndicator" class="typing-indicator" style="display: none;">
@@ -333,8 +354,8 @@
 
       <!-- Input Area -->
       <div class="input-area">
-        <input type="text" id="textAreaExample" class="message-input" placeholder="Type your message...">
-        <button class="send-btn" id="send-btn">
+        <input type="text" id="textAreaExample" class="message-input" placeholder="Type your message..." @guest disabled @endguest>
+        <button class="send-btn" id="send-btn" @guest disabled @endguest>
           <i class="fas fa-paper-plane"></i>
         </button>
       </div>
@@ -435,19 +456,71 @@
   const input = document.getElementById('textAreaExample');
   const chatMessages = document.getElementById('chat-messages');
   const typingIndicator = document.getElementById('typingIndicator');
+  let offset = 0;
+  let isLoading = false;
 
   document.getElementById('chatToggleBtn').classList.add('has-new-message');
   document.getElementById('chatToggleBtn').classList.remove('has-new-message');
 
-  window.addEventListener('DOMContentLoaded', () => {
-    loadChatHistory();
+  chatMessages.addEventListener('scroll', () => {
+    if (chatMessages.scrollTop < 30 && !isLoading) {
+      loadChatHistory(); // load older messages
+    }
   });
 
-  function loadChatHistory() {
-    const messages = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-    messages.forEach(msg => {
-      appendMessage(msg.sender, msg.text, true); // true = skip save
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+    loadChatHistory(true); // initial load
+  });
+
+  function loadChatHistory(initial = false) {
+    if (isLoading) return;
+    isLoading = true;
+
+    fetch(`{{ route('chat-history') }}?offset=${offset}`)
+      .then(res => res.json())
+      .then(messages => {
+        if (messages.length === 0) return;
+
+        offset += messages.length;
+
+        messages.forEach(msg => {
+          const msgEl = createMessageElement(msg.sender, msg.text);
+          chatMessages.insertBefore(msgEl, chatMessages.firstChild);
+        });
+
+        if (initial) {
+          chatMessages.scrollTop = chatMessages.scrollHeight; // scroll to bottom on first load
+        }
+      })
+      .finally(() => {
+        isLoading = false;
+      });
+  }
+
+  function createMessageElement(sender, text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+
+    const avatar = document.createElement('img');
+    avatar.src = sender === 'user'
+      ? '{{ asset('user.png') }}'
+      : '{{ asset('logo-single.png') }}';
+    avatar.className = 'message-avatar';
+    avatar.alt = sender === 'user' ? 'You' : 'AI Assistant';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.textContent = text;
+
+    if (sender === 'user') {
+      messageDiv.appendChild(bubble);
+      messageDiv.appendChild(avatar);
+    } else {
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(bubble);
+    }
+
+    return messageDiv;
   }
 
   // Toggle chat window
@@ -538,19 +611,6 @@
 
     chatMessages.insertBefore(messageDiv, typingIndicator);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    if (!skipSave) {
-      saveMessageToLocalStorage(sender, text);
-    }
-  }
-
-  function saveMessageToLocalStorage(sender, text) {
-    const messages = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-    messages.push({
-      sender,
-      text
-    });
-    localStorage.setItem('chatHistory', JSON.stringify(messages));
   }
 </script>
 

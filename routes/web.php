@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
     //  Chatbot
     // ====================
     Route::post('/chat', [ChatController::class, 'chat'])->name('chat');
+    Route::get('/chat-history', [ChatController::class, 'paginatedHistory'])->name('chat-history');
 
     // ====================
     //  Support Tickets
@@ -159,7 +160,6 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/banners-create', [BannerController::class, 'create'])->name('banners-create');
     Route::post('/banners-store', [BannerController::class, 'store'])->name('banners-store');
-
 });
 
 /* ---- */

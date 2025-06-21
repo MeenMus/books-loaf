@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Models\Book;
+use App\Models\ChatMessage;
 use App\Models\Genre;
 use App\Services\EmbeddingService;
 use App\Services\QdrantService;
@@ -19,10 +20,17 @@ class ChatController
         $user = Auth::user();
         $userMessage = strtolower($request->input('message'));
 
+        // 📝 Save user message
+        ChatMessage::create([
+            'user_id' => $user->id,
+            'sender' => 'user',
+            'message' => $userMessage,
+        ]);
+
         $genreFilter = null;
         $priceFilter = null;
 
-        // 🧐 LoafBot tries to detect any genres mentioned
+        // Genre detection
         $genres = Genre::pluck('name')->map(fn($g) => strtolower($g))->toArray();
         foreach ($genres as $genre) {
             if (str_contains($userMessage, $genre)) {
@@ -31,12 +39,12 @@ class ChatController
             }
         }
 
-        // 💰 Check if the user mentions a budget like "under $20"
+        // Budget detection
         if (preg_match('/under\s*\$?(\d+)/', $userMessage, $matches)) {
             $priceFilter = floatval($matches[1]);
         }
 
-        // 📦 LoafBot checks your liked, carted, and purchased books
+        // Get liked/carted/purchased books
         $likedBooks = $user->likes()->with('book.genres')->get()->pluck('book');
         $cartBooks = $user->cart ? $user->cart->items()->with('book.genres')->get()->pluck('book') : collect();
         $purchasedBooks = $user->orders()
@@ -45,23 +53,19 @@ class ChatController
             ->flatMap(fn($order) => $order->orderItems->pluck('book'))
             ->unique('id');
 
-        // 📚 A helper to nicely format books for LoafBot's response
         $formatBooks = fn($books) => $books->take(3)->map(
             fn($b) =>
             "- *{$b->title}* – " .
                 Str::of($b->description)->words(300, '...') .
-                 " (RM " . number_format($b->price, 2) . ", In stock: {$b->stock})"
+                " (RM " . number_format($b->price, 2) . ", In stock: {$b->stock})"
         )->implode("\n");
-
 
         $likesContext = $formatBooks($likedBooks);
         $cartContext = $formatBooks($cartBooks);
         $purchasedContext = $formatBooks($purchasedBooks);
 
-
-        // 🔍 Let’s search for books based on user's taste or filters using qdrant embeded vector
+        // Vector search
         $embedding = app(EmbeddingService::class)->getEmbedding($userMessage);
-
         $matchedIds = [];
 
         if ($embedding && count($embedding) === 768) {
@@ -69,28 +73,29 @@ class ChatController
             $matchedIds = collect($qdrantResults['result'] ?? [])->pluck('id')->toArray();
         }
 
-
         $availableBooks = Book::with('genres')
             ->when(!empty($matchedIds), fn($q) => $q->whereIn('id', $matchedIds), fn($q) => $q->limit(50))
             ->whereNotIn('id', $purchasedBooks->pluck('id'))
-            ->where('stock', '>', 0) // ✅ Only show books in stock
+            ->where('stock', '>', 0)
             ->when($genreFilter, fn($q) => $q->whereHas('genres', fn($q) => $q->whereRaw('LOWER(name) LIKE ?', ["%$genreFilter%"])))
             ->when($priceFilter, fn($q) => $q->where('price', '<=', $priceFilter))
             ->get();
 
-
-        $availableContext = $formatBooks($availableBooks);
-
-        // 🧵 Maintain a simple 4-line history for context
-        $sessionHistory = session('chat_history', []);
-        $sessionHistory[] = "User: $userMessage";
-        $sessionHistory = array_slice($sessionHistory, -10); // Keep only last 4
-        $chatHistory = implode("\n", $sessionHistory);
-
-        $trimmedAvailableBooks = $availableBooks->take(5); // Only take top 5 
+        $trimmedAvailableBooks = $availableBooks->take(5);
         $availableContext = $formatBooks($trimmedAvailableBooks);
 
+        // ✅ Pull last 10 messages from DB (user and bot)
+        $recentMessages = ChatMessage::where('user_id', $user->id)
+            ->latest()
+            ->take(10)
+            ->get()
+            ->reverse(); // To get oldest at the top
 
+        $chatHistory = $recentMessages
+            ->map(fn($msg) => ucfirst($msg->sender) . ': ' . $msg->message)
+            ->implode("\n");
+
+        // 🔥 Prompt
         // 🤖 Here’s LoafBot’s full prompt
         $prompt = <<<EOT
                 You are LoafBot, a friendly and concise virtual book assistant in a cozy bookstore. Your job is to help users find books based only on what’s available and what they’ve liked, carted, or purchased.
@@ -142,9 +147,7 @@ class ChatController
                 LoafBot:
                 EOT;
 
-        // 💬 Send the prompt to the local LLM and wait for a reply
-        session(['chat_history' => [...$sessionHistory, "LoafBot: (thinking...)"]]);
-
+        // Send to LLM
         $response = Http::post('http://localhost:11434/api/generate', [
             'model' => 'gemma3:4b',
             'prompt' => $prompt,
@@ -153,15 +156,38 @@ class ChatController
 
         $responseText = $response->successful() ? $response->json()['response'] ?? null : null;
 
-        // 😅 Fallback if LoafBot is unsure what to say
         $reply = trim($responseText ?? '') ?: "Oops! I couldn't find any good reads for that. Want to explore some bestsellers or cozy picks instead? 📚";
 
-        // 📝 Update conversation history
-        $sessionHistory[] = "LoafBot: $reply";
-        session(['chat_history' => $sessionHistory]);
+        // Save bot reply
+        ChatMessage::create([
+            'user_id' => $user->id,
+            'sender' => 'bot',
+            'message' => $reply,
+        ]);
 
         return response()->json([
             'reply' => $reply,
         ]);
+    }
+
+    public function paginatedHistory(Request $request)
+    {
+        $user = Auth::user();
+        $offset = $request->input('offset', 0);
+        $limit = 15; // messages per scroll
+
+        $messages = ChatMessage::where('user_id', $user->id)
+            ->orderBy('created_at', 'asc')
+            ->skip($offset)
+            ->take($limit)
+            ->get()
+            ->reverse() // so oldest shows first
+            ->values()
+            ->map(fn($msg) => [
+                'sender' => $msg->sender,
+                'text' => $msg->message,
+            ]);
+
+        return response()->json($messages);
     }
 }
