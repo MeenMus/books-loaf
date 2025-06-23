@@ -249,7 +249,7 @@
     <div class="container">
       <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
         <h3 class="d-flex align-items-center">Best selling items</h3>
-        <a href="{{ url('shop') }}" class="btn">View All</a>
+        <a href="{{ url('shop/all') }}" class="btn">View All</a>
       </div>
 
       <!-- Swiper Controls -->
